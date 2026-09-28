@@ -1,0 +1,46 @@
+# Diretório de saída e cache local do LuaTeX
+build/
+
+# Arquivos auxiliares do LaTeX e latexmk
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.vrb
+*.xdv
+*.xdy
+
+# Saídas de pacotes que geram diretórios próprios
+_minted-*/
+*.pyg
+
+# Arquivos temporários de editores e do sistema operacional
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
