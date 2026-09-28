@@ -43,3 +43,17 @@ A justificativa das decisões e a lista completa de tokens estão em
 e arquivos de arte originais permanecem fora deste repositório, no diretório
 pai. O pacote contém cópias normalizadas em PDF dos arquivos de produção
 fornecidos.
+
+## Licença
+
+Copyright (C) 2026 IEEE UFG Computer Society contributors.
+
+Os arquivos produzidos pelo projeto e relacionados em [`MANIFEST.md`](MANIFEST.md)
+são distribuídos sob a LaTeX Project Public License, versão 1.3c ou, à sua
+escolha, qualquer versão posterior. O trabalho tem o status LPPL `maintained` e
+seu mantenedor atual é a IEEE UFG Computer Society. Consulte [`LICENSE`](LICENSE)
+para conhecer os termos completos.
+
+Os arquivos oficiais de arte do IEEE e da IEEE Computer Society não fazem parte
+do trabalho licenciado sob a LPPL. A licença do repositório não concede permissão
+para usar nomes, marcas ou logotipos do IEEE.

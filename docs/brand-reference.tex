@@ -1,0 +1,73 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.3c of this license or (at your
+% option) any later version. The latest version is available at
+% https://www.latex-project.org/lppl.txt.
+%
+% This work has the LPPL maintenance status `maintained'. The Current
+% Maintainer is the IEEE UFG Computer Society. The work consists of the files
+% listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
+\documentclass{article}
+\usepackage[a4paper,margin=16mm]{geometry}
+\usepackage{array}
+\usepackage{ieeeufgcs-brand}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\newcommand{\swatch}[2]{%
+  \begin{minipage}[t]{.18\linewidth}
+    \colorbox{#1}{\color{#1}\rule{\dimexpr\linewidth-2\fboxsep\relax}{10mm}}\\[-1pt]
+    {\IEEECSHeadingFont\bfseries #2}\\
+    {\footnotesize\ttfamily #1}
+  \end{minipage}%
+}
+
+\begin{document}
+{\IEEECSHeadingFont\bfseries\Huge IEEE UFG CS brand foundation}\par
+{\IEEECSBodyFont\large Official colors, typography, and supplied artwork}\par
+
+\bigskip
+\swatch{IEEECSOrange}{Orange}\hfill
+\swatch{IEEEBlue}{IEEE blue}\hfill
+\swatch{IEEECyan}{Cyan}\hfill
+\swatch{IEEEGray}{Gray}\hfill
+\swatch{IEEEDarkBlue}{Dark blue}
+
+\bigskip
+\swatch{IEEERed}{Red}\hfill
+\swatch{IEEEYellow}{Yellow}\hfill
+\swatch{IEEEBrightGreen}{Bright green}\hfill
+\swatch{IEEEGreen}{Green}\hfill
+\swatch{IEEETeal}{Teal}
+
+\bigskip
+\swatch{IEEEPurple}{Purple}\hfill
+\swatch{IEEEDarkRed}{Dark red}\hfill
+\swatch{IEEEDarkOrange}{Dark orange}\hfill
+\swatch{IEEEDarkGreen}{Dark green}\hfill
+\swatch{IEEEDarkPurple}{Dark purple}
+
+\bigskip
+{\IEEECSHeadingFont\bfseries\Large Computer Society marks}\par
+\medskip
+\IEEECSLogo[variant=orange,width=48mm]\hfill
+\IEEECSLogo[variant=black,width=48mm]
+
+\medskip
+\colorbox{IEEEDarkBlue}{\IEEECSLogo[variant=orange-white,width=48mm]}\hfill
+\colorbox{IEEEBlack}{\IEEECSLogo[variant=white,width=48mm]}
+
+\bigskip
+{\IEEECSHeadingFont\bfseries\Large IEEE master-brand lockups}\par
+\medskip
+\IEEEMasterBrand[variant=blue,width=55mm,clear-space=digital]\hfill
+\IEEEMasterBrand[variant=black,width=55mm,clear-space=digital]
+
+\medskip
+\colorbox{IEEEDarkBlue}{%
+  \IEEEMasterBrand[variant=white,width=55mm,clear-space=digital]%
+}
+
+\end{document}
