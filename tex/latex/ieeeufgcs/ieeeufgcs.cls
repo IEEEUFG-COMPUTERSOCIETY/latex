@@ -12,6 +12,34 @@
 %%
 %% The official artwork distributed beside this file is not part of the LPPL
 %% work. See LICENSE and tex/latex/ieeeufgcs/assets/README.md.
+%%
+%% Implementation reference
+%% ------------------------
+%% This is a generic institutional document class, not an article-publication
+%% format. Work plans, minutes, decisions, reports, and future promotional
+%% formats are templates or profiles built on this shared identity layer. The
+%% standard article class is only the internal structural foundation. The
+%% official material retained in example/ is the evidence for design choices;
+%% source files here contain the resulting implementation specification.
+%%
+%% The default is A4 at 11 pt with a two-sided mirrored text block. Inner,
+%% outer, top, and bottom margins are 27, 22, 24, and 28 mm respectively. The
+%% wider inner margin alternates on odd and even pages. Binding offset is zero
+%% by policy and remains independently configurable for exceptional uses.
+%% Open Sans is the body face and Montserrat is the heading face.
+%%
+%% The class supplies a full-page cover by default, an optional compact title,
+%% text-only running heads, outer page numbers, branded tables, and notices.
+%% Content-specific structures belong in templates, beginning with the work
+%% plan distilled from recurring structures in example/ without copying its
+%% text or artwork.
+%%
+%% Public class keys are paper-size, font-size, two-sided, title-page,
+%% section-numbering, inner-margin, outer-margin, top-margin, bottom-margin,
+%% binding-offset, and color-model. Unknown standard options are forwarded to
+%% article. IEEECSSetup accepts title, subtitle, author, date, document-type,
+%% institution, unit, location, identifier, and running-title. Standard title,
+%% author, and date commands remain valid.
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesClass{ieeeufgcs}
   [2026-09-29 v0.3 Generic IEEE UFG CS document class]

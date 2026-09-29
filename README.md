@@ -1,112 +1,101 @@
 # IEEE UFG Computer Society LaTeX
 
-Recursos de identidade visual e modelos reutilizáveis em LaTeX para o Capítulo
-Estudantil da IEEE Computer Society na UFG.
+Este projeto permite criar documentos institucionais com as identidades
+visuais da IEEE Computer Society e da Universidade Federal de Goiás. Ele usa
+LuaLaTeX e oferece modelos prontos para pessoas que não precisam conhecer a
+implementação da classe ou dos pacotes de identidade visual.
 
-O projeto fornece a classe `ieeeufgcs` para documentos institucionais e o
-pacote de baixo nível `ieeeufgcs-brand` para uso da identidade visual em
-outros formatos. Esses componentes incluem:
+## Requisitos
 
-- as paletas oficiais do IEEE, da IEEE Computer Society e da UFG;
-- seletores para títulos em Montserrat e corpo de texto em Open Sans;
-- comandos para inserir as marcas oficiais da Computer Society, do IEEE e da
-  UFG, respeitando suas áreas de proteção; e
-- modos de saída RGB (padrão) e CMYK.
+- GNU Make;
+- LuaLaTeX e `latexmk`;
+- fontes Montserrat e Open Sans;
+- Bash; e
+- Biber, somente para documentos com referências bibliográficas.
 
-## Início rápido
+## Uso rápido
 
-```tex
-\documentclass{ieeeufgcs}
-
-\IEEECSSetup{
-  document-type={Documento interno},
-  title={Título do documento},
-  subtitle={Subtítulo opcional},
-  running-title={Título abreviado},
-  institution={Capítulo Estudantil da IEEE Computer Society na UFG},
-  author={Nome da pessoa autora},
-  date={\today}
-}
-
-\begin{document}
-\maketitle
-\section{Introdução}
-Conteúdo do documento.
-\end{document}
-```
-
-Por padrão, a classe usa papel A4, corpo de 11 pt e páginas frente e verso. As
-margens medem 27 mm no lado interno, 22 mm no externo, 24 mm no topo e 28 mm na
-base. O deslocamento adicional de encadernação é `0mm`. A classe espelha as
-margens internas e externas automaticamente em páginas pares e ímpares.
-
-As opções públicas são `paper-size=a4|letter`, `font-size=10pt|11pt|12pt`,
-`two-sided=true|false`, `inner-margin`, `outer-margin`, `top-margin`,
-`bottom-margin`, `binding-offset`, `title-page=true|false`,
-`section-numbering=plain|two-digit` e `color-model=rgb|cmyk`.
-
-A classe não determina o propósito do conteúdo. Planos de trabalho, atas,
-decisões, relatórios e materiais futuros usam a mesma definição institucional.
-Cada diretório em `templates/` fornece apenas a estrutura inicial adequada ao
-tipo de documento.
-
-Para usar somente os elementos visuais em outra classe, carregue o pacote
-diretamente:
-
-```tex
-\usepackage{ieeeufgcs-brand}
-
-\color{IEEECSOrange}
-{\IEEECSHeadingFont Um título da Computer Society}
-
-\IEEECSLogo[variant=orange,width=45mm]
-\IEEEMasterBrand[variant=blue,width=55mm,clear-space=print]
-\UFGLogo[width=24mm]
-```
-
-`\UFGLogo` usa por padrão a assinatura vertical completa, azul, com área de
-proteção. As opções são `orientation=vertical|horizontal`,
-`variant=blue|black|white`, `width=<dimensão>` e
-`clear-space=true|false`. A opção `clear-space=false` deve ser usada somente
-quando o leiaute ao redor já garantir a área de proteção oficial.
-
-Use `\usepackage[color-model=cmyk]{ieeeufgcs-brand}` para obter definições
-CMYK destinadas à impressão. Use a opção `fonts=false` quando a classe do
-documento já for responsável pela seleção das fontes.
-
-O primeiro exemplo completo é o
-[`modelo de plano de trabalho`](templates/work-plan/main.tex). Compile os
-testes, a folha de referência e o modelo com:
+Execute apenas `make` para consultar os comandos disponíveis:
 
 ```sh
-make test
-make docs
-make templates
+make
 ```
 
-LuaLaTeX é o motor de composição do projeto. O Makefile executa
-`latexmk -lualatex` e mantém o cache de fontes gerado em `build/`. Montserrat e
-Open Sans devem estar instaladas e acessíveis ao LuaLaTeX.
+Crie um documento:
 
-A justificativa das decisões e a lista completa de tokens estão em
-[`docs/brand-foundation.md`](docs/brand-foundation.md). Os manuais de identidade
-e arquivos de arte originais permanecem fora deste repositório, no diretório
-pai. O pacote contém cópias normalizadas em PDF dos arquivos de produção
-fornecidos.
+```sh
+make new
+```
 
-O projeto impõe o limite de 80 caracteres por linha nos arquivos-fonte. Use
-`make check-style` para verificar essa regra antes de enviar alterações.
+O assistente apresenta os modelos disponíveis, solicita um identificador e
+pergunta se o documento deve ser compilado imediatamente. O resultado tem a
+seguinte estrutura:
+
+```text
+documents/<identificador>/
+├── img/
+├── main.tex
+└── references.bib.example
+```
+
+Para começar, edite somente `main.tex`. O próprio arquivo explica as opções de
+papel, tamanho da fonte, margens, páginas, cores, metadados, imagens, tabelas e
+referências. A pasta `img/` recebe imagens específicas do documento.
+
+O diretório `documents/` é a área de trabalho local do usuário. Os diretórios
+`templates/`, `tex/`, `scripts/`, `tests/` e `example/` pertencem ao
+desenvolvimento da infraestrutura e não precisam ser editados para criar um
+documento.
+
+Se precisar de bibliografia, renomeie `references.bib.example` para
+`references.bib` e siga as instruções presentes nos dois arquivos.
+
+Compile um documento criado anteriormente com:
+
+```sh
+make build
+```
+
+Quando houver mais de um documento, o comando apresenta uma lista para
+seleção. Os arquivos gerados ficam em:
+
+```text
+build/documents/<identificador>/main.pdf
+```
+
+Para listar modelos e documentos ou remover somente os arquivos gerados:
+
+```sh
+make list
+make clean
+```
+
+## Uso não interativo
+
+Colaboradores e rotinas automatizadas também podem informar as escolhas na
+linha de comando:
+
+```sh
+make new TEMPLATE=work-plan NAME=plano-2027 BUILD=no
+make build NAME=plano-2027
+```
+
+## Desenvolvimento
+
+O comando `make all` compila testes, a referência visual e modelos canônicos. O
+projeto exige no máximo 80 caracteres por linha; `make check-style` verifica
+essa regra.
+
+As decisões de implementação e os detalhes da identidade visual são mantidos
+como comentários nos arquivos da classe e do pacote. Os modelos disponíveis
+estão descritos em [`templates/README.md`](templates/README.md).
 
 ## Licença
 
-Copyright (C) 2026 IEEE UFG Computer Society contributors.
-
-Os arquivos produzidos pelo projeto e relacionados em
-[`MANIFEST.md`](MANIFEST.md) são distribuídos sob a LaTeX Project Public
-License, versão 1.3c ou, à sua escolha, qualquer versão posterior. O trabalho
-tem o status LPPL `maintained` e seu mantenedor atual é a IEEE UFG Computer
-Society. Consulte [`LICENSE`](LICENSE) para conhecer os termos completos.
+Os arquivos relacionados em [`MANIFEST.md`](MANIFEST.md) são distribuídos sob
+a LaTeX Project Public License, versão 1.3c ou posterior, com status
+`maintained`.
 
 Os arquivos oficiais de arte do IEEE, da IEEE Computer Society e da UFG não
-fazem parte do trabalho licenciado sob a LPPL. A licença do repositório não
-concede permissão para usar seus nomes, marcas ou logotipos.
+fazem parte do trabalho licenciado sob a LPPL. Consulte [`LICENSE`](LICENSE)
+para conhecer os termos completos e as exclusões de marcas oficiais.

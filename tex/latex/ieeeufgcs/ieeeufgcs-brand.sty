@@ -12,6 +12,50 @@
 %%
 %% The official artwork distributed beside this file is not part of the LPPL
 %% work. See LICENSE and tex/latex/ieeeufgcs/assets/README.md.
+%%
+%% Implementation reference
+%% ------------------------
+%% Brand decisions in this package are derived, in descending precedence,
+%% from the IEEE Computer Society Brand Identity & Graphic Style Guide
+%% (2023), the IEEE Brand Identity Guidelines (Q1 2025), and Marca UFG:
+%% Manual de Identidade Visual (2022). The material kept in example/ is the
+%% local evidence used by maintainers. Packaged assets are normalized copies
+%% of official production artwork; they must never be redrawn or recolored.
+%%
+%% The Computer Society logo receives clear space equal to 0.3 times its
+%% artwork height. The IEEE master brand receives one artwork height for print
+%% or 0.5 times its height for digital use. Disabling package-provided clear
+%% space is valid only when the surrounding layout supplies the same exclusion
+%% zone. White and orange-white artwork requires a suitable dark background.
+%% No logo may be distorted, screened, rotated, cropped, placed over a busy
+%% background, or used as part of a sentence.
+%%
+%% A Chapter or Student Chapter mark must use approved artwork. The CS guide
+%% gives the CS name greater hierarchy, limits the chapter name to two lines,
+%% and specifies Montserrat. This package deliberately does not synthesize a
+%% UFG chapter lockup because none is present in the official source material.
+%%
+%% The preferred UFG signature is the blue, full-name, vertical version. Its
+%% protected area is 3x horizontally and 2x vertically, where x is half the
+%% side of the largest hexagon; the implementation derives x from the vector
+%% artwork. Minimum artwork sizes are 24.5 by 12.6 mm for the horizontal
+%% signature and 12 by 21.7 mm for the vertical one. Use the horizontal form
+%% only when a horizontal composition requires it. Joint marks use the same
+%% orientation, matching visual heights, and independently preserved exclusion
+%% zones. Compact UFG marks remain unsupported until a concrete layout needs
+%% them. Blue artwork is preferred on medium- and high-luminance backgrounds;
+%% black and white are reserved for unsuitable backgrounds or processes.
+%%
+%% Montserrat is the CS heading face and Open Sans is the body face. Calibri is
+%% the guide's offline fallback but is not distributed. LuaLaTeX and fontspec
+%% are therefore required even when fonts=false lets another class select the
+%% document fonts.
+%%
+%% IEEE palette values follow the newer parent guide where printed rounding
+%% differs. The bright palette is preferred and all text/background pairs
+%% require adequate contrast. IEEE tints are supplied in the documented 80,
+%% 60, 40, and 20 percent steps; tints below 10 percent are forbidden. UFGBlue
+%% has no derived tints because the UFG manual prohibits altered colors.
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesPackage{ieeeufgcs-brand}
   [2026-09-29 v0.5 IEEE UFG CS brand primitives]

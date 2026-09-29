@@ -9,9 +9,49 @@
 % This work has the LPPL maintenance status `maintained'. The Current
 % Maintainer is the IEEE UFG Computer Society. The work consists of the files
 % listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
-\documentclass[section-numbering=two-digit]{ieeeufgcs}
+%
+% GUIA DE EDIÇÃO
+% Mantenha exatamente uma opção ativa em cada grupo abaixo. Para trocar uma
+% opção, adicione % à linha atual e remova % da alternativa desejada.
+\documentclass[
+  paper-size=a4,
+  % paper-size=letter,
+  % font-size=10pt,
+  font-size=11pt,
+  % font-size=12pt,
+  two-sided=true,
+  % two-sided=false,
+  title-page=true,
+  % title-page=false,
+  % section-numbering=plain,
+  section-numbering=two-digit,
+  inner-margin=27mm,
+  outer-margin=22mm,
+  top-margin=24mm,
+  bottom-margin=28mm,
+  binding-offset=0mm,
+  color-model=rgb
+  % color-model=cmyk
+]{ieeeufgcs}
 \usepackage[brazil]{babel}
 
+% Para usar referências bibliográficas, renomeie
+% references.bib.example para references.bib e ative as três linhas abaixo.
+% \usepackage{csquotes}
+% \usepackage[backend=biber,style=numeric]{biblatex}
+% \addbibresource{references.bib}
+
+% COMANDOS ÚTEIS
+% Imagem: \includegraphics[width=.8\linewidth]{img/arquivo.png}
+% Referência: \cite{chave-da-referencia}
+% Tabela simples:
+% \begin{tabular}{ll}
+%   Primeira coluna & Segunda coluna \\
+% \end{tabular}
+% Para tabelas institucionais, copie um dos exemplos IEEECSBrandedTable
+% presentes no corpo deste documento.
+
+% Edite somente os valores depois de cada sinal de igual.
 \IEEECSSetup{
   document-type={Plano de trabalho},
   title={Título do plano},
@@ -178,5 +218,8 @@ Liste as ações imediatas, seus responsáveis e os prazos iniciais.
 \section{Conclusão}
 
 Retome o valor esperado, as condições de execução e a decisão solicitada.
+
+% Ative esta linha depois de configurar o arquivo references.bib.
+% \printbibliography
 
 \end{document}

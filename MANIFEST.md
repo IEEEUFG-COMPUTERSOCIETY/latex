@@ -12,21 +12,24 @@ The LPPL “Work” consists of the following repository-authored files:
 - `MANIFEST.md`
 - `Makefile`
 - `README.md`
-- `docs/brand-foundation.md`
-- `docs/brand-reference.tex`
 - `scripts/check-line-length.lua`
+- `scripts/document.sh`
 - `templates/README.md`
+- `templates/catalog.tsv`
+- `templates/work-plan/img/README.md`
 - `templates/work-plan/main.tex`
-- `tests/smoke/compact.tex`
-- `tests/smoke/document.tex`
+- `templates/work-plan/references.bib.example`
+- `tests/reference/brand-reference.tex`
 - `tests/smoke/brand.tex`
 - `tests/smoke/cmyk.tex`
+- `tests/smoke/compact.tex`
+- `tests/smoke/document.tex`
 - `tex/latex/ieeeufgcs/ieeeufgcs.cls`
 - `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty`
 - `tex/latex/ieeeufgcs/assets/README.md`
 
-The following supplied IEEE artwork files are distributed alongside the Work
-but are expressly excluded from it and are not licensed under the LPPL:
+The following supplied official artwork files are distributed alongside the
+Work but are expressly excluded from it and are not licensed under the LPPL:
 
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-cs-logo-black.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-cs-logo-orange-white.pdf`

@@ -1,6 +1,9 @@
 # Diretório de saída e cache local do LuaTeX
 build/
 
+# Área local de trabalho criada por `make new`
+/documents/
+
 # Diretório de exemplos para ter como base
 example/
 
