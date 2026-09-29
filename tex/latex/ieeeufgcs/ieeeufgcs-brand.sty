@@ -12,56 +12,114 @@
 %%
 %% The official artwork distributed beside this file is not part of the LPPL
 %% work. See LICENSE and tex/latex/ieeeufgcs/assets/README.md.
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieeeufgcs-brand}[2026/09/28 v0.2 IEEE UFG CS brand primitives]
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesPackage{ieeeufgcs-brand}
+  [2026-09-29 v0.5 IEEE UFG CS brand primitives]
 
-\newif\ifieeecs@rgb
-\newif\ifieeecs@fonts
-\ieeecs@rgbtrue
-\ieeecs@fontstrue
-\DeclareOption{rgb}{\ieeecs@rgbtrue}
-\DeclareOption{cmyk}{\ieeecs@rgbfalse}
-\DeclareOption{fonts}{\ieeecs@fontstrue}
-\DeclareOption{nofonts}{\ieeecs@fontsfalse}
-\DeclareOption*{\PackageWarning{ieeeufgcs-brand}{Unknown option `\CurrentOption'}}
-\ProcessOptions\relax
-
-\RequirePackage{xcolor}
-\RequirePackage{graphicx}
-\RequirePackage{xparse}
 \RequirePackage{iftex}
 \RequireLuaTeX
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+
+\ExplSyntaxOn
+\bool_new:N \l__ieeecs_rgb_bool
+\bool_new:N \l__ieeecs_fonts_bool
+\bool_set_true:N \l__ieeecs_rgb_bool
+\bool_set_true:N \l__ieeecs_fonts_bool
+
+\cs_new_protected:Npn \__ieeecs_deprecated_option:nn #1#2
+  {
+    \PackageWarningNoLine { ieeeufgcs-brand }
+      { Option~'#1'~is~deprecated;\MessageBreak use~'#2'~instead }
+  }
+
+\DeclareKeys [ ieeeufgcs-brand ]
+  {
+    color-model .choice:,
+    color-model / rgb .code:n =
+      { \bool_set_true:N \l__ieeecs_rgb_bool },
+    color-model / cmyk .code:n =
+      { \bool_set_false:N \l__ieeecs_rgb_bool },
+    color-model .usage = load,
+    fonts .bool_set:N = \l__ieeecs_fonts_bool,
+    fonts .default:n = true,
+    fonts .usage = load,
+    rgb .code:n =
+      {
+        \__ieeecs_deprecated_option:nn { rgb } { color-model=rgb }
+        \bool_set_true:N \l__ieeecs_rgb_bool
+      },
+    rgb .value_forbidden:n = true,
+    rgb .usage = load,
+    cmyk .code:n =
+      {
+        \__ieeecs_deprecated_option:nn { cmyk } { color-model=cmyk }
+        \bool_set_false:N \l__ieeecs_rgb_bool
+      },
+    cmyk .value_forbidden:n = true,
+    cmyk .usage = load,
+    nofonts .code:n =
+      {
+        \__ieeecs_deprecated_option:nn { nofonts } { fonts=false }
+        \bool_set_false:N \l__ieeecs_fonts_bool
+      },
+    nofonts .value_forbidden:n = true,
+    nofonts .usage = load,
+  }
+
+\ProcessKeyOptions [ ieeeufgcs-brand ]
 
 % Define the public color names in the selected production color model.
 % Values come from the shared IEEE palette in the supplied brand guides.
-\newcommand*{\ieeecs@definecolor}[3]{%
-  \ifieeecs@rgb
-    \definecolor{#1}{RGB}{#2}%
-  \else
-    \definecolor{#1}{cmyk}{#3}%
-  \fi
-}
+\cs_new_protected:Npn \__ieeecs_define_color:nnn #1#2#3
+  {
+    \bool_if:NTF \l__ieeecs_rgb_bool
+      { \definecolor {#1} { RGB } {#2} }
+      { \definecolor {#1} { cmyk } {#3} }
+  }
 
-\ieeecs@definecolor{IEEEBlue}{0,98,155}{1,0.35,0.03,0.21}
-\ieeecs@definecolor{IEEECyan}{0,181,226}{1,0,0,0}
-\ieeecs@definecolor{IEEECSOrange}{255,163,0}{0,0.41,1,0}
-\ieeecs@definecolor{IEEEGray}{117,120,123}{0.30,0.22,0.17,0.57}
-\ieeecs@definecolor{IEEERed}{186,12,47}{0.03,1,0.70,0.12}
-\ieeecs@definecolor{IEEEYellow}{255,209,0}{0,0.09,1,0}
-\ieeecs@definecolor{IEEEBrightGreen}{120,190,32}{0.65,0,1,0}
-\ieeecs@definecolor{IEEEGreen}{0,132,61}{0.96,0.02,1,0.12}
-\ieeecs@definecolor{IEEEPurple}{152,29,151}{0.48,0.96,0,0}
-\ieeecs@definecolor{IEEETeal}{0,156,166}{0.96,0,0.31,0.02}
-\ieeecs@definecolor{IEEEDarkRed}{134,31,65}{0.15,1,0.37,0.45}
-\ieeecs@definecolor{IEEEDarkOrange}{232,119,34}{0,0.62,0.95,0}
-\ieeecs@definecolor{IEEEDarkYellow}{255,199,44}{0,0.19,0.89,0}
-\ieeecs@definecolor{IEEEOliveGreen}{101,141,27}{0.62,0.01,1,0.25}
-\ieeecs@definecolor{IEEEDarkGreen}{0,99,65}{0.93,0.13,0.85,0.44}
-\ieeecs@definecolor{IEEEDarkPurple}{119,37,131}{0.67,1,0,0.05}
-\ieeecs@definecolor{IEEEDarkTeal}{0,115,119}{0.97,0.09,0.39,0.34}
-\ieeecs@definecolor{IEEEDarkBlue}{0,40,85}{1,0.69,0.08,0.54}
-\ieeecs@definecolor{IEEEBlack}{0,0,0}{0,0,0,1}
-\ieeecs@definecolor{IEEEWhite}{255,255,255}{0,0,0,0}
+\__ieeecs_define_color:nnn { IEEEBlue }
+  { 0,98,155 } { 1,0.35,0.03,0.21 }
+\__ieeecs_define_color:nnn { IEEECyan }
+  { 0,181,226 } { 1,0,0,0 }
+\__ieeecs_define_color:nnn { IEEECSOrange }
+  { 255,163,0 } { 0,0.41,1,0 }
+\__ieeecs_define_color:nnn { IEEEGray }
+  { 117,120,123 } { 0.30,0.22,0.17,0.57 }
+\__ieeecs_define_color:nnn { IEEERed }
+  { 186,12,47 } { 0.03,1,0.70,0.12 }
+\__ieeecs_define_color:nnn { IEEEYellow }
+  { 255,209,0 } { 0,0.09,1,0 }
+\__ieeecs_define_color:nnn { IEEEBrightGreen }
+  { 120,190,32 } { 0.65,0,1,0 }
+\__ieeecs_define_color:nnn { IEEEGreen }
+  { 0,132,61 } { 0.96,0.02,1,0.12 }
+\__ieeecs_define_color:nnn { IEEEPurple }
+  { 152,29,151 } { 0.48,0.96,0,0 }
+\__ieeecs_define_color:nnn { IEEETeal }
+  { 0,156,166 } { 0.96,0,0.31,0.02 }
+\__ieeecs_define_color:nnn { IEEEDarkRed }
+  { 134,31,65 } { 0.15,1,0.37,0.45 }
+\__ieeecs_define_color:nnn { IEEEDarkOrange }
+  { 232,119,34 } { 0,0.62,0.95,0 }
+\__ieeecs_define_color:nnn { IEEEDarkYellow }
+  { 255,199,44 } { 0,0.19,0.89,0 }
+\__ieeecs_define_color:nnn { IEEEOliveGreen }
+  { 101,141,27 } { 0.62,0.01,1,0.25 }
+\__ieeecs_define_color:nnn { IEEEDarkGreen }
+  { 0,99,65 } { 0.93,0.13,0.85,0.44 }
+\__ieeecs_define_color:nnn { IEEEDarkPurple }
+  { 119,37,131 } { 0.67,1,0,0.05 }
+\__ieeecs_define_color:nnn { IEEEDarkTeal }
+  { 0,115,119 } { 0.97,0.09,0.39,0.34 }
+\__ieeecs_define_color:nnn { IEEEDarkBlue }
+  { 0,40,85 } { 1,0.69,0.08,0.54 }
+\__ieeecs_define_color:nnn { IEEEBlack }
+  { 0,0,0 } { 0,0,0,1 }
+\__ieeecs_define_color:nnn { IEEEWhite }
+  { 255,255,255 } { 0,0,0,0 }
+\__ieeecs_define_color:nnn { UFGBlue }
+  { 0,103,172 } { 1,0.40,0,0 }
 
 % Computer Society semantic aliases.
 \colorlet{IEEECSPrimary}{IEEECSOrange}
@@ -69,32 +127,34 @@
 \colorlet{IEEECSBodyText}{IEEEBlack}
 
 % The CS guide explicitly shows these tint steps. White is the tint base.
-\newcommand*{\ieeecs@definetints}[1]{%
-  \colorlet{#1Eighty}{#1!80!IEEEWhite}%
-  \colorlet{#1Sixty}{#1!60!IEEEWhite}%
-  \colorlet{#1Forty}{#1!40!IEEEWhite}%
-  \colorlet{#1Twenty}{#1!20!IEEEWhite}%
-}
-\ieeecs@definetints{IEEEBlue}
-\ieeecs@definetints{IEEECyan}
-\ieeecs@definetints{IEEECSOrange}
-\ieeecs@definetints{IEEEGray}
-\ieeecs@definetints{IEEERed}
-\ieeecs@definetints{IEEEYellow}
-\ieeecs@definetints{IEEEBrightGreen}
-\ieeecs@definetints{IEEEGreen}
-\ieeecs@definetints{IEEEPurple}
-\ieeecs@definetints{IEEETeal}
-\ieeecs@definetints{IEEEDarkRed}
-\ieeecs@definetints{IEEEDarkOrange}
-\ieeecs@definetints{IEEEDarkYellow}
-\ieeecs@definetints{IEEEOliveGreen}
-\ieeecs@definetints{IEEEDarkGreen}
-\ieeecs@definetints{IEEEDarkPurple}
-\ieeecs@definetints{IEEEDarkTeal}
-\ieeecs@definetints{IEEEDarkBlue}
+\cs_new_protected:Npn \__ieeecs_define_tints:n #1
+  {
+    \colorlet { #1Eighty } { #1!80!IEEEWhite }
+    \colorlet { #1Sixty } { #1!60!IEEEWhite }
+    \colorlet { #1Forty } { #1!40!IEEEWhite }
+    \colorlet { #1Twenty } { #1!20!IEEEWhite }
+  }
+\__ieeecs_define_tints:n { IEEEBlue }
+\__ieeecs_define_tints:n { IEEECyan }
+\__ieeecs_define_tints:n { IEEECSOrange }
+\__ieeecs_define_tints:n { IEEEGray }
+\__ieeecs_define_tints:n { IEEERed }
+\__ieeecs_define_tints:n { IEEEYellow }
+\__ieeecs_define_tints:n { IEEEBrightGreen }
+\__ieeecs_define_tints:n { IEEEGreen }
+\__ieeecs_define_tints:n { IEEEPurple }
+\__ieeecs_define_tints:n { IEEETeal }
+\__ieeecs_define_tints:n { IEEEDarkRed }
+\__ieeecs_define_tints:n { IEEEDarkOrange }
+\__ieeecs_define_tints:n { IEEEDarkYellow }
+\__ieeecs_define_tints:n { IEEEOliveGreen }
+\__ieeecs_define_tints:n { IEEEDarkGreen }
+\__ieeecs_define_tints:n { IEEEDarkPurple }
+\__ieeecs_define_tints:n { IEEEDarkTeal }
+\__ieeecs_define_tints:n { IEEEDarkBlue }
 
-\ifieeecs@fonts
+\bool_if:NTF \l__ieeecs_fonts_bool
+  {
   \RequirePackage{fontspec}
   \IfFontExistsTF{Montserrat}{%
     \newfontfamily\IEEECSHeadingFont[
@@ -112,9 +172,9 @@
       FontFace={eb}{n}{*-ExtraBold},
       FontFace={eb}{it}{*-ExtraBoldItalic}
     ]{Montserrat}%
-  }{%
-    \PackageError{ieeeufgcs-brand}{Montserrat font not found}
-      {Install Montserrat as an OpenType font visible to LuaLaTeX.}%
+  }{
+    \PackageError { ieeeufgcs-brand } { Montserrat~font~not~found }
+      { Install~Montserrat~as~an~OpenType~font~visible~to~LuaLaTeX. }
   }
   \IfFontExistsTF{OpenSans}{%
     \newfontfamily\IEEECSBodyFont[
@@ -130,33 +190,57 @@
       FontFace={eb}{n}{*-ExtraBold},
       FontFace={eb}{it}{*-ExtraBoldItalic}
     ]{OpenSans}%
-  }{%
-    \PackageError{ieeeufgcs-brand}{Open Sans font not found}
-      {Install Open Sans as an OpenType font visible to LuaLaTeX.}%
+  }{
+    \PackageError { ieeeufgcs-brand } { Open~Sans~font~not~found }
+      { Install~Open~Sans~as~an~OpenType~font~visible~to~LuaLaTeX. }
   }
-\else
-  \newcommand*{\IEEECSHeadingFont}{\sffamily}
-  \newcommand*{\IEEECSBodyFont}{\rmfamily}
-\fi
+  }
+  {
+    \NewDocumentCommand \IEEECSHeadingFont { } { \sffamily }
+    \NewDocumentCommand \IEEECSBodyFont { } { \rmfamily }
+  }
 
-\ExplSyntaxOn
 \tl_new:N \l__ieeecs_artwork_file_tl
 \tl_new:N \l__ieeecs_artwork_width_tl
 \tl_new:N \l__ieeecs_artwork_ratio_tl
+\tl_new:N \l__ieeecs_ufg_orientation_tl
+\tl_new:N \l__ieeecs_ufg_variant_tl
+\bool_new:N \l__ieeecs_ufg_clear_space_bool
 \box_new:N \l__ieeecs_artwork_box
-\dim_new:N \l__ieeecs_artwork_pad_dim
+\dim_new:N \l__ieeecs_artwork_hpad_dim
+\dim_new:N \l__ieeecs_artwork_vpad_dim
+\dim_new:N \l__ieeecs_artwork_x_dim
+\dim_new:N \l__ieeecs_artwork_width_dim
+
+\msg_new:nnn { ieeeufgcs-brand } { ufg-logo-too-small }
+  {
+    The~UFG~#1~full-name~signature~is~below~its~official~minimum~
+    width~of~#2.
+  }
 
 \keys_define:nn { ieeeufgcs / logo }
   {
     variant .choice:,
     variant / orange .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-cs-logo-orange.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-cs-logo-orange.pdf }
+      },
     variant / black .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-cs-logo-black.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-cs-logo-black.pdf }
+      },
     variant / white .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-cs-logo-white.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-cs-logo-white.pdf }
+      },
     variant / orange-white .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-cs-logo-orange-white.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-cs-logo-orange-white.pdf }
+      },
     width .tl_set:N = \l__ieeecs_artwork_width_tl,
     clear-space .choice:,
     clear-space / true .code:n =
@@ -169,11 +253,20 @@
   {
     variant .choice:,
     variant / blue .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-master-brand-blue.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-master-brand-blue.pdf }
+      },
     variant / black .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-master-brand-black.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-master-brand-black.pdf }
+      },
     variant / white .code:n =
-      { \tl_set:Nn \l__ieeecs_artwork_file_tl { ieeeufgcs-master-brand-white.pdf } },
+      {
+        \tl_set:Nn \l__ieeecs_artwork_file_tl
+          { ieeeufgcs-master-brand-white.pdf }
+      },
     width .tl_set:N = \l__ieeecs_artwork_width_tl,
     clear-space .choice:,
     clear-space / print .code:n =
@@ -184,7 +277,26 @@
       { \tl_set:Nn \l__ieeecs_artwork_ratio_tl { 0 } },
   }
 
-\cs_new_protected:Npn \__ieeecs_typeset_artwork:
+\keys_define:nn { ieeeufgcs / ufg-logo }
+  {
+    orientation .choice:,
+    orientation / horizontal .code:n =
+      { \tl_set:Nn \l__ieeecs_ufg_orientation_tl { horizontal } },
+    orientation / vertical .code:n =
+      { \tl_set:Nn \l__ieeecs_ufg_orientation_tl { vertical } },
+    variant .choice:,
+    variant / blue .code:n =
+      { \tl_set:Nn \l__ieeecs_ufg_variant_tl { blue } },
+    variant / black .code:n =
+      { \tl_set:Nn \l__ieeecs_ufg_variant_tl { black } },
+    variant / white .code:n =
+      { \tl_set:Nn \l__ieeecs_ufg_variant_tl { white } },
+    width .tl_set:N = \l__ieeecs_artwork_width_tl,
+    clear-space .bool_set:N = \l__ieeecs_ufg_clear_space_bool,
+    clear-space .default:n = true,
+  }
+
+\cs_new_protected:Npn \__ieeecs_load_artwork:
   {
     \hbox_set:Nn \l__ieeecs_artwork_box
       {
@@ -192,23 +304,88 @@
           [ width = \l__ieeecs_artwork_width_tl ]
           { \l__ieeecs_artwork_file_tl }
       }
-    \dim_set:Nn \l__ieeecs_artwork_pad_dim
-      { \l__ieeecs_artwork_ratio_tl \box_ht:N \l__ieeecs_artwork_box }
-    \dim_compare:nNnTF { \l__ieeecs_artwork_pad_dim } > { 0pt }
+  }
+
+\cs_new_protected:Npn \__ieeecs_use_artwork:
+  {
+    \mode_leave_vertical:
+    \dim_compare:nNnTF
+      {
+        \l__ieeecs_artwork_hpad_dim
+        + \l__ieeecs_artwork_vpad_dim
+      }
+      > { 0pt }
       {
         \vbox:n
           {
-            \kern \l__ieeecs_artwork_pad_dim
+            \kern \l__ieeecs_artwork_vpad_dim
             \hbox:n
               {
-                \kern \l__ieeecs_artwork_pad_dim
+                \kern \l__ieeecs_artwork_hpad_dim
                 \box_use:N \l__ieeecs_artwork_box
-                \kern \l__ieeecs_artwork_pad_dim
+                \kern \l__ieeecs_artwork_hpad_dim
               }
-            \kern \l__ieeecs_artwork_pad_dim
+            \kern \l__ieeecs_artwork_vpad_dim
           }
       }
       { \box_use:N \l__ieeecs_artwork_box }
+  }
+
+\cs_new_protected:Npn \__ieeecs_typeset_artwork:
+  {
+    \__ieeecs_load_artwork:
+    \dim_set:Nn \l__ieeecs_artwork_hpad_dim
+      { \l__ieeecs_artwork_ratio_tl \box_ht:N \l__ieeecs_artwork_box }
+    \dim_set_eq:NN
+      \l__ieeecs_artwork_vpad_dim
+      \l__ieeecs_artwork_hpad_dim
+    \__ieeecs_use_artwork:
+  }
+
+\cs_new_protected:Npn \__ieeecs_prepare_ufg_artwork:
+  {
+    \dim_set:Nn \l__ieeecs_artwork_width_dim
+      { \l__ieeecs_artwork_width_tl }
+    \tl_if_eq:NnTF \l__ieeecs_ufg_orientation_tl { horizontal }
+      {
+        \dim_compare:nNnT
+          { \l__ieeecs_artwork_width_dim } < { 24.5mm }
+          {
+            \msg_warning:nnnn
+              { ieeeufgcs-brand }
+              { ufg-logo-too-small }
+              { horizontal }
+              { 24.5mm }
+          }
+        % x = 10.5575 pt in the 385 pt-wide normalized artwork.
+        \dim_set:Nn \l__ieeecs_artwork_x_dim
+          { 0.027422 \l__ieeecs_artwork_width_dim }
+      }
+      {
+        \dim_compare:nNnT
+          { \l__ieeecs_artwork_width_dim } < { 12mm }
+          {
+            \msg_warning:nnnn
+              { ieeeufgcs-brand }
+              { ufg-logo-too-small }
+              { vertical }
+              { 12mm }
+          }
+        % x = 21.017 pt in the 183 pt-wide normalized artwork.
+        \dim_set:Nn \l__ieeecs_artwork_x_dim
+          { 0.114847 \l__ieeecs_artwork_width_dim }
+      }
+    \bool_if:NTF \l__ieeecs_ufg_clear_space_bool
+      {
+        \dim_set:Nn \l__ieeecs_artwork_hpad_dim
+          { 3 \l__ieeecs_artwork_x_dim }
+        \dim_set:Nn \l__ieeecs_artwork_vpad_dim
+          { 2 \l__ieeecs_artwork_x_dim }
+      }
+      {
+        \dim_zero:N \l__ieeecs_artwork_hpad_dim
+        \dim_zero:N \l__ieeecs_artwork_vpad_dim
+      }
   }
 
 \cs_new_protected:Npn \ieeecs_logo:n #1
@@ -233,8 +410,29 @@
     \group_end:
   }
 
+\cs_new_protected:Npn \ieeecs_ufg_logo:n #1
+  {
+    \group_begin:
+      \tl_set:Nn \l__ieeecs_ufg_orientation_tl { vertical }
+      \tl_set:Nn \l__ieeecs_ufg_variant_tl { blue }
+      \tl_set:Nn \l__ieeecs_artwork_width_tl { 24mm }
+      \bool_set_true:N \l__ieeecs_ufg_clear_space_bool
+      \keys_set:nn { ieeeufgcs / ufg-logo } { #1 }
+      \tl_set:Nx \l__ieeecs_artwork_file_tl
+        {
+          ieeeufgcs-ufg-logo-
+          \l__ieeecs_ufg_orientation_tl-
+          \l__ieeecs_ufg_variant_tl.pdf
+        }
+      \__ieeecs_load_artwork:
+      \__ieeecs_prepare_ufg_artwork:
+      \__ieeecs_use_artwork:
+    \group_end:
+  }
+
 \NewDocumentCommand{\IEEECSLogo}{ O{} }{\ieeecs_logo:n { #1 }}
 \NewDocumentCommand{\IEEEMasterBrand}{ O{} }{\ieeecs_master_brand:n { #1 }}
+\NewDocumentCommand{\UFGLogo}{ O{} }{\ieeecs_ufg_logo:n { #1 }}
 \ExplSyntaxOff
 
 \endinput

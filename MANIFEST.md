@@ -14,8 +14,14 @@ The LPPL “Work” consists of the following repository-authored files:
 - `README.md`
 - `docs/brand-foundation.md`
 - `docs/brand-reference.tex`
+- `scripts/check-line-length.lua`
+- `templates/README.md`
+- `templates/work-plan/main.tex`
+- `tests/smoke/compact.tex`
+- `tests/smoke/document.tex`
 - `tests/smoke/brand.tex`
 - `tests/smoke/cmyk.tex`
+- `tex/latex/ieeeufgcs/ieeeufgcs.cls`
 - `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty`
 - `tex/latex/ieeeufgcs/assets/README.md`
 
@@ -29,6 +35,12 @@ but are expressly excluded from it and are not licensed under the LPPL:
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-black.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-blue.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-white.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-black.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-blue.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-white.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-vertical-black.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-vertical-blue.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-vertical-white.pdf`
 
 The repository metadata, the LPPL text itself, and generated build products are
 not components of the Work.

@@ -9,14 +9,21 @@
 % This work has the LPPL maintenance status `maintained'. The Current
 % Maintainer is the IEEE UFG Computer Society. The work consists of the files
 % listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
-\documentclass{article}
-\usepackage[color-model=cmyk,fonts=false]{ieeeufgcs-brand}
-\pagestyle{empty}
+\documentclass[title-page=false,two-sided=false]{ieeeufgcs}
+
+\IEEECSSetup{
+  document-type={Decision record},
+  title={Compact title test},
+  subtitle={Short official documents},
+  running-title={Compact title test},
+  author={Project contributors},
+  date={29 September 2026}
+}
 
 \begin{document}
-\textcolor{IEEECSOrange}{CMYK Computer Society orange.}
-\textcolor{IEEEBlue}{CMYK IEEE blue.}
-\textcolor{UFGBlue}{CMYK UFG blue.}
-\IEEECSLogo[variant=black,width=30mm,clear-space=false]
-\IEEEMasterBrand[variant=black,width=40mm,clear-space=none]
+\maketitle
+
+\section{Decision}
+
+This page exercises the compact title and one-sided page style.
 \end{document}

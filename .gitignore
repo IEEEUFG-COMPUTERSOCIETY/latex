@@ -1,6 +1,12 @@
 # Diretório de saída e cache local do LuaTeX
 build/
 
+# Diretório de exemplos para ter como base
+example/
+
+# Documentação externa usada apenas como referência local
+/clsguide.pdf
+
 # Arquivos auxiliares do LaTeX e latexmk
 *.acn
 *.acr

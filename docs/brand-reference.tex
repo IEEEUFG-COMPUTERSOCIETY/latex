@@ -18,13 +18,17 @@
 
 \newcommand{\swatch}[2]{%
   \begin{minipage}[t]{.18\linewidth}
-    \colorbox{#1}{\color{#1}\rule{\dimexpr\linewidth-2\fboxsep\relax}{10mm}}\\[-1pt]
+    \colorbox{#1}{%
+      \color{#1}%
+      \rule{\dimexpr\linewidth-2\fboxsep\relax}{10mm}%
+    }\\[-1pt]
     {\IEEECSHeadingFont\bfseries #2}\\
     {\footnotesize\ttfamily #1}
   \end{minipage}%
 }
 
 \begin{document}
+\IEEECSBodyFont
 {\IEEECSHeadingFont\bfseries\Huge IEEE UFG CS brand foundation}\par
 {\IEEECSBodyFont\large Official colors, typography, and supplied artwork}\par
 
@@ -50,6 +54,9 @@
 \swatch{IEEEDarkPurple}{Dark purple}
 
 \bigskip
+\swatch{UFGBlue}{UFG blue}
+
+\bigskip
 {\IEEECSHeadingFont\bfseries\Large Computer Society marks}\par
 \medskip
 \IEEECSLogo[variant=orange,width=48mm]\hfill
@@ -68,6 +75,31 @@
 \medskip
 \colorbox{IEEEDarkBlue}{%
   \IEEEMasterBrand[variant=white,width=55mm,clear-space=digital]%
+}
+
+\newpage
+{
+  \IEEECSHeadingFont\bfseries\Huge
+  Universidade Federal de Goiás marks
+}\par
+\medskip
+These full-name signatures include the official protected area: three
+construction modules horizontally and two vertically.
+
+\bigskip
+\UFGLogo[orientation=horizontal,variant=blue,width=55mm]\hfill
+\UFGLogo[orientation=horizontal,variant=black,width=55mm]
+
+\bigskip
+\colorbox{IEEEDarkBlue}{%
+  \UFGLogo[orientation=horizontal,variant=white,width=55mm]%
+}
+
+\bigskip
+\UFGLogo[orientation=vertical,variant=blue,width=30mm]\hfill
+\UFGLogo[orientation=vertical,variant=black,width=30mm]\hfill
+\colorbox{IEEEDarkBlue}{%
+  \UFGLogo[orientation=vertical,variant=white,width=30mm]%
 }
 
 \end{document}

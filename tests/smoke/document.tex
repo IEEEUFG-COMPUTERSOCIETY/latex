@@ -1,0 +1,63 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.3c of this license or (at your
+% option) any later version. The latest version is available at
+% https://www.latex-project.org/lppl.txt.
+%
+% This work has the LPPL maintenance status `maintained'. The Current
+% Maintainer is the IEEE UFG Computer Society. The work consists of the files
+% listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
+\documentclass[
+  binding-offset=0mm,
+  section-numbering=two-digit
+]{ieeeufgcs}
+
+\IEEECSSetup{
+  document-type={Internal document},
+  title={Generic class smoke test},
+  subtitle={Mirrored margins and reusable components},
+  running-title={Generic class smoke test},
+  institution={IEEE Computer Society Student Branch Chapter at UFG},
+  unit={School of Electrical, Mechanical and Computer Engineering},
+  author={Project contributors},
+  date={29 September 2026},
+  location={Goiânia},
+  identifier={TEST-001}
+}
+
+\begin{document}
+\maketitle
+
+\section{First recto page}
+
+The first content page exercises the branded heading, running header, body
+font, and outer page number. Its inner margin is wider than its outer margin.
+
+\begin{IEEECSNotice}[Constraint]
+The binding offset remains zero while the semantic margins alternate.
+\end{IEEECSNotice}
+
+\begin{IEEECSBrandedTable}{p{0.25\linewidth}X}
+\IEEECSHeaderCell{Item} & \IEEECSHeaderCell{Result} \\
+Class & Generic institutional document \\
+Layout & Mirrored two-sided pages \\
+\end{IEEECSBrandedTable}
+
+\vfill
+Recto page footer check.
+\clearpage
+
+\section{First verso page}
+
+The second content page verifies that the inner and outer margins exchange
+sides and that sections use two-digit numbering.
+
+\subsection{Secondary heading}
+
+This heading exercises the second level of the class hierarchy.
+
+\vfill
+Verso page footer check.
+\end{document}
