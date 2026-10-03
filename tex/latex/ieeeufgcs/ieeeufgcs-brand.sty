@@ -65,6 +65,9 @@
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 
+% Package options are processed before colors and fonts are declared because
+% both public APIs depend on these choices. Old flag-style options remain only
+% as a migration path and always emit a deprecation warning.
 \ExplSyntaxOn
 \bool_new:N \l__ieeecs_rgb_bool
 \bool_new:N \l__ieeecs_fonts_bool
@@ -197,6 +200,8 @@
 \__ieeecs_define_tints:n { IEEEDarkTeal }
 \__ieeecs_define_tints:n { IEEEDarkBlue }
 
+% Keep typography behind stable selectors. With fonts=false, host classes can
+% manage their own fonts while documents continue to use the same public API.
 \bool_if:NTF \l__ieeecs_fonts_bool
   {
   \RequirePackage{fontspec}
@@ -244,6 +249,8 @@
     \NewDocumentCommand \IEEECSBodyFont { } { \rmfamily }
   }
 
+% Artwork state is local to each public command's group. A call can therefore
+% change its variant or size without affecting any later mark on the page.
 \tl_new:N \l__ieeecs_artwork_file_tl
 \tl_new:N \l__ieeecs_artwork_width_tl
 \tl_new:N \l__ieeecs_artwork_ratio_tl
@@ -262,6 +269,8 @@
     width~of~#2.
   }
 
+% Each family has its own key set because the official variants and clear-space
+% vocabulary are different for the three organizations.
 \keys_define:nn { ieeeufgcs / logo }
   {
     variant .choice:,
@@ -340,6 +349,8 @@
     clear-space .default:n = true,
   }
 
+% Load the graphic into a measurable box before adding protection. The final
+% box contains both the original, unmodified art and computed empty margins.
 \cs_new_protected:Npn \__ieeecs_load_artwork:
   {
     \hbox_set:Nn \l__ieeecs_artwork_box
@@ -432,6 +443,8 @@
       }
   }
 
+% Public commands install documented defaults first and then apply user keys.
+% Grouping guarantees that all temporary selections are discarded afterward.
 \cs_new_protected:Npn \ieeecs_logo:n #1
   {
     \group_begin:

@@ -23,7 +23,7 @@
 %% source files here contain the resulting implementation specification.
 %%
 %% The default is A4 at 11 pt with a two-sided mirrored text block. Inner,
-%% outer, top, and bottom margins are 27, 22, 24, and 28 mm respectively. The
+%% outer, top, and bottom margins are 22, 22, 24, and 28 mm respectively. The
 %% wider inner margin alternates on odd and even pages. Binding offset is zero
 %% by policy and remains independently configurable for exceptional uses.
 %% Open Sans is the body face and Montserrat is the heading face.
@@ -47,9 +47,14 @@
 \RequirePackage{iftex}
 \RequireLuaTeX
 
+% LaTeX2e conditionals are used later in title and section definitions, where
+% their direct if/else syntax is clearer than repeatedly entering expl3 mode.
 \newif\ifieeecs@titlepage
 \newif\ifieeecs@twodigitsections
 
+% Phase 1: collect class options before loading article. Paper size, base font
+% size, and sidedness are immutable article choices and must be forwarded
+% before \LoadClass. Geometry and brand choices remain available for phase 2.
 \ExplSyntaxOn
 \tl_new:N \l__ieeecs_class_paper_tl
 \tl_new:N \l__ieeecs_class_font_size_tl
@@ -71,7 +76,7 @@
 \bool_set_true:N \l__ieeecs_class_two_sided_bool
 \bool_set_true:N \l__ieeecs_class_title_page_bool
 \bool_set_false:N \l__ieeecs_class_two_digit_sections_bool
-\dim_set:Nn \l__ieeecs_class_inner_margin_dim { 27mm }
+\dim_set:Nn \l__ieeecs_class_inner_margin_dim { 22mm }
 \dim_set:Nn \l__ieeecs_class_outer_margin_dim { 22mm }
 \dim_set:Nn \l__ieeecs_class_top_margin_dim { 24mm }
 \dim_set:Nn \l__ieeecs_class_bottom_margin_dim { 28mm }
@@ -127,6 +132,7 @@
   { \PassOptionsToClass { \CurrentOption } { article } }
 \ProcessKeyOptions [ ieeeufgcs ]
 
+% Bridge expl3 booleans into the LaTeX2e conditionals used below.
 \bool_if:NTF \l__ieeecs_class_title_page_bool
   { \ieeecs@titlepagetrue }
   { \ieeecs@titlepagefalse }
@@ -146,6 +152,7 @@
   \l__ieeecs_class_base_options_tl { article }
 \ExplSyntaxOff
 
+% Phase 2: build the institutional class on the standard structural base.
 \LoadClass{article}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
@@ -154,6 +161,8 @@
 \RequirePackage{tabularx}
 \RequirePackage{colortbl}
 
+% Translate semantic margins into geometry after article has established the
+% paper and page mode. Pass the color model before loading the brand package.
 \ExplSyntaxOn
 \tl_set:Nx \l__ieeecs_class_geometry_options_tl
   {
@@ -177,6 +186,8 @@
 \RequirePackage{ieeeufgcs-brand}
 \setmainfont{OpenSans}
 
+% Metadata is stored independently so that a missing optional field consumes
+% no space. Title, author, and date deliberately reuse LaTeX's standard state.
 \makeatletter
 \newcommand{\@ieeecs@documenttype}{}
 \newcommand{\@ieeecs@subtitle}{}
@@ -211,32 +222,144 @@
   \fi
 }
 
+% Title rendering
+% ---------------
+% The public \maketitle command is a dispatcher.  The title-page class option
+% is copied into \ifieeecs@titlepage while options are processed above; that
+% conditional selects one of the two private renderers below.  Keep the
+% selection here rather than in the metadata commands so that both renderers
+% consume the same stored title, author, date, and IEEECSSetup state.
+%
+% The full-page renderer creates and closes a titlepage, paints artwork against
+% the physical page, and restarts body-page numbering at one.  The compact
+% renderer emits an in-flow heading on the current page and leaves pagination
+% alone.  In particular, it is safe for compact \maketitle to follow material
+% already placed by a template; it must not acquire an implicit page break.
+%
+% Full-page cover artwork.  This command paints only the background layer; the
+% logos and metadata are normal page content added by
+% \ieeecs@maketitlepage.  All coordinates are deliberately relative to
+% `current page', not to the geometry text block.  Changing the document
+% margins therefore does not move the artwork, while changing the paper size
+% preserves its offsets from the top and right paper edges.
+%
+% The measurements form one coupled composition and should be reviewed
+% together:
+%   * 110mm is the bottom of the dark-blue field;
+%   * 110--115mm is the 5mm orange divider immediately below that field;
+%   * the three wireframe icosahedrons occupy the right side of the field in the
+%     same approximate -92mm to -18mm horizontal and -72mm to -106mm vertical
+%     region as the line artwork they replaced.
+% `remember picture' makes the page node available and `overlay' prevents the
+% picture from contributing its page-sized bounds to TeX's layout.  The
+% surrounding \noindent ... \par gives the zero-sized overlay a predictable
+% paragraph context without adding visible content.
+%
+% Draw one orthographic icosahedron centered at #1, scaled by #2, colored with
+% #3, and with both line widths multiplied by #4.  The twelve coordinates are a
+% fixed projection of the canonical three-dimensional vertices.  Edges whose
+% midpoints lie on the far half of the solid are drawn first and faintly; near
+% edges are drawn second and more strongly.  That depth cue keeps the complete
+% 30-edge graph legible at cover size without requiring TikZ's heavier 3-D
+% libraries.  Coordinates are in millimetres.  Geometry scaling and stroke
+% scaling are deliberately independent, so #4=1 preserves the base 0.35pt and
+% 0.55pt widths regardless of #2.
+\newcommand{\ieeecs@covericosahedron}[4]{%
+  \begin{scope}[
+    shift={#1},
+    x=1mm,
+    y=1mm,
+    scale=#2,
+    draw=#3,
+    line cap=round,
+    line join=round
+  ]
+    \coordinate (ico-1)  at ( 4.47,-1.90);
+    \coordinate (ico-2)  at (-1.63,-8.35);
+    \coordinate (ico-3)  at ( 1.63, 8.35);
+    \coordinate (ico-4)  at (-4.47, 1.90);
+    \coordinate (ico-5)  at (-2.71,-9.00);
+    \coordinate (ico-6)  at (-7.32, 7.59);
+    \coordinate (ico-7)  at ( 7.32,-7.59);
+    \coordinate (ico-8)  at ( 2.71, 9.00);
+    \coordinate (ico-9)  at (-6.23, 0.85);
+    \coordinate (ico-10) at (-10.00,-3.14);
+    \coordinate (ico-11) at ( 10.00, 3.14);
+    \coordinate (ico-12) at ( 6.23,-0.85);
+
+    \pgfmathsetlengthmacro{\ieeecs@farlinewidth}{#4 * 0.35pt}
+    \pgfmathsetlengthmacro{\ieeecs@nearlinewidth}{#4 * 0.55pt}
+
+    % Far-side edges remain visible, but recede behind the front shell.
+    \foreach \from/\to in {
+      1/9,1/3,3/9,1/5,5/9,1/11,1/7,6/9,3/11,9/10,
+      3/6,5/7,5/10,7/11,3/8} {
+      \draw[opacity=0.28,line width=\ieeecs@farlinewidth]
+        (ico-\from) -- (ico-\to);
+    }
+
+    % Near-side edges establish the silhouette and dominant triangular faces.
+    \foreach \from/\to in {
+      2/5,6/10,8/11,6/8,2/7,11/12,2/10,7/12,4/6,4/10,
+      8/12,4/8,2/12,2/4,4/12} {
+      \draw[opacity=0.88,line width=\ieeecs@nearlinewidth]
+        (ico-\from) -- (ico-\to);
+    }
+  \end{scope}%
+}
+
 \newcommand{\ieeecs@coverbackground}{%
   \noindent
   \begin{tikzpicture}[remember picture,overlay]
     \fill[IEEEDarkBlue]
       (current page.north west)
-      rectangle ([yshift=-112mm]current page.north east);
+      rectangle ([yshift=-110mm]current page.north east);
     \fill[IEEECSOrange]
-      ([yshift=-112mm]current page.north west)
+      ([yshift=-110mm]current page.north west)
       rectangle ([yshift=-115mm]current page.north east);
-    \draw[IEEECyan,line width=0.6pt]
-      ([xshift=-92mm,yshift=-72mm]current page.north east)
-      -- ([xshift=-18mm,yshift=-72mm]current page.north east)
-      -- ([xshift=-18mm,yshift=-102mm]current page.north east);
-    \draw[IEEEBlueTwenty,line width=0.6pt]
-      ([xshift=-72mm,yshift=-78mm]current page.north east)
-      -- ([xshift=-34mm,yshift=-100mm]current page.north east)
-      -- ([xshift=-34mm,yshift=-106mm]current page.north east);
-    \fill[IEEECyan]
-      ([xshift=-18mm,yshift=-72mm]current page.north east)
-      circle[radius=1.2mm];
-    \fill[IEEECSOrange]
-      ([xshift=-34mm,yshift=-100mm]current page.north east)
-      circle[radius=1.2mm];
+    \ieeecs@covericosahedron
+      {([xshift=-54mm,yshift=-74mm]current page.north east)}
+      {2.55}
+      {IEEECyan}
+      {1.7}
+    \ieeecs@covericosahedron
+      {([xshift=-32mm,yshift=-93mm]current page.north east)}
+      {1.30}
+      {IEEEBlueTwenty}
+      {2.0}
+    \ieeecs@covericosahedron
+      {([xshift=-125mm,yshift=-90mm]current page.north east)}
+      {7.6}
+      {IEEECSOrange}
+      {1.2}
+    \fill[IEEEWhite]
+      ([yshift=-110mm]current page.south west)
+      rectangle ([yshift=-115mm]current page.north east);
   \end{tikzpicture}\par
 }
 
+% Full-page title implementation (the default).  The titlepage environment is
+% responsible for isolating the cover from surrounding content and for the
+% page breaks at both boundaries.  Its page style is explicitly empty because
+% the global ieeeufgcs fancyhdr style must not place running furniture over the
+% cover artwork.
+%
+% The first 76mm of text-area content is a top-aligned minipage placed over the
+% 110mm blue field.  It contains the two white-compatible logo variants,
+% followed by the optional document type and the title.  Its fixed height is
+% part of the cover geometry: it keeps all subsequent metadata below the
+% colored header independently of how little content appears in this block.
+% A long title or document type can overfill it, so adjust the typography or
+% revisit the cover dimensions when allowing unusually long metadata; do not
+% simply remove the fixed height.
+%
+% Optional metadata is guarded with \ifx ... \@empty so absent values consume
+% neither text nor their associated vertical space.  The information hierarchy
+% is subtitle; author; institution and unit; date and location.  The final
+% \vfill pins the master-brand/identifier row toward the bottom of the
+% available text area.  The identifier is right-aligned only when present.
+% \@thanks is expanded inside the titlepage so standard \thanks entries remain
+% attached to the cover rather than leaking into the document body.
 \newcommand{\ieeecs@maketitlepage}{%
   \begin{titlepage}
     \thispagestyle{empty}%
@@ -254,7 +377,7 @@
       \UFGLogo[
         orientation=horizontal,
         variant=white,
-        width=28.5mm,
+        width=32.5mm,
         clear-space=false
       ]\par
       \vspace{14mm}
@@ -298,9 +421,24 @@
     \par
     \@thanks
   \end{titlepage}
+  % In two-sided article documents, titlepage advances the counter when it
+  % ships the cover.  The cover is intentionally outside the numbered body, so
+  % normalize the first body page to page 1 in every sidedness mode.
   \setcounter{page}{1}%
 }
 
+% Compact title implementation.  Unlike the full cover, this is ordinary
+% vertical material in the current text block: it neither opens a titlepage nor
+% resets the page counter.  Apply the branded page style locally to the page on
+% which the heading lands, since a template may have changed the surrounding
+% pagestyle.
+%
+% Compact titles intentionally present only document type, title, subtitle,
+% author, and date.  Institution, unit, location, identifier, logos, and
+% \@thanks belong to the full cover and are not silently squeezed into this
+% smaller treatment.  The author/date pair shares one line with stretchable
+% space; maintainers adding potentially wide fields should introduce an
+% explicit wrapping policy rather than adding more \hfill-separated items.
 \newcommand{\ieeecs@makecompacttitle}{%
   \thispagestyle{ieeeufgcs}%
   \ifx\@ieeecs@documenttype\@empty\else
@@ -320,6 +458,9 @@
   \bigskip
 }
 
+% Preserve LaTeX's public entry point while replacing article's title layout.
+% This command deliberately takes no arguments: callers configure all content
+% through \title, \author, \date, and \IEEECSSetup before invoking it.
 \RenewDocumentCommand{\maketitle}{}{%
   \ifieeecs@titlepage
     \ieeecs@maketitlepage
@@ -328,6 +469,8 @@
   \fi
 }
 
+% Section styling and page furniture belong to the class because they are
+% shared by every institutional document, regardless of its template.
 \ifieeecs@twodigitsections
   \renewcommand{\thesection}{%
     \ifnum\value{section}<10 0\fi\arabic{section}}
@@ -370,6 +513,8 @@
 \pagestyle{ieeeufgcs}
 \makeatother
 
+% Public content components. These intentionally accept ordinary array and
+% tabularx column declarations instead of introducing another table language.
 \NewDocumentCommand{\IEEECSHeaderCell}{m}{%
   \cellcolor{IEEEBlue}%
   \color{IEEEWhite}%
