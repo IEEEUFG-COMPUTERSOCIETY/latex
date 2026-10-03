@@ -44,6 +44,8 @@ check-style:
 	@find . \
 		-path './.git' -prune -o \
 		-path './build' -prune -o \
+		-path './documents' -prune -o \
+		-path './example' -prune -o \
 		-type f \( \
 			-name '*.cls' -o \
 			-name '*.bib' -o \
@@ -76,10 +78,10 @@ reference:
 		tests/reference/brand-reference.tex
 
 templates:
-	mkdir -p $(BUILD_DIR)/templates/work-plan "$(TEXMFVAR_DIR)"
+	mkdir -p $(BUILD_DIR)/templates/plano-trabalho "$(TEXMFVAR_DIR)"
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/work-plan \
-		templates/work-plan/main.tex
+		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
+		templates/plano-trabalho/main.tex
 
 clean:
 	@bash scripts/document.sh clean

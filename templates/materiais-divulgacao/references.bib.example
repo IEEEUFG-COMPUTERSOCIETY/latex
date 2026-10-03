@@ -1,0 +1,26 @@
+@Comment{
+  COMO USAR ESTE ARQUIVO
+
+  1. Renomeie este arquivo para references.bib.
+  2. Configure biblatex no futuro arquivo principal.
+  3. Cite uma entrada com \cite{exemplo-livro}.
+  4. Inclua a bibliografia quando o formato exigir.
+
+  Substitua as entradas de exemplo pelas referências reais.
+}
+
+@book{exemplo-livro,
+  author    = {Sobrenome, Nome},
+  title     = {Título da obra},
+  publisher = {Nome da editora},
+  location  = {Cidade},
+  year      = {2026}
+}
+
+@online{exemplo-site,
+  author  = {{Nome da organização}},
+  title   = {Título da página},
+  year    = {2026},
+  url     = {https://example.org},
+  urldate = {2026-09-29}
+}

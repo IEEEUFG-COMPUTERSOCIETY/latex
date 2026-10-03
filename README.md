@@ -76,7 +76,7 @@ Colaboradores e rotinas automatizadas também podem informar as escolhas na
 linha de comando:
 
 ```sh
-make new TEMPLATE=work-plan NAME=plano-2027 BUILD=no
+make new TEMPLATE=plano-trabalho NAME=plano-2027 BUILD=no
 make build NAME=plano-2027
 ```
 
@@ -89,6 +89,11 @@ essa regra.
 As decisões de implementação e os detalhes da identidade visual são mantidos
 como comentários nos arquivos da classe e do pacote. Os modelos disponíveis
 estão descritos em [`templates/README.md`](templates/README.md).
+
+O [`guia de desenvolvimento`](development/README.md) apresenta a
+arquitetura do projeto, documenta as APIs completas da classe e do pacote de
+marca e ensina como criar opções, metadados, componentes, modelos, cores,
+ativos e testes.
 
 ## Licença
 
