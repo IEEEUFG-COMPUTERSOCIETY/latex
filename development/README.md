@@ -28,8 +28,8 @@ documento local
 modelo
     sugere a estrutura de conteúdo para um tipo de documento
         ↓
-classe ieeeufgcs
-    define página, capa, cabeçalhos e componentes institucionais
+classe ieeeufgcs ou tema Beamer ieeeufgcs
+    define páginas ou quadros e seus componentes institucionais
         ↓
 pacote ieeeufgcs-brand
     fornece cores, fontes, marcas e suas regras de proteção
@@ -48,7 +48,8 @@ todo o documento.
 
 Neste projeto:
 
-- `ieeeufgcs.cls` é a classe institucional;
+- `ieeeufgcs.cls` é a classe institucional para documentos;
+- `beamerthemeieeeufgcs.sty` é o tema institucional para apresentações;
 - `ieeeufgcs-brand.sty` é o pacote de identidade visual;
 - `templates/` contém pontos de partida para tipos de documento; e
 - `documents/` contém trabalhos locais criados a partir desses modelos.
@@ -58,7 +59,8 @@ Neste projeto:
 | Caminho | Responsabilidade |
 |---|---|
 | `tex/latex/ieeeufgcs/ieeeufgcs.cls` | Classe institucional pública. |
-| `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty` | Cores, fontes e marcas. |
+| `tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty` | Tema público do Beamer. |
+| `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty` | Identidade visual compartilhada. |
 | `tex/latex/ieeeufgcs/assets/` | Cópias normalizadas da arte oficial. |
 | `templates/` | Modelos canônicos de conteúdo. |
 | `templates/catalog.tsv` | Catálogo lido pelo assistente. |
@@ -78,14 +80,14 @@ Os diretórios `build/`, `documents/` e `example/` têm funções diferentes:
 - `documents/` contém trabalho do usuário e nunca é removido por `make clean`;
 - `example/` contém referências, não componentes públicos do projeto.
 
-## 3. Como uma compilação encontra a classe
+## 3. Como uma compilação encontra os componentes
 
 Uma instalação global em uma árvore TeX não é necessária durante o
 desenvolvimento. O `Makefile` e `scripts/document.sh` acrescentam
 `tex/latex//` à variável `TEXINPUTS`. Os dois caracteres `/` no final pedem
 uma busca recursiva.
 
-O fluxo de uma compilação é:
+O fluxo de uma compilação documental é:
 
 1. `latexmk` inicia o LuaLaTeX;
 2. `TEXINPUTS` permite localizar `ieeeufgcs.cls` e o pacote de marca;
@@ -93,6 +95,11 @@ O fluxo de uma compilação é:
 4. a classe repassa `color-model` ao pacote de marca;
 5. o pacote localiza a arte PDF pelo mesmo caminho de busca; e
 6. `latexmk` repete a compilação enquanto referências estiverem mudando.
+
+Nas apresentações, `TEXINPUTS` localiza o tema
+`beamerthemeieeeufgcs.sty`. O Beamer carrega o tema, que por sua vez carrega o
+mesmo pacote de marca. O restante do fluxo de busca por arte e de repetição da
+compilação permanece igual.
 
 `TEXMFVAR` aponta para `build/texmf-var`. Assim, o cache de fontes do LuaTeX
 fica dentro do projeto, em vez de depender de uma pasta gravável do sistema.
@@ -435,6 +442,49 @@ consegue avaliar todo o contexto visual. A pessoa responsável ainda deve:
 - não girar, cortar, distorcer, recolorir ou reconstruir as marcas; e
 - confirmar permissões de uso das marcas oficiais.
 
+### 5.9 Tema Beamer `ieeeufgcs`
+
+Apresentações usam a classe `beamer` e carregam o tema institucional. O tema
+reutiliza o pacote de marca; ele não carrega a classe documental
+`ieeeufgcs`.
+
+```tex
+\documentclass[aspectratio=169]{beamer}
+\usetheme{ieeeufgcs}
+
+\title[Título breve]{Título da apresentação}
+\author{Nome da pessoa ou equipe}
+
+\begin{document}
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+\section{Contexto}
+\begin{frame}{Questão central}
+  Conteúdo do quadro.
+\end{frame}
+\end{document}
+```
+
+O tema fornece:
+
+- capa escura com as marcas da Computer Society e da UFG;
+- divisórias automáticas para cada `\section`;
+- quadros de conteúdo com títulos e rodapé discretos;
+- cores institucionais para `block`, `alertblock` e `exampleblock`; e
+- `\IEEECSMetric{valor}{rótulo}` para evidências numéricas curtas.
+
+As divisórias são ativadas por padrão. Em uma apresentação curta, desative-as
+com:
+
+```tex
+\usetheme[sectionpages=false]{ieeeufgcs}
+```
+
+O tema não cria um comando exclusivo para o encerramento. O modelo demonstra
+como limitar a cor `background canvas` a um único quadro, mantendo essa escolha
+visível e fácil de adaptar no documento.
+
 ## 6. Como a implementação LaTeX está organizada
 
 ### 6.1 LaTeX2e e `expl3`
@@ -468,7 +518,7 @@ A classe e o pacote carregam dependências pequenas e especializadas:
 | `iftex` | Exigir o motor LuaLaTeX. |
 | `geometry` | Aplicar margens semânticas e encadernação. |
 | `fancyhdr` | Construir cabeçalhos e rodapés. |
-| `tikz` | Desenhar o fundo vetorial da capa. |
+| `tikz` | Desenhar os icosaedros da capa e das apresentações. |
 | `array` | Oferecer tipos e modificadores de coluna. |
 | `tabularx` | Criar tabelas que ocupam a largura disponível. |
 | `colortbl` | Colorir células e alternar fundos das linhas. |
@@ -510,6 +560,10 @@ não devem depender deles. A API pública é composta por:
 - `\IEEECSHeaderCell`;
 - `IEEECSBrandedTable`; e
 - `IEEECSNotice`.
+
+Para apresentações, `\usetheme{ieeeufgcs}` e
+`\IEEECSMetric{valor}{rótulo}` complementam essa API. Cores, fontes e comandos
+de marca continuam vindo de `ieeeufgcs-brand`.
 
 Essa fronteira permite reorganizar a implementação sem quebrar documentos.
 

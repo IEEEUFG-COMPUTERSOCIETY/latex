@@ -10,7 +10,8 @@ implementação da classe ou dos pacotes de identidade visual.
 - GNU Make;
 - LuaLaTeX e `latexmk`;
 - fontes Montserrat e Open Sans;
-- Bash; e
+- Bash;
+- Beamer, para criar apresentações; e
 - Biber, somente para documentos com referências bibliográficas.
 
 ## Uso rápido

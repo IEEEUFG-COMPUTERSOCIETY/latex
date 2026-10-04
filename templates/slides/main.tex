@@ -1,0 +1,190 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.3c of this license or (at your
+% option) any later version. The latest version is available at
+% https://www.latex-project.org/lppl.txt.
+%
+% This work has the LPPL maintenance status `maintained'. The Current
+% Maintainer is the IEEE UFG Computer Society. The work consists of the files
+% listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
+
+% GUIA DE EDIÇÃO
+% Use uma mensagem principal por quadro e prefira evidências visuais a blocos
+% longos de texto. Para apresentações curtas, use
+% \usetheme[sectionpages=false]{ieeeufgcs}.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{ieeeufgcs}
+\usepackage[brazil]{babel}
+
+% Para usar referências bibliográficas, renomeie
+% references.bib.example para references.bib e ative as três linhas abaixo.
+% \usepackage{csquotes}
+% \usepackage[backend=biber,style=numeric]{biblatex}
+% \addbibresource{references.bib}
+
+% COMANDOS ÚTEIS
+% Imagem: \includegraphics[width=\linewidth]{img/arquivo.png}
+% Referência: \cite{chave-da-referencia}
+% Destaque numérico: \IEEECSMetric{42}{Descrição breve}
+
+\title[Título breve]{Título da apresentação}
+\subtitle{Mensagem principal ou contexto}
+\author{Nome da pessoa ou equipe}
+\institute{Capítulo Estudantil da IEEE Computer Society na UFG}
+\date{Evento ou ocasião · \today}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\section{Contexto}
+
+\begin{frame}{Contexto e objetivo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.48\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Contexto\par}
+      \medskip
+      Apresente as informações necessárias para situar o tema, o público e o
+      período abordado.
+    \end{column}
+    \begin{column}{.48\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Objetivo\par}
+      \medskip
+      Declare o propósito da apresentação e o resultado esperado deste
+      encontro.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Evidências}
+  \framesubtitle{Indicadores diretamente relacionados ao tema}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.30\textwidth}
+      \IEEECSMetric{42}{Participantes}
+    \end{column}
+    \begin{column}{.30\textwidth}
+      \IEEECSMetric{3×}{Variação no período}
+    \end{column}
+    \begin{column}{.30\textwidth}
+      \IEEECSMetric{87\%}{Índice de conclusão}
+    \end{column}
+  \end{columns}
+  \vfill
+  Registre a fonte e o período de referência dos dados apresentados.
+\end{frame}
+
+\section{Proposta}
+
+\begin{frame}{Proposta}
+  \begin{columns}[c,onlytextwidth]
+    \begin{column}{.61\textwidth}
+      {\IEEECSHeadingFont\bfseries\Large
+        Apresente a proposta em uma frase direta.\par}
+      \medskip
+      Delimite o escopo, a relação com o contexto e as condições necessárias
+      para execução.
+    \end{column}
+    \begin{column}{.33\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Resultado\par}
+      \medskip
+      Indique a principal entrega ou mudança esperada.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Como funciona}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.30\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}01\par}
+      \medskip
+      \textbf{Preparação}\par
+      Confirme responsáveis, recursos e critérios.
+    \end{column}
+    \begin{column}{.30\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}02\par}
+      \medskip
+      \textbf{Execução}\par
+      Realize as atividades e registre as evidências.
+    \end{column}
+    \begin{column}{.30\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}03\par}
+      \medskip
+      \textbf{Avaliação}\par
+      Compare resultados e defina os ajustes seguintes.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Responsabilidades e recursos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.48\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Quem participa\par}
+      \begin{itemize}
+        \item coordenação e tomada de decisão;
+        \item execução técnica ou operacional;
+        \item apoio institucional e comunicação.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.48\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Recursos\par}
+      \begin{itemize}
+        \item tempo e disponibilidade;
+        \item infraestrutura e orçamento;
+        \item acessos, dados e autorizações.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Encaminhamentos}
+
+\begin{frame}{Resultados esperados}
+  \begin{itemize}
+    \item associe cada resultado a uma evidência observável;
+    \item diferencie entregas imediatas de efeitos de longo prazo;
+    \item registre limites, riscos e condições de validade;
+    \item indique quando os resultados serão avaliados.
+  \end{itemize}
+  \vfill
+  {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Critério de sucesso\par}
+  \smallskip
+  Escreva uma condição objetiva para verificar o resultado.
+\end{frame}
+
+\begin{frame}{Próximos passos}
+  \begin{enumerate}
+    \item \textbf{Decisão:} diga exatamente o que precisa ser aprovado.
+    \item \textbf{Responsável:} identifique quem inicia cada ação.
+    \item \textbf{Prazo:} indique a primeira data verificável.
+  \end{enumerate}
+  \vfill
+  {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Encaminhamento\par}
+  \smallskip
+  Registre a decisão solicitada ao público.
+\end{frame}
+
+% Ative este quadro depois de configurar o arquivo references.bib.
+% \begin{frame}[allowframebreaks]{Referências}
+%   \printbibliography
+% \end{frame}
+
+{
+  \setbeamercolor{background canvas}{bg=IEEEDarkBlue}
+  \begin{frame}[plain]
+    \usebeamercolor[fg]{ieeecs closing}
+    \centering
+    \vfill
+    {\IEEECSHeadingFont\bfseries\LARGE
+      Retome aqui a única mensagem que o público deve guardar.\par}
+    \vspace{6mm}
+    Nome ou equipe · contato@example.org
+    \vfill
+    \IEEECSLogo[variant=orange-white,width=34mm]
+  \end{frame}
+}
+
+\end{document}

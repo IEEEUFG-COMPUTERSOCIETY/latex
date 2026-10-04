@@ -2,7 +2,7 @@
   COMO USAR ESTE ARQUIVO
 
   1. Renomeie este arquivo para references.bib.
-  2. Configure biblatex no futuro arquivo principal.
+  2. Ative a configuração do biblatex em main.tex.
   3. Cite uma entrada com \cite{exemplo-livro}.
   4. Inclua a bibliografia no ponto apropriado da apresentação.
 

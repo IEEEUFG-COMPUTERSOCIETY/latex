@@ -22,12 +22,13 @@ de conteúdo que pode ser adaptada conforme a necessidade.
 
 - `plano-trabalho`: plano de trabalho, proposta institucional ou pedido de
   aprovação com objetivos, etapas, responsabilidades e decisões solicitadas.
+- `slides`: apresentação institucional em formato 16:9, organizada em
+  contexto, proposta e próximos passos.
 
 Os diretórios abaixo reservam espaço para modelos futuros. Eles contêm apenas
 uma pasta de imagens e referências de exemplo; ainda não aparecem no
 assistente porque não possuem `main.tex`:
 
-- `apresentacoes` para apresentações;
 - `atas` para atas;
 - `relatorios` para relatórios; e
 - `materiais-divulgacao` para materiais de divulgação.

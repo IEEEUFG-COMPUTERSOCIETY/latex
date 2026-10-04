@@ -21,8 +21,9 @@ The LPPL “Work” consists of the following repository-authored files:
 - `templates/plano-trabalho/img/README.md`
 - `templates/plano-trabalho/main.tex`
 - `templates/plano-trabalho/references.bib.example`
-- `templates/apresentacoes/img/README.md`
-- `templates/apresentacoes/references.bib.example`
+- `templates/slides/img/README.md`
+- `templates/slides/main.tex`
+- `templates/slides/references.bib.example`
 - `templates/atas/img/README.md`
 - `templates/atas/references.bib.example`
 - `templates/materiais-divulgacao/img/README.md`
@@ -34,8 +35,10 @@ The LPPL “Work” consists of the following repository-authored files:
 - `tests/smoke/cmyk.tex`
 - `tests/smoke/compact.tex`
 - `tests/smoke/document.tex`
+- `tests/smoke/slides.tex`
 - `tex/latex/ieeeufgcs/ieeeufgcs.cls`
 - `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty`
+- `tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty`
 - `tex/latex/ieeeufgcs/assets/README.md`
 
 The following supplied official artwork files are distributed alongside the

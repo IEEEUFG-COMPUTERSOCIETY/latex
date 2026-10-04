@@ -58,12 +58,13 @@
 %% has no derived tints because the UFG manual prohibits altered colors.
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesPackage{ieeeufgcs-brand}
-  [2026-09-29 v0.5 IEEE UFG CS brand primitives]
+  [2026-10-04 v0.6 IEEE UFG CS brand primitives]
 
 \RequirePackage{iftex}
 \RequireLuaTeX
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
+\RequirePackage{tikz}
 
 % Package options are processed before colors and fonts are declared because
 % both public APIs depend on these choices. Old flag-style options remain only
@@ -491,5 +492,51 @@
 \NewDocumentCommand{\IEEEMasterBrand}{ O{} }{\ieeecs_master_brand:n { #1 }}
 \NewDocumentCommand{\UFGLogo}{ O{} }{\ieeecs_ufg_logo:n { #1 }}
 \ExplSyntaxOff
+
+% Shared internal geometry for the document class and the Beamer theme. Draw
+% one orthographic icosahedron centered at #1, scaled by #2, colored with #3,
+% and with both line widths multiplied by #4. Far edges are faint; near edges
+% establish the silhouette. Geometry and stroke scaling remain independent.
+\NewDocumentCommand{\ieeecs@brandicosahedron}{m m m m}{%
+  \begin{scope}[
+    shift={#1},
+    x=1mm,
+    y=1mm,
+    scale=#2,
+    draw=#3,
+    line cap=round,
+    line join=round
+  ]
+    \coordinate (ico-1)  at ( 4.47,-1.90);
+    \coordinate (ico-2)  at (-1.63,-8.35);
+    \coordinate (ico-3)  at ( 1.63, 8.35);
+    \coordinate (ico-4)  at (-4.47, 1.90);
+    \coordinate (ico-5)  at (-2.71,-9.00);
+    \coordinate (ico-6)  at (-7.32, 7.59);
+    \coordinate (ico-7)  at ( 7.32,-7.59);
+    \coordinate (ico-8)  at ( 2.71, 9.00);
+    \coordinate (ico-9)  at (-6.23, 0.85);
+    \coordinate (ico-10) at (-10.00,-3.14);
+    \coordinate (ico-11) at ( 10.00, 3.14);
+    \coordinate (ico-12) at ( 6.23,-0.85);
+
+    \pgfmathsetlengthmacro{\ieeecs@farlinewidth}{#4 * 0.35pt}
+    \pgfmathsetlengthmacro{\ieeecs@nearlinewidth}{#4 * 0.55pt}
+
+    \foreach \from/\to in {
+      1/9,1/3,3/9,1/5,5/9,1/11,1/7,6/9,3/11,9/10,
+      3/6,5/7,5/10,7/11,3/8} {
+      \draw[opacity=0.28,line width=\ieeecs@farlinewidth]
+        (ico-\from) -- (ico-\to);
+    }
+
+    \foreach \from/\to in {
+      2/5,6/10,8/11,6/8,2/7,11/12,2/10,7/12,4/6,4/10,
+      8/12,4/8,2/12,2/4,4/12} {
+      \draw[opacity=0.88,line width=\ieeecs@nearlinewidth]
+        (ico-\from) -- (ico-\to);
+    }
+  \end{scope}%
+}
 
 \endinput

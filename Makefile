@@ -98,6 +98,8 @@ test: check-style
 		-outdir=$(BUILD_DIR)/tests tests/smoke/document.tex
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/tests tests/smoke/compact.tex
+	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
+		-outdir=$(BUILD_DIR)/tests tests/smoke/slides.tex
 
 reference:
 	mkdir -p $(BUILD_DIR)/reference "$(TEXMFVAR_DIR)"
@@ -106,10 +108,14 @@ reference:
 		tests/reference/brand-reference.tex
 
 templates:
-	mkdir -p $(BUILD_DIR)/templates/plano-trabalho "$(TEXMFVAR_DIR)"
+	mkdir -p $(BUILD_DIR)/templates/plano-trabalho \
+		$(BUILD_DIR)/templates/slides "$(TEXMFVAR_DIR)"
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
 		templates/plano-trabalho/main.tex
+	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
+		-outdir=$(BUILD_DIR)/templates/slides \
+		templates/slides/main.tex
 
 ifeq ($(strip $(DOCUMENT_GOALS)),)
 clean:

@@ -156,7 +156,6 @@
 \LoadClass{article}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
-\RequirePackage{tikz}
 \RequirePackage{array}
 \RequirePackage{tabularx}
 \RequirePackage{colortbl}
@@ -255,59 +254,6 @@
 % surrounding \noindent ... \par gives the zero-sized overlay a predictable
 % paragraph context without adding visible content.
 %
-% Draw one orthographic icosahedron centered at #1, scaled by #2, colored with
-% #3, and with both line widths multiplied by #4.  The twelve coordinates are a
-% fixed projection of the canonical three-dimensional vertices.  Edges whose
-% midpoints lie on the far half of the solid are drawn first and faintly; near
-% edges are drawn second and more strongly.  That depth cue keeps the complete
-% 30-edge graph legible at cover size without requiring TikZ's heavier 3-D
-% libraries.  Coordinates are in millimetres.  Geometry scaling and stroke
-% scaling are deliberately independent, so #4=1 preserves the base 0.35pt and
-% 0.55pt widths regardless of #2.
-\newcommand{\ieeecs@covericosahedron}[4]{%
-  \begin{scope}[
-    shift={#1},
-    x=1mm,
-    y=1mm,
-    scale=#2,
-    draw=#3,
-    line cap=round,
-    line join=round
-  ]
-    \coordinate (ico-1)  at ( 4.47,-1.90);
-    \coordinate (ico-2)  at (-1.63,-8.35);
-    \coordinate (ico-3)  at ( 1.63, 8.35);
-    \coordinate (ico-4)  at (-4.47, 1.90);
-    \coordinate (ico-5)  at (-2.71,-9.00);
-    \coordinate (ico-6)  at (-7.32, 7.59);
-    \coordinate (ico-7)  at ( 7.32,-7.59);
-    \coordinate (ico-8)  at ( 2.71, 9.00);
-    \coordinate (ico-9)  at (-6.23, 0.85);
-    \coordinate (ico-10) at (-10.00,-3.14);
-    \coordinate (ico-11) at ( 10.00, 3.14);
-    \coordinate (ico-12) at ( 6.23,-0.85);
-
-    \pgfmathsetlengthmacro{\ieeecs@farlinewidth}{#4 * 0.35pt}
-    \pgfmathsetlengthmacro{\ieeecs@nearlinewidth}{#4 * 0.55pt}
-
-    % Far-side edges remain visible, but recede behind the front shell.
-    \foreach \from/\to in {
-      1/9,1/3,3/9,1/5,5/9,1/11,1/7,6/9,3/11,9/10,
-      3/6,5/7,5/10,7/11,3/8} {
-      \draw[opacity=0.28,line width=\ieeecs@farlinewidth]
-        (ico-\from) -- (ico-\to);
-    }
-
-    % Near-side edges establish the silhouette and dominant triangular faces.
-    \foreach \from/\to in {
-      2/5,6/10,8/11,6/8,2/7,11/12,2/10,7/12,4/6,4/10,
-      8/12,4/8,2/12,2/4,4/12} {
-      \draw[opacity=0.88,line width=\ieeecs@nearlinewidth]
-        (ico-\from) -- (ico-\to);
-    }
-  \end{scope}%
-}
-
 \newcommand{\ieeecs@coverbackground}{%
   \noindent
   \begin{tikzpicture}[remember picture,overlay]
@@ -317,17 +263,17 @@
     \fill[IEEECSOrange]
       ([yshift=-110mm]current page.north west)
       rectangle ([yshift=-115mm]current page.north east);
-    \ieeecs@covericosahedron
+    \ieeecs@brandicosahedron
       {([xshift=-54mm,yshift=-74mm]current page.north east)}
       {2.55}
       {IEEECyan}
       {1.7}
-    \ieeecs@covericosahedron
+    \ieeecs@brandicosahedron
       {([xshift=-32mm,yshift=-93mm]current page.north east)}
       {1.30}
       {IEEEBlueTwenty}
       {2.0}
-    \ieeecs@covericosahedron
+    \ieeecs@brandicosahedron
       {([xshift=-125mm,yshift=-90mm]current page.north east)}
       {7.6}
       {IEEECSOrange}
