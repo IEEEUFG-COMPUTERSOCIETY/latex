@@ -1,126 +1,60 @@
 # IEEE UFG Computer Society LaTeX
 
-Este projeto permite criar documentos institucionais com as identidades
-visuais da IEEE Computer Society e da Universidade Federal de Goiás. Ele usa
-LuaLaTeX e oferece modelos prontos para pessoas que não precisam conhecer a
-implementação da classe ou dos pacotes de identidade visual.
+Modelos institucionais da IEEE Computer Society e da UFG para LuaLaTeX.
 
 ## Requisitos
 
-- GNU Make;
-- LuaLaTeX e `latexmk`;
-- fontes Montserrat e Open Sans;
-- Bash;
-- Beamer, para criar apresentações; e
-- Biber, somente para documentos com referências bibliográficas.
+- GNU Make, Bash, LuaLaTeX e `latexmk`;
+- Montserrat e Open Sans;
+- Beamer para apresentações; e
+- Biber para referências bibliográficas.
 
-## Uso rápido
-
-Execute apenas `make` para consultar os comandos disponíveis:
-
-```sh
-make
-```
-
-Crie um documento:
+## Uso
 
 ```sh
 make new
-```
-
-O assistente apresenta os modelos disponíveis, solicita um identificador e
-pergunta se o documento deve ser compilado imediatamente. O resultado tem a
-seguinte estrutura:
-
-```text
-documents/<identificador>/
-├── img/
-├── Makefile
-├── main.tex
-└── references.bib.example
-```
-
-Para começar, edite somente `main.tex`. O próprio arquivo explica as opções de
-papel, tamanho da fonte, margens, páginas, cores, metadados, imagens, tabelas e
-referências. A pasta `img/` recebe imagens específicas do documento.
-
-O diretório `documents/` é a área de trabalho local do usuário. Os diretórios
-`templates/`, `tex/`, `scripts/`, `tests/` e `example/` pertencem ao
-desenvolvimento da infraestrutura e não precisam ser editados para criar um
-documento.
-
-Se precisar de bibliografia, renomeie `references.bib.example` para
-`references.bib` e siga as instruções presentes nos dois arquivos.
-
-Na raiz do repositório, compile todos os documentos criados com:
-
-```sh
 make build
 ```
 
-Para compilar somente documentos específicos, informe seus diretórios:
+O assistente cria `documents/<identificador>/`. Edite `main.tex`, coloque
+imagens em `img/` e encontre o PDF em
+`build/documents/<identificador>/main.pdf`.
+
+Comandos úteis:
 
 ```sh
-make build documents/plano-2027 documents/apresentacao-evento
-```
-
-Também é possível entrar no diretório de um documento. Nesse caso, `make`
-continua mostrando a ajuda e `make build` compila somente o documento atual:
-
-```sh
-cd documents/plano-2027
-make
-make build
-```
-
-Os arquivos gerados ficam em:
-
-```text
-build/documents/<identificador>/main.pdf
-```
-
-Para listar modelos e documentos ou remover os arquivos gerados:
-
-```sh
-make list
+make                         # ajuda
+make list                    # modelos e documentos
+make build documents/meu-doc
 make clean
-make clean documents/plano-2027
 ```
 
-Na raiz, `make clean` limpa todo o diretório `build/`. Dentro de um documento,
-`make clean` remove somente os arquivos gerados para aquele documento.
+Dentro de um documento, `make build` compila apenas esse documento e
+`make clean` remove apenas sua saída.
 
-## Uso não interativo
-
-Colaboradores e rotinas automatizadas também podem informar as escolhas na
-linha de comando:
+Para uso não interativo:
 
 ```sh
+make new TEMPLATE=slides NAME=evento BUILD=yes
 make new TEMPLATE=plano-trabalho NAME=plano-2027 BUILD=no
-make build documents/plano-2027
 ```
+
+Para referências, renomeie `references.bib.example` para `references.bib` e
+ative as linhas indicadas em `main.tex`.
 
 ## Desenvolvimento
 
-O comando `make all` compila testes, a referência visual e modelos canônicos. O
-projeto exige no máximo 80 caracteres por linha; `make check-style` verifica
-essa regra.
+```sh
+make all          # testes, referência visual e modelos
+make test         # estilo e testes de fumaça
+make templates    # modelos canônicos
+make check-style  # limite de 80 caracteres
+```
 
-As decisões de implementação e os detalhes da identidade visual são mantidos
-como comentários nos arquivos da classe e do pacote. Os modelos disponíveis
-estão descritos em [`templates/README.md`](templates/README.md).
-
-O [`guia de desenvolvimento`](development/README.md) apresenta a
-arquitetura do projeto, documenta as APIs completas da classe e do pacote de
-marca e ensina como criar opções, metadados, componentes, modelos, cores,
-ativos e testes.
+Consulte os [modelos](templates/README.md) e o
+[guia de desenvolvimento](development/README.md).
 
 ## Licença
 
-Os arquivos relacionados em [`MANIFEST.md`](MANIFEST.md) são distribuídos sob
-a LaTeX Project Public License, versão 1.3c ou posterior, com status
-`maintained`.
-
-Os arquivos oficiais de arte do IEEE, da IEEE Computer Society e da UFG não
-fazem parte do trabalho licenciado sob a LPPL. Consulte [`LICENSE`](LICENSE)
-para conhecer os termos completos e as exclusões de marcas oficiais.
+O código listado em [MANIFEST.md](MANIFEST.md) usa a LPPL 1.3c ou posterior.
+As marcas oficiais não fazem parte desse trabalho. Consulte [LICENSE](LICENSE).
