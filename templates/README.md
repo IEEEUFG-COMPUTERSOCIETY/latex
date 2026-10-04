@@ -8,8 +8,8 @@ Maintainer is the IEEE UFG Computer Society. See LICENSE and MANIFEST.md.
 # Modelos disponíveis
 
 Use `make new` na raiz do repositório para escolher um modelo. O assistente
-copia o diretório escolhido para `documents/<identificador>/`, cria `img/` e
-oferece a compilação imediata.
+copia o diretório escolhido para `documents/<identificador>/`, cria `img/`,
+adiciona um `Makefile` local e oferece a compilação imediata.
 
 Cada modelo contém um `main.tex` documentado e um
 `references.bib.example`. A pessoa autora começa editando somente `main.tex`.

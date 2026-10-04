@@ -64,6 +64,7 @@ Neste projeto:
 | `templates/catalog.tsv` | Catálogo lido pelo assistente. |
 | `documents/` | Documentos locais; não pertence ao controle de versão. |
 | `scripts/document.sh` | Criação, seleção, compilação e limpeza. |
+| `scripts/document.mk` | Makefile copiado para cada documento local. |
 | `scripts/check-line-length.lua` | Verificação do limite de 80 caracteres. |
 | `tests/smoke/` | Testes rápidos das APIs e dos leiautes principais. |
 | `tests/reference/` | Referência visual compilável da identidade. |
@@ -538,8 +539,9 @@ Um modelo contém a estrutura recomendada, exemplos de componentes e
 orientações de edição. Ele não deve conter fatos de um evento ou gestão
 específicos.
 
-`make new` copia o diretório completo do modelo. Depois da cópia, o documento
-local é independente: mudar o modelo não altera documentos já criados.
+`make new` copia o diretório completo do modelo e adiciona o Makefile local de
+`scripts/document.mk`. Depois da cópia, o documento local é independente:
+mudar o modelo não altera documentos já criados.
 
 ### 7.1 Criar um modelo
 
@@ -585,8 +587,11 @@ As ações públicas são:
 |---|---|
 | `new` | Seleciona um modelo, copia-o e oferece compilação. |
 | `build` | Seleciona e compila um documento local. |
+| `build-path` | Valida um diretório e compila seu documento. |
+| `validate-path` | Valida um diretório sem compilá-lo. |
 | `list` | Lista modelos e documentos locais. |
 | `clean` | Remove apenas o conteúdo de `build/`. |
+| `clean-path` | Remove a saída de um único documento validado. |
 
 O `Makefile` fornece uma interface mais amigável para essas ações.
 
@@ -594,6 +599,10 @@ Identificadores são validados pela expressão
 `^[[:alnum:]][[:alnum:]_-]*$`. Eles devem começar com letra ou número e podem
 continuar com letras, números, hífen ou sublinhado. Essa restrição impede que
 um identificador seja interpretado como caminho arbitrário.
+
+As ações que recebem caminhos resolvem o caminho físico e exigem que seu pai
+seja exatamente `documents/`. Assim, links simbólicos, subdiretórios e
+travessias com `..` não permitem operar fora da área de documentos.
 
 `clean` recusa um `build/` que seja link simbólico. Em seguida, usa `find` com
 profundidade mínima 1, preservando o diretório e apagando somente seus
@@ -605,7 +614,8 @@ descendentes. O script nunca remove `documents/`.
 |---|---|
 | `make` | Mostra a ajuda. |
 | `make new` | Inicia o assistente de criação. |
-| `make build` | Compila um documento local. |
+| `make build` | Compila todos os documentos locais. |
+| `make build documents/x [...]` | Compila documentos específicos. |
 | `make list` | Lista modelos e documentos. |
 | `make check-style` | Verifica o limite de 80 caracteres. |
 | `make test` | Executa estilo e testes de fumaça. |
@@ -613,13 +623,19 @@ descendentes. O script nunca remove `documents/`.
 | `make templates` | Compila todos os modelos canônicos. |
 | `make all` | Executa testes, referência e modelos. |
 | `make clean` | Limpa produtos gerados. |
+| `make clean documents/x [...]` | Limpa documentos específicos. |
 
 Para automação sem perguntas interativas:
 
 ```sh
 make new TEMPLATE=plano-trabalho NAME=plano-2027 BUILD=no
-make build NAME=plano-2027
+make build documents/plano-2027
 ```
+
+Cada documento criado recebe um Makefile cujo alvo padrão é `help`. Dentro do
+diretório, `make build` compila somente o documento atual e `make clean` remove
+somente sua saída. O Makefile da raiz chama esses Makefiles locais com
+`$(MAKE) -C`, preservando opções como `-j` e o servidor de tarefas do Make.
 
 `LATEXMK` pode selecionar outro executável compatível. `TEXMFVAR_DIR` pode
 selecionar outro diretório de cache. Essas substituições são principalmente

@@ -10,6 +10,7 @@ readonly SCRIPT_DIR="$(
 )"
 readonly ROOT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
 readonly CATALOG_FILE="$ROOT_DIR/templates/catalog.tsv"
+readonly DOCUMENT_MAKEFILE="$ROOT_DIR/scripts/document.mk"
 readonly DOCUMENTS_DIR="$ROOT_DIR/documents"
 readonly BUILD_DIR="$ROOT_DIR/build"
 readonly DOCUMENT_BUILD_DIR="$BUILD_DIR/documents"
@@ -155,6 +156,24 @@ choose_existing_document() {
   SELECTED_DOCUMENT=${DOCUMENT_NAMES[$((answer - 1))]}
 }
 
+choose_document_path() {
+  local requested=$1 actual parent name
+
+  [[ -n "$requested" ]] || fail "diretório de documento não informado"
+  [[ -d "$requested" ]] || fail "diretório não encontrado: $requested"
+  actual="$(cd -- "$requested" && pwd -P)"
+  parent="$(cd -- "$actual/.." && pwd -P)"
+  name="${actual##*/}"
+  validate_name "$name"
+  [[ "$parent" == "$DOCUMENTS_DIR" ]] || {
+    fail "o diretório deve estar diretamente dentro de documents/"
+  }
+  [[ -f "$actual/main.tex" ]] || {
+    fail "arquivo principal não encontrado em $requested"
+  }
+  SELECTED_DOCUMENT=$name
+}
+
 build_document() {
   local name=$1 source_dir output_dir
 
@@ -221,8 +240,12 @@ new_document() {
   [[ ! -e "$target_dir" ]] || {
     fail "o documento $SELECTED_DOCUMENT já existe"
   }
+  [[ -f "$DOCUMENT_MAKEFILE" ]] || {
+    fail "Makefile de documento não encontrado"
+  }
   mkdir -p -- "$DOCUMENTS_DIR"
   cp -R -- "$source_dir" "$target_dir"
+  cp -- "$DOCUMENT_MAKEFILE" "$target_dir/Makefile"
   mkdir -p -- "$target_dir/img"
   printf '\nDocumento criado em:\n  %s\n\n' \
     "${target_dir#"$ROOT_DIR/"}/main.tex"
@@ -248,6 +271,23 @@ clean_build() {
   printf 'Arquivos gerados removidos de build/.\n'
 }
 
+clean_document() {
+  local name=$1 output_dir
+
+  validate_name "$name"
+  output_dir="$DOCUMENT_BUILD_DIR/$name"
+  if [[ ! -e "$output_dir" && ! -L "$output_dir" ]]; then
+    printf 'Nenhum arquivo gerado para %s.\n' "$name"
+    return
+  fi
+  [[ -d "$output_dir" && ! -L "$output_dir" ]] || {
+    fail "a saída de $name deve ser um diretório, não um link"
+  }
+  find "$output_dir" -mindepth 1 -depth -delete
+  rmdir -- "$output_dir"
+  printf 'Arquivos gerados removidos para %s.\n' "$name"
+}
+
 case "${1:-}" in
   new)
     new_document "${2:-}" "${3:-}" "${4:-}"
@@ -256,11 +296,22 @@ case "${1:-}" in
     choose_existing_document "${2:-}"
     build_document "$SELECTED_DOCUMENT"
     ;;
+  build-path)
+    choose_document_path "${2:-}"
+    build_document "$SELECTED_DOCUMENT"
+    ;;
+  validate-path)
+    choose_document_path "${2:-}"
+    ;;
   list)
     list_items
     ;;
   clean)
     clean_build
+    ;;
+  clean-path)
+    choose_document_path "${2:-}"
+    clean_document "$SELECTED_DOCUMENT"
     ;;
   *)
     fail "ação desconhecida; use new, build, list ou clean"

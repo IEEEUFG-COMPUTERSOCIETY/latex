@@ -34,6 +34,7 @@ seguinte estrutura:
 ```text
 documents/<identificador>/
 ├── img/
+├── Makefile
 ├── main.tex
 └── references.bib.example
 ```
@@ -50,25 +51,43 @@ documento.
 Se precisar de bibliografia, renomeie `references.bib.example` para
 `references.bib` e siga as instruções presentes nos dois arquivos.
 
-Compile um documento criado anteriormente com:
+Na raiz do repositório, compile todos os documentos criados com:
 
 ```sh
 make build
 ```
 
-Quando houver mais de um documento, o comando apresenta uma lista para
-seleção. Os arquivos gerados ficam em:
+Para compilar somente documentos específicos, informe seus diretórios:
+
+```sh
+make build documents/plano-2027 documents/apresentacao-evento
+```
+
+Também é possível entrar no diretório de um documento. Nesse caso, `make`
+continua mostrando a ajuda e `make build` compila somente o documento atual:
+
+```sh
+cd documents/plano-2027
+make
+make build
+```
+
+Os arquivos gerados ficam em:
 
 ```text
 build/documents/<identificador>/main.pdf
 ```
 
-Para listar modelos e documentos ou remover somente os arquivos gerados:
+Para listar modelos e documentos ou remover os arquivos gerados:
 
 ```sh
 make list
 make clean
+make clean documents/plano-2027
 ```
+
+Na raiz, `make clean` limpa todo o diretório `build/`. Dentro de um documento,
+`make clean` remove somente os arquivos gerados para aquele documento.
 
 ## Uso não interativo
 
@@ -77,7 +96,7 @@ linha de comando:
 
 ```sh
 make new TEMPLATE=plano-trabalho NAME=plano-2027 BUILD=no
-make build NAME=plano-2027
+make build documents/plano-2027
 ```
 
 ## Desenvolvimento

@@ -14,6 +14,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `README.md`
 - `development/README.md`
 - `scripts/check-line-length.lua`
+- `scripts/document.mk`
 - `scripts/document.sh`
 - `templates/README.md`
 - `templates/catalog.tsv`
