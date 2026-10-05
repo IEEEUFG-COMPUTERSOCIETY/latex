@@ -18,10 +18,10 @@ OFFICIAL ARTWORK AND TRADEMARK EXCEPTION
 ----------------------------------------
 
 The official IEEE, IEEE Computer Society, and UFG artwork files under
-tex/latex/ieeeufgcs/assets/*.pdf are not part of the Work and are not licensed
-under the LPPL. No permission to use those organizations' names, trademarks,
-logos, or other brand assets is granted by this license. Their use remains
-subject to the applicable permissions and brand guidelines.
+tex/latex/ieeeufgcs/assets/ are not part of the Work and are not licensed under
+the LPPL. No permission to use those organizations' names, trademarks, logos,
+or other brand assets is granted by this license. Their use remains subject to
+the applicable permissions and brand guidelines.
 
 The canonical LPPL 1.3c text follows verbatim.
 

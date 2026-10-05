@@ -32,8 +32,9 @@
 %%
 %% A Chapter or Student Chapter mark must use approved artwork. The CS guide
 %% gives the CS name greater hierarchy, limits the chapter name to two lines,
-%% and specifies Montserrat. This package deliberately does not synthesize a
-%% UFG chapter lockup because none is present in the official source material.
+%% and specifies Montserrat. The supplied IEEE UFG Student Branch raster marks
+%% are exposed without redrawing or recoloring them. Their empty canvas is
+%% clipped at use time, while the packaged source pixels remain unchanged.
 %%
 %% The preferred UFG signature is the blue, full-name, vertical version. Its
 %% protected area is 3x horizontally and 2x vertically, where x is half the
@@ -58,7 +59,7 @@
 %% has no derived tints because the UFG manual prohibits altered colors.
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesPackage{ieeeufgcs-brand}
-  [2026-10-04 v0.6 IEEE UFG CS brand primitives]
+  [2026-10-04 v0.7 IEEE UFG CS brand primitives]
 
 \RequirePackage{iftex}
 \RequireLuaTeX
@@ -255,6 +256,8 @@
 \tl_new:N \l__ieeecs_artwork_file_tl
 \tl_new:N \l__ieeecs_artwork_width_tl
 \tl_new:N \l__ieeecs_artwork_ratio_tl
+\tl_new:N \l__ieeecs_artwork_viewport_tl
+\tl_new:N \l__ieeecs_student_branch_variant_tl
 \tl_new:N \l__ieeecs_ufg_orientation_tl
 \tl_new:N \l__ieeecs_ufg_variant_tl
 \bool_new:N \l__ieeecs_ufg_clear_space_bool
@@ -348,6 +351,18 @@
     width .tl_set:N = \l__ieeecs_artwork_width_tl,
     clear-space .bool_set:N = \l__ieeecs_ufg_clear_space_bool,
     clear-space .default:n = true,
+  }
+
+\keys_define:nn { ieeeufgcs / student-branch }
+  {
+    variant .choice:,
+    variant / horizontal .code:n =
+      { \tl_set:Nn \l__ieeecs_student_branch_variant_tl { horizontal } },
+    variant / compact .code:n =
+      { \tl_set:Nn \l__ieeecs_student_branch_variant_tl { compact } },
+    variant / symbol .code:n =
+      { \tl_set:Nn \l__ieeecs_student_branch_variant_tl { symbol } },
+    width .tl_set:N = \l__ieeecs_artwork_width_tl,
   }
 
 % Load the graphic into a measurable box before adding protection. The final
@@ -488,9 +503,61 @@
     \group_end:
   }
 
+\cs_new_protected:Npn \ieeecs_student_branch_mark:n #1
+  {
+    \group_begin:
+      \tl_set:Nn \l__ieeecs_student_branch_variant_tl { horizontal }
+      \tl_clear:N \l__ieeecs_artwork_width_tl
+      \keys_set:nn { ieeeufgcs / student-branch } { #1 }
+      \str_case:Vn \l__ieeecs_student_branch_variant_tl
+        {
+          { horizontal }
+            {
+              \tl_set:Nn \l__ieeecs_artwork_file_tl
+                { ieeeufgcs-student-branch-horizontal.png }
+              \tl_set:Nn \l__ieeecs_artwork_viewport_tl
+                { 272bp~355bp~1379bp~670bp }
+              \tl_if_blank:VT \l__ieeecs_artwork_width_tl
+                { \tl_set:Nn \l__ieeecs_artwork_width_tl { 60mm } }
+            }
+          { compact }
+            {
+              \tl_set:Nn \l__ieeecs_artwork_file_tl
+                { ieeeufgcs-student-branch-compact.png }
+              \tl_set:Nn \l__ieeecs_artwork_viewport_tl
+                { 256bp~180bp~1036bp~1083bp }
+              \tl_if_blank:VT \l__ieeecs_artwork_width_tl
+                { \tl_set:Nn \l__ieeecs_artwork_width_tl { 35mm } }
+            }
+          { symbol }
+            {
+              \tl_set:Nn \l__ieeecs_artwork_file_tl
+                { ieeeufgcs-student-branch-symbol.png }
+              \tl_set:Nn \l__ieeecs_artwork_viewport_tl
+                { 125bp~111bp~392bp~387bp }
+              \tl_if_blank:VT \l__ieeecs_artwork_width_tl
+                { \tl_set:Nn \l__ieeecs_artwork_width_tl { 18mm } }
+            }
+        }
+      \mode_leave_vertical:
+      \use:x
+        {
+          \exp_not:N \includegraphics
+            [
+              width = \tl_use:N \l__ieeecs_artwork_width_tl,
+              viewport = \tl_use:N \l__ieeecs_artwork_viewport_tl,
+              clip
+            ]
+            { \tl_use:N \l__ieeecs_artwork_file_tl }
+        }
+    \group_end:
+  }
+
 \NewDocumentCommand{\IEEECSLogo}{ O{} }{\ieeecs_logo:n { #1 }}
 \NewDocumentCommand{\IEEEMasterBrand}{ O{} }{\ieeecs_master_brand:n { #1 }}
 \NewDocumentCommand{\UFGLogo}{ O{} }{\ieeecs_ufg_logo:n { #1 }}
+\NewDocumentCommand{\IEEEUFGStudentBranchMark}{ O{} }
+  {\ieeecs_student_branch_mark:n { #1 }}
 \ExplSyntaxOff
 
 % Shared internal geometry for the document class and the Beamer theme. Draw

@@ -87,13 +87,15 @@ também alimentam os comandos LaTeX padrão.
 Mensagem curta.
 \end{IEEECSNotice}
 
-\begin{IEEECSBrandedTable}{p{.3\linewidth}X}
+\begin{IEEECSBrandedTable}{m{.3\linewidth}X}
 \IEEECSHeaderCell{Item} & \IEEECSHeaderCell{Descrição} \\
 Prazo & Dezembro. \\
 \end{IEEECSBrandedTable}
 ```
 
-`IEEECSBrandedTable` usa a sintaxe de colunas de `tabularx`.
+`IEEECSBrandedTable` usa a sintaxe de colunas de `tabularx`. As colunas `X`
+são centralizadas verticalmente; use `m{largura}` para obter o mesmo
+alinhamento em colunas de largura fixa.
 
 ## Pacote `ieeeufgcs-brand`
 
@@ -127,6 +129,7 @@ As cores IEEE possuem os sufixos `Eighty`, `Sixty`, `Forty` e `Twenty`.
 \IEEECSLogo[variant=orange,width=45mm,clear-space=true]
 \IEEEMasterBrand[variant=blue,width=55mm,clear-space=digital]
 \UFGLogo[orientation=vertical,variant=blue,width=24mm]
+\IEEEUFGStudentBranchMark[variant=horizontal,width=60mm]
 ```
 
 | Comando | Variantes e proteção |
@@ -134,12 +137,22 @@ As cores IEEE possuem os sufixos `Eighty`, `Sixty`, `Forty` e `Twenty`.
 | `\IEEECSLogo` | `orange`, `black`, `white`, `orange-white`; 0,3 da altura. |
 | `\IEEEMasterBrand` | `blue`, `black`, `white`; `print`, `digital`, `none`. |
 | `\UFGLogo` | `blue`, `black`, `white`; proteção própria da UFG. |
+| `\IEEEUFGStudentBranchMark` | `horizontal`, `compact`, `symbol`; raster. |
 
 A assinatura UFG pode ser `vertical` ou `horizontal`. As larguras mínimas são
 12mm e 24,5mm, respectivamente. `width` mede a arte, não a área protegida.
 
 Não distorça, corte, gire, recolora ou reconstrua marcas. Use versões brancas
 somente em fundos escuros e preserve contraste e áreas de proteção.
+
+As marcas do Student Branch usam os PNGs oficiais fornecidos. `horizontal` é a
+assinatura completa, `compact` contém “IEEE UFG” sobre fundo branco e `symbol`
+é o símbolo isolado. Como não há fonte vetorial, use-as apenas em tamanhos nos
+quais a resolução original seja suficiente.
+Os PNGs permanecem em RGB mesmo com `color-model=cmyk`; confirme o fluxo de
+conversão com a gráfica antes de usá-los em produção impressa.
+Para cerca de 300 ppi, limite `horizontal` a 93mm, `compact` a 66mm e
+`symbol` a 22mm. Os padrões do comando ficam abaixo desses limites.
 
 ## Tema Beamer `ieeeufgcs`
 

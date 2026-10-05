@@ -26,6 +26,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `templates/slides/references.bib.example`
 - `templates/atas/img/README.md`
 - `templates/atas/references.bib.example`
+- `templates/cartao/main.tex`
 - `templates/materiais-divulgacao/img/README.md`
 - `templates/materiais-divulgacao/references.bib.example`
 - `templates/relatorios/img/README.md`
@@ -51,6 +52,9 @@ Work but are expressly excluded from it and are not licensed under the LPPL:
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-black.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-blue.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-master-brand-white.pdf`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-student-branch-compact.png`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-student-branch-horizontal.png`
+- `tex/latex/ieeeufgcs/assets/ieeeufgcs-student-branch-symbol.png`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-black.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-blue.pdf`
 - `tex/latex/ieeeufgcs/assets/ieeeufgcs-ufg-logo-horizontal-white.pdf`

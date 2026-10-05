@@ -109,13 +109,18 @@ reference:
 
 templates:
 	mkdir -p $(BUILD_DIR)/templates/plano-trabalho \
-		$(BUILD_DIR)/templates/slides "$(TEXMFVAR_DIR)"
+		$(BUILD_DIR)/templates/slides \
+		$(BUILD_DIR)/templates/cartao \
+		"$(TEXMFVAR_DIR)"
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
 		templates/plano-trabalho/main.tex
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/slides \
 		templates/slides/main.tex
+	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
+		-outdir=$(BUILD_DIR)/templates/cartao \
+		templates/cartao/main.tex
 
 ifeq ($(strip $(DOCUMENT_GOALS)),)
 clean:

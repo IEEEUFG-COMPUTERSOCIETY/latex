@@ -1,0 +1,140 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.3c of this license or (at your
+% option) any later version. The latest version is available at
+% https://www.latex-project.org/lppl.txt.
+%
+% This work has the LPPL maintenance status `maintained'. The Current
+% Maintainer is the IEEE UFG Computer Society. The work consists of the files
+% listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
+
+% GUIA DE EDIÇÃO
+% Este arquivo gera um cartão de visita de 90 x 50 mm. A primeira página é a
+% frente e a segunda é o verso. Envie ambas à gráfica sem redimensionar.
+\documentclass[10pt]{article}
+\usepackage[
+  paperwidth=90mm,
+  paperheight=50mm,
+  margin=0mm,
+  noheadfoot
+]{geometry}
+\usepackage[color-model=cmyk]{ieeeufgcs-brand}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Edite somente os campos abaixo.
+\newcommand{\CardName}{Nome Sobrenome}
+\newcommand{\CardRole}{Função no capítulo estudantil}
+\newcommand{\CardEmail}{nome@ieee.org}
+\newcommand{\CardPhone}{+55 62 00000-0000}
+\newcommand{\CardWebsite}{computer.org}
+
+% Mantém posições, tamanhos e traços na mesma proporção da capa do plano de
+% trabalho. O fator 0.38 adapta a composição ao cartão sem deformá-la.
+\makeatletter
+\newcommand{\CardIcosahedrons}{%
+  \ieeecs@brandicosahedron
+    {([xshift=-20.52mm,yshift=-28.12mm]current page.north east)}
+    {0.969}
+    {IEEECyan}
+    {0.646}
+  \ieeecs@brandicosahedron
+    {([xshift=-12.16mm,yshift=-35.34mm]current page.north east)}
+    {0.494}
+    {IEEEBlueTwenty}
+    {0.76}
+  \ieeecs@brandicosahedron
+    {([xshift=-47.5mm,yshift=-34.2mm]current page.north east)}
+    {2.888}
+    {IEEECSOrange}
+    {0.456}
+}
+\makeatother
+
+\newcommand{\CardFront}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[IEEEDarkBlue]
+      (current page.south west) rectangle (current page.north east);
+    \CardIcosahedrons
+    \fill[IEEECSOrange]
+      (current page.south west)
+      rectangle ([yshift=2mm]current page.south east);
+    \node[anchor=north west,inner sep=0pt]
+      at ([xshift=5mm,yshift=-4mm]current page.north west) {%
+        \IEEECSLogo[
+          variant=orange-white,
+          width=32mm,
+          clear-space=false
+        ]%
+      };
+    \node[anchor=north east,inner sep=0pt]
+      at ([xshift=-5mm,yshift=-4mm]current page.north east) {%
+        \UFGLogo[
+          orientation=horizontal,
+          variant=white,
+          width=25mm,
+          clear-space=false
+        ]%
+      };
+    \node[
+      anchor=south west,
+      align=left,
+      inner sep=0pt,
+      text=IEEEWhite,
+      text width=64mm
+    ] at ([xshift=5mm,yshift=7mm]current page.south west) {%
+      {\IEEECSHeadingFont\bfseries\fontsize{14}{15}\selectfont
+        \CardName\par}
+      \vspace{1.2mm}
+      {\IEEECSBodyFont\fontsize{7.5}{9}\selectfont
+        \CardRole\par}
+    };
+  \end{tikzpicture}%
+  \null
+}
+
+\newcommand{\CardBack}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[IEEEWhite]
+      (current page.south west) rectangle (current page.north east);
+    \fill[IEEECSOrange]
+      (current page.south west)
+      rectangle ([xshift=3mm]current page.north west);
+    \node[anchor=north west,inner sep=0pt]
+      at ([xshift=8mm,yshift=-6mm]current page.north west) {%
+        \IEEECSLogo[
+          variant=orange,
+          width=31mm,
+          clear-space=false
+        ]%
+      };
+    \node[
+      anchor=south west,
+      align=left,
+      inner sep=0pt,
+      text=IEEEDarkBlue,
+      text width=74mm
+    ] at ([xshift=8mm,yshift=7mm]current page.south west) {%
+      {\IEEECSHeadingFont\bfseries\fontsize{8.5}{10}\selectfont
+        \CardName\par}
+      \vspace{2mm}
+      {\IEEECSBodyFont\fontsize{7}{9}\selectfont
+        \CardEmail\par
+        \CardPhone\par
+        \CardWebsite\par}
+    };
+    \draw[IEEECyan,line width=0.7pt]
+      ([xshift=8mm,yshift=18.5mm]current page.south west)
+      -- ([xshift=-8mm,yshift=18.5mm]current page.south east);
+  \end{tikzpicture}%
+  \null
+}
+
+\begin{document}
+\CardFront
+\newpage
+\CardBack
+\end{document}

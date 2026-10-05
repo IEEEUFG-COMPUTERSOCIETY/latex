@@ -13,6 +13,7 @@ version 1.3c or later. See LICENSE and MANIFEST.md.
 |---|---|
 | `plano-trabalho` | Plano, proposta ou pedido institucional. |
 | `slides` | Apresentação institucional em formato 16:9. |
+| `cartao` | Cartão de visita institucional, frente e verso. |
 
 `atas`, `relatorios` e `materiais-divulgacao` ainda são reservas sem
 `main.tex` e não aparecem no assistente.

@@ -303,7 +303,7 @@
 % neither text nor their associated vertical space.  The information hierarchy
 % is subtitle; author; institution and unit; date and location.  The final
 % \vfill pins the master-brand/identifier row toward the bottom of the
-% available text area.  The identifier is right-aligned only when present.
+% available text area. The identifier is right-aligned only when present.
 % \@thanks is expanded inside the titlepage so standard \thanks entries remain
 % attached to the cover rather than leaking into the document body.
 \newcommand{\ieeecs@maketitlepage}{%
@@ -471,8 +471,9 @@
   \par\smallskip
   \begingroup
   \renewcommand{\arraystretch}{1.25}%
+  \renewcommand{\tabularxcolumn}[1]{m{##1}}%
   \setlength{\tabcolsep}{5pt}%
-  \rowcolors{2}{IEEEBlueTwenty}{IEEEWhite}%
+  \rowcolors{2}{IEEEDarkBlueTwenty}{IEEEWhite}%
   \noindent
   \tabularx{\linewidth}{#1}%
 }{%
