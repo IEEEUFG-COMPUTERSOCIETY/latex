@@ -1,6 +1,6 @@
 -- Copyright (C) 2026 IEEE UFG Computer Society contributors.
 -- Distributed under the LaTeX Project Public License 1.3c or later.
--- See LICENSE and MANIFEST.md.
+-- See ../../LICENSE and ../MANIFEST.md.
 
 local limit = 80
 local failed = false

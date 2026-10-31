@@ -1,6 +1,6 @@
 # Imagens do documento
 
-Coloque aqui imagens específicas deste documento. No arquivo `main.tex`, use:
+Coloque aqui imagens específicas deste documento. No arquivo `.tex`, use:
 
 ```tex
 \includegraphics[width=.8\linewidth]{img/nome-do-arquivo}

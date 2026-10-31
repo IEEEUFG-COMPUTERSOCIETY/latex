@@ -1,6 +1,6 @@
 # Copyright (C) 2026 IEEE UFG Computer Society contributors.
 # Distributed under the LaTeX Project Public License 1.3c or later.
-# See LICENSE and MANIFEST.md.
+# See project LICENSE and development/MANIFEST.md.
 
 PROJECT_ROOT := $(shell cd ../.. && pwd -P)
 DOCUMENT_DIR := $(shell pwd -P)
@@ -17,9 +17,9 @@ help:
 	@echo "  make clean remove os arquivos gerados deste documento"
 
 build:
-	@bash "$(PROJECT_ROOT)/scripts/document.sh" \
+	@bash "$(PROJECT_ROOT)/development/scripts/document.sh" \
 		build-path "$(DOCUMENT_DIR)"
 
 clean:
-	@bash "$(PROJECT_ROOT)/scripts/document.sh" \
+	@bash "$(PROJECT_ROOT)/development/scripts/document.sh" \
 		clean-path "$(DOCUMENT_DIR)"

@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # Copyright (C) 2026 IEEE UFG Computer Society contributors.
 # Distributed under the LaTeX Project Public License 1.3c or later.
-# See LICENSE and MANIFEST.md.
+# See ../../LICENSE and ../MANIFEST.md.
 
 set -euo pipefail
 
 readonly SCRIPT_DIR="$(
   cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P
 )"
-readonly ROOT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
-readonly CATALOG_FILE="$ROOT_DIR/templates/catalog.tsv"
-readonly DOCUMENT_MAKEFILE="$ROOT_DIR/scripts/document.mk"
+readonly DEVELOPMENT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+readonly ROOT_DIR="$(cd -- "$DEVELOPMENT_DIR/.." && pwd -P)"
+readonly CATALOG_FILE="$DEVELOPMENT_DIR/templates/catalog.tsv"
+readonly DOCUMENT_MAKEFILE="$SCRIPT_DIR/document.mk"
 readonly DOCUMENTS_DIR="$ROOT_DIR/documents"
-readonly BUILD_DIR="$ROOT_DIR/build"
+readonly BUILD_DIR="$DEVELOPMENT_DIR/build"
 readonly DOCUMENT_BUILD_DIR="$BUILD_DIR/documents"
 readonly TEXMFVAR_DIR="$BUILD_DIR/texmf-var"
 
@@ -103,12 +104,15 @@ choose_new_name() {
 }
 
 load_documents() {
-  local main_file
+  local document_dir name
 
   DOCUMENT_NAMES=()
   shopt -s nullglob
-  for main_file in "$DOCUMENTS_DIR"/*/main.tex; do
-    DOCUMENT_NAMES+=("$(basename -- "$(dirname -- "$main_file")")")
+  for document_dir in "$DOCUMENTS_DIR"/*; do
+    [[ -d "$document_dir" ]] || continue
+    name="${document_dir##*/}"
+    [[ -f "$document_dir/$name.tex" ]] || continue
+    DOCUMENT_NAMES+=("$name")
   done
   shopt -u nullglob
 }
@@ -135,7 +139,7 @@ choose_existing_document() {
   }
   if [[ -n "$requested" ]]; then
     validate_name "$requested"
-    [[ -f "$DOCUMENTS_DIR/$requested/main.tex" ]] || {
+    [[ -f "$DOCUMENTS_DIR/$requested/$requested.tex" ]] || {
       fail "documento não encontrado: $requested"
     }
     SELECTED_DOCUMENT=$requested
@@ -168,19 +172,20 @@ choose_document_path() {
   [[ "$parent" == "$DOCUMENTS_DIR" ]] || {
     fail "o diretório deve estar diretamente dentro de documents/"
   }
-  [[ -f "$actual/main.tex" ]] || {
+  [[ -f "$actual/$name.tex" ]] || {
     fail "arquivo principal não encontrado em $requested"
   }
   SELECTED_DOCUMENT=$name
 }
 
 build_document() {
-  local name=$1 source_dir output_dir
+  local name=$1 source_dir output_dir pdf_path
 
   validate_name "$name"
   source_dir="$DOCUMENTS_DIR/$name"
   output_dir="$DOCUMENT_BUILD_DIR/$name"
-  [[ -f "$source_dir/main.tex" ]] || {
+  pdf_path="$source_dir/$name.pdf"
+  [[ -f "$source_dir/$name.tex" ]] || {
     fail "arquivo principal não encontrado para $name"
   }
   command -v latexmk >/dev/null || fail "latexmk não está instalado"
@@ -189,17 +194,18 @@ build_document() {
   printf 'Compilando %s...\n' "$name"
   (
     cd -- "$source_dir"
-    TEXINPUTS="$ROOT_DIR/tex/latex//:${TEXINPUTS:-}" \
+    TEXINPUTS="$DEVELOPMENT_DIR/tex/latex//:${TEXINPUTS:-}" \
       TEXMFVAR="$TEXMFVAR_DIR" \
       latexmk \
         -lualatex \
         -interaction=nonstopmode \
         -halt-on-error \
         -outdir="$output_dir" \
-        main.tex
+        "$name.tex"
   )
+  cp -- "$output_dir/$name.pdf" "$pdf_path"
   printf '\nPDF gerado em:\n  %s\n' \
-    "${output_dir#"$ROOT_DIR/"}/main.pdf"
+    "${pdf_path#"$ROOT_DIR/"}"
 }
 
 ask_to_build() {
@@ -232,7 +238,7 @@ new_document() {
   load_templates
   choose_template "$template"
   choose_new_name "$name"
-  source_dir="$ROOT_DIR/templates/$SELECTED_TEMPLATE"
+  source_dir="$DEVELOPMENT_DIR/templates/$SELECTED_TEMPLATE"
   target_dir="$DOCUMENTS_DIR/$SELECTED_DOCUMENT"
   [[ -f "$source_dir/main.tex" ]] || {
     fail "o modelo $SELECTED_TEMPLATE não contém main.tex"
@@ -246,9 +252,10 @@ new_document() {
   mkdir -p -- "$DOCUMENTS_DIR"
   cp -R -- "$source_dir" "$target_dir"
   cp -- "$DOCUMENT_MAKEFILE" "$target_dir/Makefile"
+  mv -- "$target_dir/main.tex" "$target_dir/$SELECTED_DOCUMENT.tex"
   mkdir -p -- "$target_dir/img"
   printf '\nDocumento criado em:\n  %s\n\n' \
-    "${target_dir#"$ROOT_DIR/"}/main.tex"
+    "${target_dir#"$ROOT_DIR/"}/$SELECTED_DOCUMENT.tex"
   printf 'Edite somente esse arquivo para começar.\n'
   ask_to_build "$build_now"
 }
@@ -262,30 +269,49 @@ list_items() {
 }
 
 clean_build() {
-  if [[ ! -d "$BUILD_DIR" ]]; then
-    printf 'Nenhum arquivo gerado para remover.\n'
-    return
-  fi
-  [[ ! -L "$BUILD_DIR" ]] || fail "build/ não pode ser um link simbólico"
-  find "$BUILD_DIR" -mindepth 1 -depth -delete
-  printf 'Arquivos gerados removidos de build/.\n'
+  local name
+
+  load_documents
+  for name in "${DOCUMENT_NAMES[@]}"; do
+    clean_document "$name"
+  done
+  clean_development
 }
 
 clean_document() {
-  local name=$1 output_dir
+  local name=$1 output_dir pdf_path
 
   validate_name "$name"
   output_dir="$DOCUMENT_BUILD_DIR/$name"
-  if [[ ! -e "$output_dir" && ! -L "$output_dir" ]]; then
+  pdf_path="$DOCUMENTS_DIR/$name/$name.pdf"
+  if [[ ! -e "$output_dir" && ! -L "$output_dir" && \
+        ! -e "$pdf_path" && ! -L "$pdf_path" ]]; then
     printf 'Nenhum arquivo gerado para %s.\n' "$name"
     return
   fi
-  [[ -d "$output_dir" && ! -L "$output_dir" ]] || {
-    fail "a saída de $name deve ser um diretório, não um link"
-  }
-  find "$output_dir" -mindepth 1 -depth -delete
-  rmdir -- "$output_dir"
+  if [[ -e "$output_dir" || -L "$output_dir" ]]; then
+    [[ -d "$output_dir" && ! -L "$output_dir" ]] || {
+      fail "a saída de $name deve ser um diretório, não um link"
+    }
+    find "$output_dir" -mindepth 1 -depth -delete
+    rmdir -- "$output_dir"
+  fi
+  if [[ -e "$pdf_path" || -L "$pdf_path" ]]; then
+    unlink -- "$pdf_path"
+  fi
   printf 'Arquivos gerados removidos para %s.\n' "$name"
+}
+
+clean_development() {
+  if [[ ! -d "$BUILD_DIR" ]]; then
+    printf 'Nenhum arquivo de desenvolvimento para remover.\n'
+    return
+  fi
+  [[ ! -L "$BUILD_DIR" ]] || {
+    fail "development/build/ não pode ser um link simbólico"
+  }
+  find "$BUILD_DIR" -mindepth 1 -depth -delete
+  printf 'Arquivos gerados removidos de development/build/.\n'
 }
 
 case "${1:-}" in
@@ -308,6 +334,9 @@ case "${1:-}" in
     ;;
   clean)
     clean_build
+    ;;
+  clean-development)
+    clean_development
     ;;
   clean-path)
     choose_document_path "${2:-}"

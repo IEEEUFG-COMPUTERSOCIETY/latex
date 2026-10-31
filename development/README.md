@@ -1,33 +1,41 @@
 <!--
 Copyright (C) 2026 IEEE UFG Computer Society contributors.
 Distributed and/or modified under the LaTeX Project Public License,
-version 1.3c or later. See LICENSE and MANIFEST.md.
+version 1.3c or later. See ../LICENSE and MANIFEST.md.
 -->
 
 # Guia de desenvolvimento
 
+Versão 1.0.0. A estrutura anterior, com `scripts/`, `templates/`, `tests/`,
+`tex/` e `build/` na raiz, é incompatível com os novos comandos. Documentos
+antigos devem ter `main.tex` renomeado para `<nome>.tex` e seu `Makefile`
+atualizado a partir de `development/scripts/document.mk`. O PDF agora fica
+ao lado do `.tex`; temporários ficam em `development/build/`.
+
 Referência curta da arquitetura, das APIs públicas e dos testes. Para criar um
-documento, use apenas `make new`, edite `main.tex` e execute `make build`.
+documento, execute `make new` na raiz, edite `documents/<nome>/<nome>.tex` e
+execute `make build`.
 
 ## Arquitetura
 
 ```text
-documents/ → templates/ → classe ou tema Beamer → pacote de marca
+documents/ → development/templates/ → classe ou tema → pacote de marca
 ```
 
 | Caminho | Responsabilidade |
 |---|---|
-| `tex/latex/ieeeufgcs/ieeeufgcs.cls` | Documentos institucionais. |
-| `tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty` | Apresentações. |
-| `tex/latex/ieeeufgcs/ieeeufgcs-brand.sty` | Identidade visual. |
-| `tex/latex/ieeeufgcs/assets/` | Arte oficial normalizada. |
-| `templates/` | Modelos canônicos. |
+| `development/tex/latex/ieeeufgcs/ieeeufgcs.cls` | Documentos institucionais. |
+| `development/tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty` | Apresentações. |
+| `development/tex/latex/ieeeufgcs/ieeeufgcs-brand.sty` | Identidade visual. |
+| `development/tex/latex/ieeeufgcs/assets/` | Arte oficial normalizada. |
+| `development/templates/` | Modelos canônicos. |
 | `documents/` | Trabalho local, ignorado pelo Git. |
-| `tests/` | Testes de fumaça e referência visual. |
-| `build/` | Saída descartável. |
+| `development/tests/` | Testes de fumaça e referência visual. |
+| `development/build/` | Saída temporária e cache do LuaTeX. |
 
-O `Makefile` acrescenta `tex/latex//` a `TEXINPUTS` e guarda o cache do LuaTeX
-em `build/texmf-var`. Não é necessária uma instalação global da classe.
+Os Makefiles acrescentam `development/tex/latex//` a `TEXINPUTS` e guardam o
+cache do LuaTeX em `development/build/texmf-var`. O PDF final fica junto ao
+arquivo `.tex` do documento. Não é necessária uma instalação global da classe.
 
 ## Classe `ieeeufgcs`
 
@@ -182,11 +190,12 @@ compartilham a mesma geometria de icosaedros pelo pacote de marca.
 Um modelo deve conter `main.tex`, `references.bib.example` e, quando útil,
 `img/README.md`. Para publicá-lo:
 
-1. crie `templates/<identificador>/`;
-2. registre `identificador|nome|descrição` em `templates/catalog.tsv`;
-3. adicione a compilação ao alvo `templates` do `Makefile`;
+1. crie `development/templates/<identificador>/`;
+2. registre `identificador|nome|descrição` em
+   `development/templates/catalog.tsv`;
+3. adicione a compilação ao alvo `templates` de `development/Makefile`;
 4. atualize `MANIFEST.md`; e
-5. execute `make all`.
+5. execute `make -C development all`.
 
 Mantenha conteúdo específico no modelo. Promova um componente à classe apenas
 quando ele tiver significado institucional reutilizável.
@@ -199,14 +208,15 @@ Seus comandos internos de caminho operam somente em filhos de `documents/`.
 
 | Comando | Resultado |
 |---|---|
-| `make new` | Cria um documento. |
+| `make new` | Cria um documento a partir da raiz. |
 | `make build` | Compila documentos locais. |
 | `make list` | Lista modelos e documentos. |
-| `make test` | Executa estilo e testes de fumaça. |
-| `make reference` | Compila a referência visual. |
-| `make templates` | Compila modelos canônicos. |
-| `make all` | Executa testes, referência e modelos. |
-| `make clean` | Limpa `build/`. |
+| `make clean` | Limpa PDFs locais e saídas temporárias. |
+| `make -C development test` | Executa estilo e testes de fumaça. |
+| `make -C development reference` | Compila a referência visual. |
+| `make -C development templates` | Compila modelos canônicos. |
+| `make -C development all` | Executa testes, referência e modelos. |
+| `make -C development clean` | Limpa saídas de desenvolvimento. |
 
 | Teste | Cobertura |
 |---|---|
@@ -216,8 +226,8 @@ Seus comandos internos de caminho operam somente em filhos de `documents/`.
 | `compact.tex` | Título compacto. |
 | `slides.tex` | Tema Beamer. |
 
-Após mudanças visuais, inspecione os PDFs em `build/tests/`,
-`build/reference/` e `build/templates/`.
+Após mudanças visuais, inspecione os PDFs em `development/build/tests/`,
+`development/build/reference/` e `development/build/templates/`.
 
 ## Manutenção
 
@@ -238,7 +248,7 @@ LPPL.
 - fontes ausentes: instale Montserrat e Open Sans e limpe o cache;
 - primeira compilação lenta: o LuaTeX está criando o cache de fontes;
 - marca aparentemente pequena: `width` não inclui a área protegida; e
-- PDF desatualizado: execute `make clean` e compile novamente.
+- PDF desatualizado: execute `make build` novamente.
 
-Antes de concluir uma mudança, execute `make all`, revise o resultado visual e
-confirme `MANIFEST.md`, compatibilidade e licenciamento.
+Antes de concluir uma mudança, execute `make -C development all`, revise o
+resultado visual e confirme `MANIFEST.md`, compatibilidade e licenciamento.

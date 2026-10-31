@@ -2,9 +2,9 @@
   COMO USAR ESTE ARQUIVO
 
   1. Renomeie este arquivo para references.bib.
-  2. Ative as linhas de biblatex no início de main.tex.
+  2. Ative as linhas de biblatex no início do arquivo .tex.
   3. Cite uma entrada com \cite{exemplo-livro}.
-  4. Ative \printbibliography no fim de main.tex.
+  4. Ative \printbibliography no fim do arquivo .tex.
 
   O comando make build executará o processador bibliográfico quando ele for
   necessário. Substitua as entradas de exemplo pelas referências reais.

@@ -8,10 +8,10 @@
 %%
 %% This work has the LPPL maintenance status `maintained'. The Current
 %% Maintainer is the IEEE UFG Computer Society. The work consists of the files
-%% listed in MANIFEST.md.
+%% listed in development/MANIFEST.md.
 %%
 %% The official artwork distributed beside this file is not part of the LPPL
-%% work. See LICENSE and tex/latex/ieeeufgcs/assets/README.md.
+%% work. See LICENSE and development/tex/latex/ieeeufgcs/assets/README.md.
 %%
 %% Implementation reference
 %% ------------------------
@@ -19,7 +19,7 @@
 %% format. Work plans, minutes, decisions, reports, and future promotional
 %% formats are templates or profiles built on this shared identity layer. The
 %% standard article class is only the internal structural foundation. The
-%% official material retained in example/ is the evidence for design choices;
+%% official material retained in development/reference-material/ informs design;
 %% source files here contain the resulting implementation specification.
 %%
 %% The default is A4 at 11 pt with a two-sided mirrored text block. Inner,
@@ -31,7 +31,7 @@
 %% The class supplies a full-page cover by default, an optional compact title,
 %% text-only running heads, outer page numbers, branded tables, and notices.
 %% Content-specific structures belong in templates, beginning with the work
-%% plan distilled from recurring structures in example/ without copying its
+%% plan distilled from recurring structures in reference material without its
 %% text or artwork.
 %%
 %% Public class keys are paper-size, font-size, two-sided, title-page,
@@ -42,7 +42,7 @@
 %% author, and date commands remain valid.
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 \ProvidesClass{ieeeufgcs}
-  [2026-09-29 v0.3 Generic IEEE UFG CS document class]
+  [2026-10-31 v1.0.0 Generic IEEE UFG CS document class]
 
 \RequirePackage{iftex}
 \RequireLuaTeX
@@ -292,9 +292,12 @@
 %
 % The first 76mm of text-area content is a top-aligned minipage placed over the
 % 110mm blue field.  It contains the two white-compatible logo variants,
-% followed by the optional document type and the title.  Its fixed height is
-% part of the cover geometry: it keeps all subsequent metadata below the
-% colored header independently of how little content appears in this block.
+% followed by the optional document type and the title.  The logo row is
+% lifted 10mm into the space above the normal text area while the compensating
+% space after it keeps the document type and title in their original
+% positions.  The minipage's fixed height is part of the cover geometry: it
+% keeps all subsequent metadata below the colored header independently of how
+% little content appears in this block.
 % A long title or document type can overfill it, so adjust the typography or
 % revisit the cover dimensions when allowing unusually long metadata; do not
 % simply remove the fixed height.
@@ -313,6 +316,7 @@
     \noindent
     \begin{minipage}[t][76mm][t]{\linewidth}
       \color{IEEEWhite}%
+      \vspace*{-40mm}%
       \noindent
       \IEEECSLogo[
         variant=orange-white,
@@ -326,7 +330,7 @@
         width=32.5mm,
         clear-space=false
       ]\par
-      \vspace{14mm}
+      \vspace{54mm}
       \ifx\@ieeecs@documenttype\@empty\else
         {\IEEECSHeadingFont\bfseries\large
           \MakeUppercase{\@ieeecs@documenttype}\par}

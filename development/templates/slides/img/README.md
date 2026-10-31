@@ -6,7 +6,7 @@ See LICENSE and MANIFEST.md.
 
 # Imagens da apresentação
 
-Coloque aqui imagens específicas da apresentação. O arquivo `main.tex` deve
+Coloque aqui imagens específicas da apresentação. O arquivo `.tex` deve
 referenciá-las pelo caminho `img/nome-do-arquivo`.
 
 Prefira PDF para gráficos vetoriais e PNG ou JPEG para imagens rasterizadas.

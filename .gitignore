@@ -1,11 +1,11 @@
 # Diretório de saída e cache local do LuaTeX
-build/
+/development/build/
 
 # Área local de trabalho criada por `make new`
 /documents/
 
-# Diretório de exemplos para ter como base
-example/
+# Documentação de referência local
+/development/reference-material/
 
 # Documentação externa usada apenas como referência local
 /clsguide.pdf

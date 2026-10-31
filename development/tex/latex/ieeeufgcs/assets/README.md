@@ -1,6 +1,7 @@
 <!--
 Copyright (C) 2026 IEEE UFG Computer Society contributors.
-This README uses the LPPL 1.3c or later. See LICENSE and MANIFEST.md.
+This README uses the LPPL 1.3c or later. See LICENSE and
+development/MANIFEST.md.
 The PDF artwork described here is expressly excluded.
 -->
 
@@ -9,11 +10,12 @@ The PDF artwork described here is expressly excluded.
 Normalized, space-free PDF copies of official artwork:
 
 - `ieeeufgcs-cs-logo-{orange,black,white,orange-white}.pdf` comes from the
-  corresponding IEEE Computer Society EPS logos in `example/Logo/`;
+  corresponding supplied IEEE Computer Society EPS logos;
 - `ieeeufgcs-master-brand-{blue,black,white}.pdf` comes from the corresponding
   supplied IEEE master-brand lockups; and
 - `ieeeufgcs-ufg-logo-{horizontal,vertical}-{blue,black,white}.pdf` comes from
-  pages 1, 3, 5, 7, 9 and 11 of `example/marca-ufg.pdf`; and
+  pages 1, 3, 5, 7, 9 and 11 of
+  `development/reference-material/marca-ufg.pdf`; and
 - `ieeeufgcs-student-branch-{horizontal,compact,symbol}.png` comes from the
   supplied IEEE UFG Student Branch raster identity.
 
