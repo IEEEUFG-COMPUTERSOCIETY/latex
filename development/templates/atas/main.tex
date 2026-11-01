@@ -1,0 +1,137 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+% Distributed under the LaTeX Project Public License 1.3c or later.
+% See LICENSE and development/MANIFEST.md.
+%
+% MODELO DE ATA DE REUNIÃO
+% Substitua todos os campos entre colchetes. Registre fatos, decisões e
+% responsáveis; remova itens opcionais que não se aplicarem à reunião.
+% Para reuniões com muitos participantes, anexe uma lista de presença.
+\documentclass[
+  paper-size=a4,
+  font-size=11pt,
+  two-sided=false,
+  title-page=false,
+  section-numbering=plain,
+  inner-margin=22mm,
+  outer-margin=22mm,
+  top-margin=24mm,
+  bottom-margin=28mm,
+  color-model=rgb
+]{ieeeufgcs}
+\usepackage[brazilian]{babel}
+\usepackage{indentfirst}
+\raggedbottom
+
+% Edite estes valores uma vez; eles aparecem no título e na identificação.
+\newcommand{\AtaNumero}{[número/ano]}
+\newcommand{\AtaData}{[dia de mês de ano]}
+
+\IEEECSSetup{
+  document-type={Ata de reunião},
+  title={Ata nº \AtaNumero},
+  subtitle={Diretoria Executiva},
+  running-title={Ata nº \AtaNumero},
+  institution={Capítulo Estudantil da IEEE Computer Society na UFG},
+  author={Secretaria},
+  date={\AtaData},
+  location={Goiânia},
+  identifier={Minuta para aprovação}
+}
+
+\begin{document}
+\maketitle
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.28\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Identificação} & \IEEECSHeaderCell{Registro} \\
+Órgão ou grupo &
+Capítulo Estudantil da IEEE Computer Society na UFG --- Diretoria Executiva.
+\\
+Tipo de reunião & [Ordinária, extraordinária ou outra]. \\
+Data & \AtaData. \\
+Horário & Início: [hh:mm]. Encerramento: [hh:mm]. \\
+Local ou modalidade & [Sala e unidade, endereço ou plataforma virtual]. \\
+Presidência da reunião & [Nome e função]. \\
+Secretaria da reunião & [Nome e função]. \\
+Quórum, se aplicável & [Regra adotada e presença verificada]. \\
+\end{IEEECSBrandedTable}
+
+\section*{Participantes}
+
+\textbf{Presentes:} [Nomes completos e funções, quando relevantes].
+
+\textbf{Ausências justificadas:} [Nomes, se houver].
+
+\textbf{Convidados:} [Nomes e vínculos, se houver].
+
+% Remova a linha de quórum se não houver regra aplicável.
+% Anexe lista de presença se a relação for extensa ou exigir assinatura.
+
+\section*{Abertura e pauta}
+
+A reunião foi aberta por [nome] às [hh:mm]. A pauta comunicada aos
+participantes compreendeu:
+\begin{enumerate}
+  \item \emph{[Primeiro assunto]};
+  \item \emph{[Segundo assunto]}.
+\end{enumerate}
+
+\section*{Discussões e deliberações}
+
+\subsection*{Item 1 --- [assunto]}
+
+[Registre os fatos e os argumentos necessários para compreender a decisão,
+sem transcrever falas nem incluir dados pessoais desnecessários.]
+
+\textbf{Deliberação:} [Descreva a decisão ou registre que não houve decisão].
+\textbf{Votação, se aplicável:} [Resultado, abstenções e impedimentos].
+
+\subsection*{Item 2 --- [assunto]}
+
+[Registre a síntese da discussão e o resultado do item. Duplique esta
+subseção para os demais assuntos efetivamente tratados.]
+
+\textbf{Deliberação:} [Decisão, adiamento ou ausência de decisão].
+
+\section*{Encaminhamentos}
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.24\linewidth}
+  >{\raggedright\arraybackslash}m{0.17\linewidth}
+}
+\IEEECSHeaderCell{Ação ou entrega} &
+\IEEECSHeaderCell{Responsável} &
+\IEEECSHeaderCell{Prazo} \\
+\emph{[Ação aprovada e resultado esperado]} &
+\emph{[Nome ou função]} & \emph{[Data]} \\
+\emph{[Outra ação, se houver]} &
+\emph{[Nome ou função]} & \emph{[Data]} \\
+\end{IEEECSBrandedTable}
+
+\section*{Encerramento e aprovação}
+
+Nada mais havendo a tratar, [nome] encerrou a reunião às [hh:mm].
+Esta ata foi redigida por [nome] e será [forma de leitura, revisão e
+aprovação adotada pelo grupo]. [Registre a data da aprovação após ela
+ocorrer.]
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.42\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Nome e função} &
+\IEEECSHeaderCell{Assinatura e data} \\
+\emph{[Nome de quem presidiu]} --- Presidência &
+\emph{[Assinatura e data]} \\
+\emph{[Nome de quem secretariou]} --- Secretaria &
+\emph{[Assinatura e data]} \\
+\end{IEEECSBrandedTable}
+
+% Anexos opcionais: lista de presença, material apresentado, votação ou
+% documento aprovado. Identifique-os aqui e guarde-os com a ata final.
+
+\end{document}

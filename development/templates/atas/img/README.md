@@ -6,7 +6,7 @@ See LICENSE and MANIFEST.md.
 
 # Imagens da ata
 
-Coloque aqui imagens específicas da ata. O futuro arquivo principal deverá
+Coloque aqui imagens específicas da ata. O arquivo principal deverá
 referenciá-las pelo caminho `img/nome-do-arquivo`.
 
 Prefira PDF para gráficos vetoriais e PNG ou JPEG para imagens rasterizadas.

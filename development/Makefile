@@ -68,6 +68,7 @@ reference:
 
 templates:
 	mkdir -p $(BUILD_DIR)/templates/documento \
+		$(BUILD_DIR)/templates/atas \
 		$(BUILD_DIR)/templates/plano-trabalho \
 		$(BUILD_DIR)/templates/estatuto \
 		$(BUILD_DIR)/templates/slides \
@@ -76,6 +77,9 @@ templates:
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/documento \
 		templates/documento/main.tex
+	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
+		-outdir=$(BUILD_DIR)/templates/atas \
+		templates/atas/main.tex
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
 		templates/plano-trabalho/main.tex

@@ -40,6 +40,8 @@ make new TEMPLATE=slides NAME=evento BUILD=yes
 Use `TEMPLATE=documento` para um texto geral ou `TEMPLATE=plano-trabalho`
 para um plano com seções de objetivos, etapas e responsáveis. Ambos usam a
 mesma classe institucional.
+Use `TEMPLATE=atas` para registrar reuniões com presenças, deliberações,
+encaminhamentos e assinaturas, em formato compacto.
 Use `TEMPLATE=estatuto` para um texto com capítulos e artigos numerados.
 
 Para referências, renomeie `references.bib.example` para `references.bib` e

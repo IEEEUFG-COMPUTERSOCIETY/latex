@@ -32,6 +32,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/templates/slides/main.tex`
 - `development/templates/slides/references.bib.example`
 - `development/templates/atas/img/README.md`
+- `development/templates/atas/main.tex`
 - `development/templates/atas/references.bib.example`
 - `development/templates/cartao/main.tex`
 - `development/templates/materiais-divulgacao/img/README.md`
