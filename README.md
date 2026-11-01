@@ -12,7 +12,7 @@ Apresentações também exigem Beamer; bibliografias exigem Biber.
 make new
 ```
 
-O assistente cria `documents/<nome>/<nome>.tex`. Edite esse arquivo e coloque
+O assistente cria `documents/<nome>/main.tex`. Edite esse arquivo e coloque
 imagens na pasta `img/` do documento. Os documentos são locais e não entram
 no Git.
 
@@ -20,7 +20,7 @@ no Git.
 make build
 ```
 
-O PDF aparece ao lado do código, em `documents/<nome>/<nome>.pdf`.
+O PDF aparece ao lado do código, em `documents/<nome>/main.pdf`.
 Para trabalhar em um documento específico:
 
 ```sh
@@ -50,6 +50,6 @@ O código listado em [development/MANIFEST.md](development/MANIFEST.md) usa a
 LPPL 1.3c ou posterior. As marcas oficiais não fazem parte desse trabalho.
 Consulte [LICENSE](LICENSE).
 
-A versão 1.0.0 altera o layout e o nome do arquivo principal. Para migrar
+A versão 1.0.0 altera o layout. Para migrar
 documentos de versões anteriores, consulte o
 [guia de desenvolvimento](development/README.md).

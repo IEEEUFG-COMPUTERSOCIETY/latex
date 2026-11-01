@@ -67,13 +67,13 @@ reference:
 		tests/reference/brand-reference.tex
 
 templates:
-	mkdir -p $(BUILD_DIR)/templates/plano-trabalho \
+	mkdir -p $(BUILD_DIR)/templates/documento \
 		$(BUILD_DIR)/templates/slides \
 		$(BUILD_DIR)/templates/cartao \
 		"$(TEXMFVAR_DIR)"
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
-		templates/plano-trabalho/main.tex
+		-outdir=$(BUILD_DIR)/templates/documento \
+		templates/documento/main.tex
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/slides \
 		templates/slides/main.tex

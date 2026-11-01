@@ -19,9 +19,9 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/scripts/document.sh`
 - `development/templates/README.md`
 - `development/templates/catalog.tsv`
-- `development/templates/plano-trabalho/img/README.md`
-- `development/templates/plano-trabalho/main.tex`
-- `development/templates/plano-trabalho/references.bib.example`
+- `development/templates/documento/img/README.md`
+- `development/templates/documento/main.tex`
+- `development/templates/documento/references.bib.example`
 - `development/templates/slides/img/README.md`
 - `development/templates/slides/main.tex`
 - `development/templates/slides/references.bib.example`

@@ -3,7 +3,7 @@
 # See LICENSE and development/MANIFEST.md.
 
 DOCUMENT_DIRS := $(foreach dir,$(wildcard documents/*),\
-  $(if $(wildcard $(dir)/$(notdir $(dir)).tex),$(dir)))
+  $(if $(wildcard $(dir)/main.tex),$(dir)))
 DOCUMENT_GOALS := $(filter documents/%,$(MAKECMDGOALS))
 COMMAND_GOALS := $(filter build clean,$(MAKECMDGOALS))
 KNOWN_GOALS := help new build list clean

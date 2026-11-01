@@ -6,14 +6,13 @@ version 1.3c or later. See ../../LICENSE and ../MANIFEST.md.
 
 # Modelos
 
-`make new` copia um modelo para `documents/<identificador>/` e renomeia
-`main.tex` para `<identificador>.tex`. Edite esse arquivo, use `img/` e
-renomeie `references.bib.example` quando necessário.
+`make new` copia um modelo para `documents/<identificador>/`. Edite
+`main.tex`, use `img/` e renomeie `references.bib.example` quando necessário.
 
 | Identificador | Uso |
 |---|---|
-| `plano-trabalho` | Plano, proposta ou pedido institucional. |
-| `slides` | Apresentação institucional em formato 16:9. |
+| `documento` | Documento institucional para textos em geral. |
+| `slides` | Slides institucionais em formato 16:9. |
 | `cartao` | Cartão de visita institucional, frente e verso. |
 
 `atas`, `relatorios` e `materiais-divulgacao` ainda são reservas sem

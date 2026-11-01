@@ -2,6 +2,6 @@
 # Distributed under the LaTeX Project Public License 1.3c or later.
 # See ../../LICENSE and ../MANIFEST.md.
 # identificador|nome exibido|descrição
-plano-trabalho|Plano de trabalho|Plano, proposta ou pedido institucional.
-slides|Apresentação|Slides institucionais em formato 16:9.
+documento|Documento|Documento institucional para textos em geral.
+slides|Slides|Slides institucionais em formato 16:9.
 cartao|Cartão de visita|Cartão institucional, frente e verso.

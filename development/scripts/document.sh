@@ -111,7 +111,7 @@ load_documents() {
   for document_dir in "$DOCUMENTS_DIR"/*; do
     [[ -d "$document_dir" ]] || continue
     name="${document_dir##*/}"
-    [[ -f "$document_dir/$name.tex" ]] || continue
+    [[ -f "$document_dir/main.tex" ]] || continue
     DOCUMENT_NAMES+=("$name")
   done
   shopt -u nullglob
@@ -139,7 +139,7 @@ choose_existing_document() {
   }
   if [[ -n "$requested" ]]; then
     validate_name "$requested"
-    [[ -f "$DOCUMENTS_DIR/$requested/$requested.tex" ]] || {
+    [[ -f "$DOCUMENTS_DIR/$requested/main.tex" ]] || {
       fail "documento não encontrado: $requested"
     }
     SELECTED_DOCUMENT=$requested
@@ -172,7 +172,7 @@ choose_document_path() {
   [[ "$parent" == "$DOCUMENTS_DIR" ]] || {
     fail "o diretório deve estar diretamente dentro de documents/"
   }
-  [[ -f "$actual/$name.tex" ]] || {
+  [[ -f "$actual/main.tex" ]] || {
     fail "arquivo principal não encontrado em $requested"
   }
   SELECTED_DOCUMENT=$name
@@ -184,8 +184,8 @@ build_document() {
   validate_name "$name"
   source_dir="$DOCUMENTS_DIR/$name"
   output_dir="$DOCUMENT_BUILD_DIR/$name"
-  pdf_path="$source_dir/$name.pdf"
-  [[ -f "$source_dir/$name.tex" ]] || {
+  pdf_path="$source_dir/main.pdf"
+  [[ -f "$source_dir/main.tex" ]] || {
     fail "arquivo principal não encontrado para $name"
   }
   command -v latexmk >/dev/null || fail "latexmk não está instalado"
@@ -201,9 +201,9 @@ build_document() {
         -interaction=nonstopmode \
         -halt-on-error \
         -outdir="$output_dir" \
-        "$name.tex"
+        main.tex
   )
-  cp -- "$output_dir/$name.pdf" "$pdf_path"
+  cp -- "$output_dir/main.pdf" "$pdf_path"
   printf '\nPDF gerado em:\n  %s\n' \
     "${pdf_path#"$ROOT_DIR/"}"
 }
@@ -252,10 +252,9 @@ new_document() {
   mkdir -p -- "$DOCUMENTS_DIR"
   cp -R -- "$source_dir" "$target_dir"
   cp -- "$DOCUMENT_MAKEFILE" "$target_dir/Makefile"
-  mv -- "$target_dir/main.tex" "$target_dir/$SELECTED_DOCUMENT.tex"
   mkdir -p -- "$target_dir/img"
   printf '\nDocumento criado em:\n  %s\n\n' \
-    "${target_dir#"$ROOT_DIR/"}/$SELECTED_DOCUMENT.tex"
+    "${target_dir#"$ROOT_DIR/"}/main.tex"
   printf 'Edite somente esse arquivo para começar.\n'
   ask_to_build "$build_now"
 }
@@ -283,7 +282,7 @@ clean_document() {
 
   validate_name "$name"
   output_dir="$DOCUMENT_BUILD_DIR/$name"
-  pdf_path="$DOCUMENTS_DIR/$name/$name.pdf"
+  pdf_path="$DOCUMENTS_DIR/$name/main.pdf"
   if [[ ! -e "$output_dir" && ! -L "$output_dir" && \
         ! -e "$pdf_path" && ! -L "$pdf_path" ]]; then
     printf 'Nenhum arquivo gerado para %s.\n' "$name"

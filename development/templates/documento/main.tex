@@ -1,0 +1,103 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%
+% This work may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.3c of this license or (at your
+% option) any later version. The latest version is available at
+% https://www.latex-project.org/lppl.txt.
+%
+% This work has the LPPL maintenance status `maintained'. The Current
+% Maintainer is the IEEE UFG Computer Society. The work consists of the files
+% listed in MANIFEST.md. See LICENSE for details and artwork exclusions.
+%
+% GUIA DE EDIÇÃO
+% Mantenha exatamente uma opção ativa em cada grupo abaixo. Para trocar uma
+% opção, adicione % à linha atual e remova % da alternativa desejada.
+\documentclass[
+  paper-size=a4,
+  % paper-size=letter,
+  % font-size=10pt,
+  font-size=11pt,
+  % font-size=12pt,
+  two-sided=true,
+  % two-sided=false,
+  title-page=true,
+  % title-page=false,
+  % section-numbering=plain,
+  section-numbering=two-digit,
+  inner-margin=22mm,
+  outer-margin=22mm,
+  top-margin=24mm,
+  bottom-margin=28mm,
+  binding-offset=0mm,
+  color-model=rgb
+  % color-model=cmyk
+]{ieeeufgcs}
+\usepackage[brazil]{babel}
+
+% Para usar referências bibliográficas, renomeie
+% references.bib.example para references.bib e ative as três linhas abaixo.
+% \usepackage{csquotes}
+% \usepackage[backend=biber,style=numeric]{biblatex}
+% \addbibresource{references.bib}
+
+% COMANDOS ÚTEIS
+% Imagem: \includegraphics[width=.8\linewidth]{img/arquivo.png}
+% Referência: \cite{chave-da-referencia}
+% Tabela simples:
+% \begin{tabular}{ll}
+%   Primeira coluna & Segunda coluna \\
+% \end{tabular}
+% Para tabelas institucionais, copie um dos exemplos IEEECSBrandedTable
+% presentes no corpo deste documento.
+
+% Edite somente os valores depois de cada sinal de igual.
+\IEEECSSetup{
+  document-type={Documento},
+  title={Título do documento},
+  subtitle={},
+  running-title={Título abreviado},
+  institution={Capítulo Estudantil da IEEE Computer Society na UFG},
+  unit={},
+  author={Nome ou equipe responsável},
+  date={\today},
+  location={Goiânia},
+  identifier={Versão 1.0}
+}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+
+Apresente o tema, o contexto e o objetivo deste documento.
+
+\section{Desenvolvimento}
+
+Organize as informações principais em seções e subseções conforme a
+necessidade. Substitua ou remova os exemplos abaixo.
+
+\subsection{Exemplo de subseção}
+
+Descreva aqui um aspecto específico do tema.
+
+\begin{IEEECSNotice}[Nota]
+Use este espaço para destacar uma informação importante.
+\end{IEEECSNotice}
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.30\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Item} & \IEEECSHeaderCell{Descrição} \\
+Exemplo & Informação correspondente. \\
+\end{IEEECSBrandedTable}
+
+\section{Conclusão}
+
+Resuma os pontos principais e indique os próximos passos, se houver.
+
+% Ative esta linha depois de configurar o arquivo references.bib.
+% \printbibliography
+
+\end{document}

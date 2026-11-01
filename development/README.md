@@ -8,12 +8,13 @@ version 1.3c or later. See ../LICENSE and MANIFEST.md.
 
 Versão 1.0.0. A estrutura anterior, com `scripts/`, `templates/`, `tests/`,
 `tex/` e `build/` na raiz, é incompatível com os novos comandos. Documentos
-antigos devem ter `main.tex` renomeado para `<nome>.tex` e seu `Makefile`
-atualizado a partir de `development/scripts/document.mk`. O PDF agora fica
-ao lado do `.tex`; temporários ficam em `development/build/`.
+antigos devem ter seu `Makefile` atualizado a partir de
+`development/scripts/document.mk`. Documentos com `<nome>.tex` devem
+renomeá-lo para `main.tex`. O PDF fica ao lado do `.tex`, como `main.pdf`;
+temporários ficam em `development/build/`.
 
 Referência curta da arquitetura, das APIs públicas e dos testes. Para criar um
-documento, execute `make new` na raiz, edite `documents/<nome>/<nome>.tex` e
+documento, execute `make new` na raiz, edite `documents/<nome>/main.tex` e
 execute `make build`.
 
 ## Arquitetura
