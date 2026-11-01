@@ -23,8 +23,8 @@
   % two-sided=false,
   title-page=true,
   % title-page=false,
-  % section-numbering=plain,
-  section-numbering=two-digit,
+  section-numbering=plain,
+  % section-numbering=two-digit,
   inner-margin=22mm,
   outer-margin=22mm,
   top-margin=24mm,
@@ -33,7 +33,11 @@
   color-model=rgb
   % color-model=cmyk
 ]{ieeeufgcs}
-\usepackage[brazil]{babel}
+\usepackage[brazilian]{babel}
+\usepackage{indentfirst}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+% Mantém o espaçamento vertical regular em páginas com tabelas longas.
+\raggedbottom
 
 % Para usar referências bibliográficas, renomeie
 % references.bib.example para references.bib e ative as três linhas abaixo.
@@ -68,9 +72,20 @@
 \begin{document}
 \maketitle
 
-\section{Introdução}
+\section*{Resumo}
+\phantomsection\addcontentsline{toc}{section}{Resumo}
 
-Apresente o tema, o contexto e o objetivo deste documento.
+Apresente em um parágrafo o propósito, o escopo e o resultado esperado do
+documento. Substitua este texto antes da publicação.
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Introdução}\label{sec:introducao}
+
+Apresente o tema, o contexto e o objetivo deste documento. Indique o público
+a que se destina e o período de referência, quando aplicável.
 
 \section{Desenvolvimento}
 
@@ -79,7 +94,8 @@ necessidade. Substitua ou remova os exemplos abaixo.
 
 \subsection{Exemplo de subseção}
 
-Descreva aqui um aspecto específico do tema.
+Descreva aqui um aspecto específico do tema. Para citar outra parte do texto,
+use uma referência como a Seção~\ref{sec:introducao}.
 
 \begin{IEEECSNotice}[Nota]
 Use este espaço para destacar uma informação importante.
@@ -93,9 +109,34 @@ Use este espaço para destacar uma informação importante.
 Exemplo & Informação correspondente. \\
 \end{IEEECSBrandedTable}
 
+\subsection{Pessoas responsáveis}
+
+Registre os dados necessários para identificar cada pessoa e sua função.
+Duplique a tabela abaixo para cada integrante quando um perfil individual
+for útil. Evite dados pessoais desnecessários.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.28\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Campo} & \IEEECSHeaderCell{Informação} \\
+Nome & Nome completo da pessoa responsável. \\
+Função & Cargo ou responsabilidade neste documento. \\
+Vínculo & Unidade, equipe ou organização. \\
+Contato institucional & \url{https://example.org/contato} \\
+\end{IEEECSBrandedTable}
+
 \section{Conclusão}
 
 Resuma os pontos principais e indique os próximos passos, se houver.
+
+\clearpage
+\appendix
+
+\section{Documentos de apoio}
+
+Inclua aqui formulários, registros ou dados complementares necessários à
+leitura do documento. Remova este apêndice quando não houver anexos.
 
 % Ative esta linha depois de configurar o arquivo references.bib.
 % \printbibliography

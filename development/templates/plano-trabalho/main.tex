@@ -23,8 +23,8 @@
   % two-sided=false,
   title-page=true,
   % title-page=false,
-  % section-numbering=plain,
-  section-numbering=two-digit,
+  section-numbering=plain,
+  % section-numbering=two-digit,
   inner-margin=22mm,
   outer-margin=22mm,
   top-margin=24mm,
@@ -33,7 +33,11 @@
   color-model=rgb
   % color-model=cmyk
 ]{ieeeufgcs}
-\usepackage[brazil]{babel}
+\usepackage[brazilian]{babel}
+\usepackage{indentfirst}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+% Mantém o espaçamento vertical regular em páginas com tabelas longas.
+\raggedbottom
 
 % Para usar referências bibliográficas, renomeie
 % references.bib.example para references.bib e ative as três linhas abaixo.
@@ -68,37 +72,40 @@
 \begin{document}
 \maketitle
 
-\section{Apresentação}
+\section*{Resumo}
+\phantomsection\addcontentsline{toc}{section}{Resumo}
+
+Sintetize a finalidade do plano, o período de execução, as principais
+entregas e a decisão institucional solicitada. Substitua este texto antes
+da submissão.
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Apresentação}\label{sec:apresentacao}
 
 Apresente a organização, o contexto do plano e sua relação com a comunidade.
 Delimite o período, o público e o escopo institucional do documento.
 
-\section{Motivação}
+\section{Motivação e justificativa}
 
 Descreva o problema ou a oportunidade que justifica o plano. Relacione a
 proposta com necessidades observáveis e com a missão da organização.
+Demonstre que a escala proposta é compatível com os recursos disponíveis.
 
-\section{Expectativas}
+\section{Membros e público-alvo}
 
-Registre resultados verificáveis para o primeiro ciclo.
+Identifique quem participa da execução e quem será atendido. Informe como
+novos membros serão acolhidos, acompanhados e mantidos ativos. Registre
+metas de adesão apenas quando houver meios de verificá-las.
 
-\begin{itemize}
-  \item formação e desenvolvimento das pessoas participantes;
-  \item entregas técnicas ou institucionais;
-  \item continuidade, documentação e transferência de conhecimento.
-\end{itemize}
+\section{Missão e objetivos}
 
-\begin{IEEECSNotice}[Condição de validade]
-Nenhuma meta deve prevalecer sobre segurança, integridade, acessibilidade,
-capacidade das pessoas voluntárias ou disponibilidade real de recursos.
-\end{IEEECSNotice}
-
-\section{Missão}
+\subsection{Missão}
 
 Declare a finalidade permanente da iniciativa e os princípios que orientam
 sua execução.
-
-\section{Objetivos}
 
 \subsection{Objetivo geral}
 
@@ -112,7 +119,72 @@ Defina o resultado amplo que o plano pretende alcançar.
   \item desenvolver responsáveis e pessoas sucessoras.
 \end{itemize}
 
-\section{Escalabilidade}
+\section{Governança e equipe responsável}
+
+Descreva a composição da equipe, o processo de decisão, a periodicidade das
+reuniões e a relação com as instâncias institucionais. Use a tabela para
+registrar a estrutura de responsabilidades e o vínculo entre funções.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.24\linewidth}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.25\linewidth}
+}
+\IEEECSHeaderCell{Função} &
+\IEEECSHeaderCell{Responsabilidade} &
+\IEEECSHeaderCell{Responsável} \\
+Coordenação & Aprovar prioridades e acompanhar a execução. & A definir. \\
+Secretaria & Registrar decisões e manter documentos. & A definir. \\
+Responsabilidade técnica & Orientar as entregas e revisar riscos. &
+A definir. \\
+Orientação docente & Acompanhar o plano e a equipe. & A definir. \\
+\end{IEEECSBrandedTable}
+
+\subsection{Perfis dos integrantes}
+
+Registre os perfis das pessoas que assumem funções no plano. Duplique a
+tabela para cada integrante e substitua os campos pelo conteúdo pertinente.
+Evite informações pessoais que não sejam necessárias à avaliação do plano.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.28\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Campo} & \IEEECSHeaderCell{Informação} \\
+Nome & Nome completo. \\
+Função & Cargo ou responsabilidade no plano. \\
+Vínculo & Unidade acadêmica ou organização. \\
+Experiência relevante & Competências ligadas às atividades previstas. \\
+Contato institucional & \url{https://example.org/contato} \\
+\end{IEEECSBrandedTable}
+
+\subsection{Sucessão}
+
+Explique como responsabilidades, documentos, acessos e conhecimento serão
+transferidos. Identifique responsáveis principais e pessoas em formação.
+
+\section{Projetos e atividades}
+
+Organize as frentes de trabalho e associe cada uma a uma entrega mínima.
+Use a Seção~\ref{sec:cronograma} para indicar quando as atividades ocorrerão.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.24\linewidth}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Frente} &
+\IEEECSHeaderCell{Propósito} &
+\IEEECSHeaderCell{Primeiro ciclo} \\
+Formação & Desenvolver competências técnicas e organizacionais. &
+Atividades e evidências de aprendizagem. \\
+Projetos & Transformar necessidades delimitadas em entregas verificáveis. &
+Protótipo ou relatório documentado. \\
+Comunidade & Integrar participantes e manter comunicação recorrente. &
+Calendário, acolhimento e evento de referência. \\
+\end{IEEECSBrandedTable}
+
+\subsection{Escalabilidade}
 
 Defina critérios de passagem antes de ampliar o público, os recursos ou a
 complexidade operacional.
@@ -125,81 +197,127 @@ complexidade operacional.
 \IEEECSHeaderCell{Etapa} &
 \IEEECSHeaderCell{Critério de passagem} &
 \IEEECSHeaderCell{Entrega principal} \\
-Fundação &
-Responsáveis, regras e recursos iniciais confirmados. &
+Fundação & Responsáveis, regras e recursos iniciais confirmados. &
 Plano aprovado e calendário inicial. \\
-Piloto &
-Primeiras atividades testadas e carga da equipe conhecida. &
+Piloto & Primeiras atividades testadas e carga da equipe conhecida. &
 Piloto documentado e retrospectiva. \\
-Consolidação &
-Rotina estável, documentação atualizada e sucessão preparada. &
+Consolidação & Rotina estável e sucessão preparada. &
 Relatório do ciclo e transição de gestão. \\
 \end{IEEECSBrandedTable}
 
-\section{Sucessão}
+\section{Cronograma}\label{sec:cronograma}
 
-Explique como responsabilidades, documentos, acessos e conhecimento serão
-transferidos. Identifique responsáveis principais e pessoas em formação.
-
-\section{Projetos e engajamento}
-
-Organize as frentes de trabalho e associe cada uma a uma entrega mínima.
+Substitua os períodos de exemplo por datas compatíveis com o calendário
+institucional. Indique os responsáveis e as evidências de conclusão.
 
 \begin{IEEECSBrandedTable}{
-  >{\raggedright\arraybackslash}m{0.24\linewidth}
+  >{\raggedright\arraybackslash}m{0.17\linewidth}
+  >{\raggedright\arraybackslash}m{0.23\linewidth}
   >{\raggedright\arraybackslash}X
-  >{\raggedright\arraybackslash}X
-}
-\IEEECSHeaderCell{Frente} &
-\IEEECSHeaderCell{Propósito} &
-\IEEECSHeaderCell{Primeiro ciclo} \\
-Formação &
-Desenvolver competências técnicas e organizacionais. &
-Atividades, materiais e evidências de aprendizagem. \\
-Projetos &
-Transformar necessidades delimitadas em entregas verificáveis. &
-Protótipo ou relatório acompanhado de documentação. \\
-Comunidade &
-Integrar participantes e manter comunicação recorrente. &
-Calendário, acolhimento e evento de referência. \\
-\end{IEEECSBrandedTable}
-
-\subsection{Roteiro do ciclo}
-
-\begin{IEEECSBrandedTable}{
-  >{\raggedright\arraybackslash}m{0.18\linewidth}
-  >{\raggedright\arraybackslash}m{0.25\linewidth}
-  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.20\linewidth}
 }
 \IEEECSHeaderCell{Período} &
 \IEEECSHeaderCell{Prioridade} &
-\IEEECSHeaderCell{Entregas} \\
-M1--M3 & Fundar e testar & Aprovar o plano e executar o primeiro piloto. \\
-M4--M6 & Validar e abrir & Revisar materiais e ampliar a participação. \\
-M7--M9 & Integrar & Executar projetos e registrar resultados. \\
-M10--M12 & Transferir & Avaliar o ciclo e preparar a sucessão. \\
+\IEEECSHeaderCell{Entrega e evidência} &
+\IEEECSHeaderCell{Responsável} \\
+M1--M3 & Fundar e testar & Plano aprovado e primeiro piloto registrado. &
+Coordenação. \\
+M4--M6 & Validar e abrir & Materiais revisados e participação ampliada. &
+Equipe de formação. \\
+M7--M9 & Integrar & Projetos executados e resultados documentados. &
+Lideranças de projeto. \\
+M10--M12 & Transferir & Relatório do ciclo e sucessão preparados. &
+Coordenação e secretaria. \\
 \end{IEEECSBrandedTable}
 
-\section{Equipe responsável}
+\section{Metas e indicadores}\label{sec:metas}
+
+Defina metas verificáveis para o período. Registre como cada resultado será
+medido e quem acompanhará a informação.
+
+\begin{IEEECSNotice}[Condição de validade]
+Nenhuma meta deve prevalecer sobre segurança, integridade, acessibilidade,
+capacidade das pessoas voluntárias ou disponibilidade real de recursos.
+\end{IEEECSNotice}
 
 \begin{IEEECSBrandedTable}{
-  >{\raggedright\arraybackslash}m{0.30\linewidth}
+  >{\raggedright\arraybackslash}m{0.22\linewidth}
   >{\raggedright\arraybackslash}X
-  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.18\linewidth}
+  >{\raggedright\arraybackslash}m{0.17\linewidth}
 }
-\IEEECSHeaderCell{Função} &
-\IEEECSHeaderCell{Responsável} &
-\IEEECSHeaderCell{Observações} \\
-Coordenação & & \\
-Secretaria & & \\
-Responsabilidade técnica & & \\
-Orientação docente & & \\
+\IEEECSHeaderCell{Meta} &
+\IEEECSHeaderCell{Indicador e fonte} &
+\IEEECSHeaderCell{Prazo} &
+\IEEECSHeaderCell{Responsável} \\
+Realizar o piloto & Relatório de execução aprovado. & M3 & Coordenação. \\
+Formar participantes & Lista de presença e avaliação da atividade. & M6 &
+Equipe de formação. \\
+Documentar o ciclo & Relatório anual entregue à instância responsável. &
+M12 & Secretaria. \\
 \end{IEEECSBrandedTable}
 
-\section{Justificativa}
+\section{Parcerias e relações institucionais}
 
-Reúna os alinhamentos técnico, acadêmico, regional e institucional. Demonstre
-que a escala proposta é compatível com os recursos e riscos conhecidos.
+Identifique as unidades acadêmicas, organizações e comunidades que poderão
+contribuir. Para cada parceria, indique o objetivo, o contato responsável e
+a condição necessária para formalizá-la. Diferencie contatos em negociação
+de compromissos já confirmados.
+
+\section{Recursos e sustentabilidade}
+
+Estime os recursos humanos, físicos, digitais e financeiros necessários.
+Indique fontes confirmadas, fontes potenciais e como eventuais despesas
+serão aprovadas e registradas.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.28\linewidth}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.24\linewidth}
+}
+\IEEECSHeaderCell{Recurso} &
+\IEEECSHeaderCell{Necessidade e finalidade} &
+\IEEECSHeaderCell{Fonte ou situação} \\
+Espaço físico & Local para reuniões e atividades. & A confirmar. \\
+Plataforma digital & Registro e compartilhamento de materiais. &
+Disponível ou a confirmar. \\
+Orçamento & Custos previstos por atividade. & Estimar e aprovar. \\
+\end{IEEECSBrandedTable}
+
+\section{Comunicação e divulgação}
+
+Indique os canais institucionais, o público de cada canal, a frequência de
+atualização e quem revisará as publicações. Registre como serão divulgados
+convites, resultados e mudanças no cronograma.
+
+\section{Monitoramento e relatórios}
+
+Acompanhe periodicamente as metas da Seção~\ref{sec:metas}. Registre
+as reuniões, guarde as evidências e defina o formato dos relatórios.
+Indique quem consolidará os resultados e a quem serão apresentados.
+
+\section{Riscos e mitigação}
+
+Identifique os riscos mais relevantes para este plano. Revise probabilidade,
+impacto e medidas de resposta ao longo da execução.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.21\linewidth}
+  >{\raggedright\arraybackslash}m{0.14\linewidth}
+  >{\raggedright\arraybackslash}m{0.13\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Risco} &
+\IEEECSHeaderCell{Probabilidade} &
+\IEEECSHeaderCell{Impacto} &
+\IEEECSHeaderCell{Mitigação} \\
+Sobrecarga da equipe & Média & Alto &
+Revisar a carga de trabalho e reduzir o escopo quando necessário. \\
+Atraso em recursos & Média & Médio &
+Confirmar dependências antes de agendar cada atividade. \\
+Baixa adesão & Média & Médio &
+Revisar a divulgação e ouvir o público-alvo. \\
+\end{IEEECSBrandedTable}
 
 \section{Pedido de aprovação}
 
@@ -218,6 +336,30 @@ Liste as ações imediatas, seus responsáveis e os prazos iniciais.
 \section{Conclusão}
 
 Retome o valor esperado, as condições de execução e a decisão solicitada.
+
+\clearpage
+\appendix
+
+\section{Documentos e registros de apoio}
+
+Liste minutas, formulários, atas ou registros que acompanham o plano. Indique
+onde cada item será mantido. Remova este apêndice quando não for necessário.
+
+\section{Termo de compromisso e assinaturas}
+
+Descreva o compromisso assumido pelas pessoas responsáveis. Insira as
+assinaturas eletrônicas no documento final depois da aprovação do texto.
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.38\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Nome e função} &
+\IEEECSHeaderCell{Assinatura eletrônica e data} \\
+Nome completo --- função & Espaço reservado para assinatura e data. \\
+Nome completo --- orientação docente &
+Espaço reservado para assinatura e data. \\
+\end{IEEECSBrandedTable}
 
 % Ative esta linha depois de configurar o arquivo references.bib.
 % \printbibliography
