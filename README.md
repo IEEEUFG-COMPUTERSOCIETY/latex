@@ -37,6 +37,10 @@ Para criar um documento sem perguntas:
 make new TEMPLATE=slides NAME=evento BUILD=yes
 ```
 
+Use `TEMPLATE=documento` para um texto geral ou `TEMPLATE=plano-trabalho`
+para um plano com seções de objetivos, etapas e responsáveis. Ambos usam a
+mesma classe institucional.
+
 Para referências, renomeie `references.bib.example` para `references.bib` e
 ative as linhas indicadas no arquivo `.tex` do documento.
 

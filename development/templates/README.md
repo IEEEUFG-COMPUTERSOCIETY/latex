@@ -12,6 +12,7 @@ version 1.3c or later. See ../../LICENSE and ../MANIFEST.md.
 | Identificador | Uso |
 |---|---|
 | `documento` | Documento institucional para textos em geral. |
+| `plano-trabalho` | Plano institucional com objetivos, etapas e responsáveis. |
 | `slides` | Slides institucionais em formato 16:9. |
 | `cartao` | Cartão de visita institucional, frente e verso. |
 

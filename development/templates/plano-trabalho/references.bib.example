@@ -1,0 +1,27 @@
+@Comment{
+  COMO USAR ESTE ARQUIVO
+
+  1. Renomeie este arquivo para references.bib.
+  2. Ative as linhas de biblatex no início de main.tex.
+  3. Cite uma entrada com \cite{exemplo-livro}.
+  4. Ative \printbibliography no fim de main.tex.
+
+  O comando make build executará o processador bibliográfico quando ele for
+  necessário. Substitua as entradas de exemplo pelas referências reais.
+}
+
+@book{exemplo-livro,
+  author    = {Sobrenome, Nome},
+  title     = {Título da obra},
+  publisher = {Nome da editora},
+  location  = {Cidade},
+  year      = {2026}
+}
+
+@online{exemplo-site,
+  author  = {{Nome da organização}},
+  title   = {Título da página},
+  year    = {2026},
+  url     = {https://example.org},
+  urldate = {2026-09-29}
+}
