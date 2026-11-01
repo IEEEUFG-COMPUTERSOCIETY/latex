@@ -13,6 +13,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `Makefile`
 - `README.md`
 - `development/README.md`
+- `development/document-use-cases.md`
 - `development/Makefile`
 - `development/scripts/check-line-length.lua`
 - `development/scripts/document.mk`
@@ -25,6 +26,9 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/templates/plano-trabalho/img/README.md`
 - `development/templates/plano-trabalho/main.tex`
 - `development/templates/plano-trabalho/references.bib.example`
+- `development/templates/plano-projeto/img/README.md`
+- `development/templates/plano-projeto/main.tex`
+- `development/templates/plano-projeto/references.bib.example`
 - `development/templates/estatuto/img/README.md`
 - `development/templates/estatuto/main.tex`
 - `development/templates/estatuto/references.bib.example`
@@ -38,6 +42,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/templates/materiais-divulgacao/img/README.md`
 - `development/templates/materiais-divulgacao/references.bib.example`
 - `development/templates/relatorios/img/README.md`
+- `development/templates/relatorios/main.tex`
 - `development/templates/relatorios/references.bib.example`
 - `development/tests/reference/brand-reference.tex`
 - `development/tests/smoke/brand.tex`

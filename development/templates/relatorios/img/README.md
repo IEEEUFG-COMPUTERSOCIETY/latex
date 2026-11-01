@@ -6,7 +6,7 @@ See LICENSE and MANIFEST.md.
 
 # Imagens do relatório
 
-Coloque aqui imagens específicas do relatório. O futuro arquivo principal
+Coloque aqui imagens específicas do relatório. O arquivo principal
 deverá referenciá-las pelo caminho `img/nome-do-arquivo`.
 
 Prefira PDF para gráficos vetoriais e PNG ou JPEG para imagens rasterizadas.

@@ -1,0 +1,298 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+% Distributed under the LaTeX Project Public License 1.3c or later.
+% See LICENSE and development/MANIFEST.md.
+%
+% PLANO DE EXECUÇÃO DE PROJETO
+% Apresente à Diretoria antes de iniciar o projeto. Após a decisão, registre
+% versão, data e referência da ata. Atualize o histórico ao mudar o escopo.
+% Substitua todos os campos entre colchetes e remova quadros desnecessários.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme[sectionpages=false]{ieeeufgcs}
+\usepackage[brazilian]{babel}
+\usepackage{tabularx}
+
+% Para citar referências, renomeie references.bib.example para
+% references.bib e ative estas linhas e o quadro ao final.
+% \usepackage{csquotes}
+% \usepackage[backend=biber,style=numeric]{biblatex}
+% \addbibresource{references.bib}
+
+\newcommand{\ProjetoNome}{[Nome do projeto]}
+\newcommand{\ProjetoCodigo}{[Código]}
+\newcommand{\ProjetoLider}{[Nome da liderança discente]}
+\newcommand{\PlanoVersao}{0.1}
+\newcommand{\PlanoData}{[data]}
+
+\title[Plano de projeto]{Plano de execução: \ProjetoNome}
+\subtitle{Proposta para decisão da Diretoria Executiva}
+\author{Diretoria de Pesquisa e Desenvolvimento e \ProjetoLider}
+\institute{Capítulo Estudantil da IEEE Computer Society na UFG}
+\date{Versão \PlanoVersao{} · \PlanoData}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Identificação e decisão solicitada}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.28\textwidth}
+    >{\raggedright\arraybackslash}X
+  }
+    \textbf{Projeto} & \ProjetoNome{} (\ProjetoCodigo) \\
+    \textbf{Frente} & [Hardware e Estruturas ou Software] \\
+    \textbf{Liderança} & \ProjetoLider \\
+    \textbf{Equipe} & [Três a seis integrantes; nomes ou referência] \\
+    \textbf{Situação} & [Proposta, aprovada ou em revisão] \\
+    \textbf{Versão e data} & \PlanoVersao{} · \PlanoData \\
+  \end{tabularx}
+  \vfill
+  \begin{block}{Pedido à Diretoria}
+    [Aprovar o escopo, os responsáveis, o cronograma e o teto de recursos
+    descritos nesta versão, com as condições indicadas.]
+  \end{block}
+\end{frame}
+
+\begin{frame}{Necessidade, proposta e sucesso}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.31\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Necessidade\par}
+      \medskip
+      [Problema observável, público afetado e evidência da necessidade.]
+    \end{column}
+    \begin{column}{.31\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Proposta\par}
+      \medskip
+      [Solução inicial e resultado útil a entregar.]
+    \end{column}
+    \begin{column}{.31\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Sucesso\par}
+      \medskip
+      [Condição mensurável para aceitar o resultado no prazo.]
+    \end{column}
+  \end{columns}
+  \vfill
+  \textbf{Vínculo com o Capítulo:}
+  [Formação, extensão, pesquisa ou produção científica esperada.]
+\end{frame}
+
+\begin{frame}{Escopo e condições de execução}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.47\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Incluído\par}
+      \begin{itemize}
+        \item \emph{[Funcionalidade ou atividade essencial]}
+        \item \emph{[Documentação e demonstração previstas]}
+      \end{itemize}
+      \medskip
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Fora do escopo\par}
+      \begin{itemize}
+        \item \emph{[Entrega adiada ou excluída nesta versão]}
+      \end{itemize}
+    \end{column}
+    \begin{column}{.47\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Condições\par}
+      \begin{itemize}
+        \item \emph{[Recurso, espaço ou autorização necessária]}
+        \item \emph{[Licenças, dados e segurança a observar]}
+        \item \emph{[Limite de tempo da equipe e do ciclo]}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Entregas e critérios de aceitação}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.20\textwidth}
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}p{.28\textwidth}
+  }
+    \textbf{Entrega} & \textbf{Critério verificável} &
+    \textbf{Evidência} \\
+    \hline
+    D1: [protótipo] & [Teste ou demonstração que deve passar] &
+    [Registro ou link] \\
+    D2: [docs] & [Conteúdo mínimo revisado] &
+    [Arquivo versionado] \\
+    D3: [apresentação] & [Público e resultado esperado] &
+    [Evento ou relatório] \\
+  \end{tabularx}
+  \vfill
+  \begin{block}{Condição de conclusão}
+    [Quem avalia as entregas, quando e como registra o aceite.]
+  \end{block}
+\end{frame}
+
+\begin{frame}{Equipe e responsabilidades}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.26\textwidth}
+    >{\raggedright\arraybackslash}p{.25\textwidth}
+    >{\raggedright\arraybackslash}X
+  }
+    \textbf{Função} & \textbf{Pessoa} & \textbf{Responsabilidade} \\
+    \hline
+    Liderança discente & \ProjetoLider &
+    [Coordenação, apresentações e decisões da equipe] \\
+    Equipe técnica & [Integrantes] &
+    [Construção, testes e documentação] \\
+    Diretoria de P\&D & [Nome] &
+    [Plano, acompanhamento e relatório] \\
+    Orientação docente & [Nomes] &
+    [Supervisão técnica e institucional] \\
+  \end{tabularx}
+  \vfill
+  \textbf{Ritmo de trabalho:} [Reuniões da equipe e apresentação mensal
+  à Diretoria.]
+\end{frame}
+
+\begin{frame}{Cronograma e marcos}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.16\textwidth}
+    >{\raggedright\arraybackslash}p{.22\textwidth}
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}p{.23\textwidth}
+  }
+    \textbf{Etapa} & \textbf{Período} & \textbf{Marco} &
+    \textbf{Evidência} \\
+    \hline
+    Preparação & [Datas] & [Equipe e recursos confirmados] &
+    [Aprovação e registro] \\
+    Primeira versão & [Datas] & [Protótipo mínimo testado] &
+    [Teste ou demonstração] \\
+    Evolução & [Datas] & [Melhorias priorizadas] &
+    [Revisão de resultados] \\
+    Encerramento & [Datas] & [Entrega e aceite] &
+    [Relatório e repositório] \\
+  \end{tabularx}
+  \vfill
+  \textbf{Dependências do calendário:}
+  [Provas, compras, laboratório ou autorizações.]
+\end{frame}
+
+\begin{frame}{Recursos e orçamento}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}p{.16\textwidth}
+    >{\raggedright\arraybackslash}p{.25\textwidth}
+    >{\raggedright\arraybackslash}p{.18\textwidth}
+  }
+    \textbf{Recurso} & \textbf{Qtd.} & \textbf{Fonte/situação} &
+    \textbf{Estimativa} \\
+    \hline
+    \emph{[Material ou serviço]} & [Qtd.] &
+    [Confirmado ou pendente] &
+    [R\$ valor] \\
+    \emph{[Equipamento existente]} & [Qtd.] &
+    [Disponível ou a confirmar] &
+    [R\$ valor] \\
+    \emph{[Espaço ou plataforma]} & [Prazo] &
+    [Autorização necessária] &
+    [R\$ valor] \\
+  \end{tabularx}
+  \vfill
+  \textbf{Total estimado:} [R\$ valor]. \quad
+  \textbf{Fonte confirmada:} [Origem e valor].
+
+  \medskip
+  Valores não confirmados exigem nova avaliação antes de gerar despesa.
+\end{frame}
+
+\begin{frame}{Riscos e dependências}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.27\textwidth}
+    >{\raggedright\arraybackslash}p{.21\textwidth}
+    >{\raggedright\arraybackslash}X
+  }
+    \textbf{Risco ou dependência} & \textbf{Sinal de alerta} &
+    \textbf{Resposta e responsável} \\
+    \hline
+    \emph{[Atraso de componentes]} & [Data sem entrega] &
+    [Alternativa e pessoa responsável] \\
+    \emph{[Sobrecarga da equipe]} & [Marco não cumprido] &
+    [Reduzir escopo ou pausar] \\
+    \emph{[Risco técnico ou de dados]} & [Teste ou revisão] &
+    [Controle, autorização e supervisão] \\
+  \end{tabularx}
+  \vfill
+  \textbf{Condição para iniciar:}
+  [Liste dependências que precisam estar resolvidas.]
+\end{frame}
+
+\begin{frame}{Acompanhamento e controle de mudanças}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.47\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Acompanhamento\par}
+      \begin{itemize}
+        \item \emph{[Indicador e fonte dos resultados]}
+        \item \emph{[Local dos arquivos e das evidências]}
+        \item \emph{[Revisão mensal com a Diretoria]}
+      \end{itemize}
+    \end{column}
+    \begin{column}{.47\textwidth}
+      {\IEEECSHeadingFont\bfseries\color{IEEEBlue}Alterações\par}
+      \begin{itemize}
+        \item \emph{[Quem propõe e justifica a mudança]}
+        \item \emph{[Impacto em prazo, custo, risco e entrega]}
+        \item \emph{[Decisão, ata e nova versão do plano]}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Histórico de versões e mudanças}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.12\textwidth}
+    >{\raggedright\arraybackslash}p{.16\textwidth}
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}p{.25\textwidth}
+  }
+    \textbf{Versão} & \textbf{Data} & \textbf{Mudança e impacto} &
+    \textbf{Decisão e registro} \\
+    \hline
+    \PlanoVersao & \PlanoData & Criação da proposta. &
+    [Decisão pendente] \\
+    \emph{[vX.Y]} & [Data] &
+    [Alteração de escopo; efeito em prazo, custo e risco] &
+    [Decisão e ata] \\
+  \end{tabularx}
+  \vfill
+  \begin{block}{Ao revisar o plano}
+    [Atualize os quadros afetados, registre a justificativa e apresente a
+    nova versão à Diretoria para decisão.]
+  \end{block}
+\end{frame}
+
+\begin{frame}{Aprovação e próximos passos}
+  \small
+  \begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}p{.27\textwidth}
+    >{\raggedright\arraybackslash}X
+  }
+    \textbf{Versão avaliada} & \PlanoVersao{} · \PlanoData \\
+    \textbf{Decisão} & [Aprovado, aprovado com condições ou devolvido] \\
+    \textbf{Responsáveis} & [Diretoria e orientação consultada] \\
+    \textbf{Registro} & [Ata nº, data e local do arquivo] \\
+    \textbf{Condições} & [Pendências antes do início, se houver] \\
+  \end{tabularx}
+  \vfill
+  \begin{block}{Após a aprovação}
+    [Confirmar recursos e equipe; publicar a versão aprovada; iniciar o
+    primeiro marco e agendar a apresentação mensal.]
+  \end{block}
+\end{frame}
+
+% Ative este quadro depois de configurar o arquivo references.bib.
+% \begin{frame}[allowframebreaks]{Referências}
+%   \printbibliography
+% \end{frame}
+
+\end{document}

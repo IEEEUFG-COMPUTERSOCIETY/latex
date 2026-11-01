@@ -42,7 +42,14 @@ para um plano com seções de objetivos, etapas e responsáveis. Ambos usam a
 mesma classe institucional.
 Use `TEMPLATE=atas` para registrar reuniões com presenças, deliberações,
 encaminhamentos e assinaturas, em formato compacto.
+Use `TEMPLATE=relatorios` para registrar execução, resultados e evidências
+de uma atividade após sua realização.
+Use `TEMPLATE=plano-projeto` para apresentar à Diretoria um plano de
+execução de projeto em slides e registrar a versão aprovada.
 Use `TEMPLATE=estatuto` para um texto com capítulos e artigos numerados.
+
+O [guia de casos de uso](development/document-use-cases.md) indica quando
+criar cada registro operacional e quem deve prepará-lo.
 
 Para referências, renomeie `references.bib.example` para `references.bib` e
 ative as linhas indicadas no arquivo `.tex` do documento.

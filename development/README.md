@@ -198,6 +198,9 @@ compartilham a mesma geometria de icosaedros pelo pacote de marca.
 
 ## Modelos e documentos
 
+Consulte os [casos de uso](document-use-cases.md) para escolher o registro
+adequado e identificar responsáveis, evidências e destino da versão final.
+
 Um modelo deve conter `main.tex`, `references.bib.example` e, quando útil,
 `img/README.md`. Para publicá-lo:
 

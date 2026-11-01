@@ -1,0 +1,137 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+% Distributed under the LaTeX Project Public License 1.3c or later.
+% See LICENSE and development/MANIFEST.md.
+%
+% MODELO DE RELATÓRIO DE ATIVIDADE
+% Use após uma reunião, evento, ação de extensão ou atividade de projeto.
+% Registre a execução e as evidências; decisões formais ficam na ata.
+% Substitua todos os campos entre colchetes e remova os não aplicáveis.
+% Os sistemas do IEEE e da UFG mantêm seus próprios registros oficiais.
+\documentclass[
+  paper-size=a4,
+  font-size=11pt,
+  two-sided=false,
+  title-page=false,
+  section-numbering=plain,
+  inner-margin=22mm,
+  outer-margin=22mm,
+  top-margin=24mm,
+  bottom-margin=28mm,
+  color-model=rgb
+]{ieeeufgcs}
+\usepackage[brazilian]{babel}
+\usepackage{indentfirst}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\raggedbottom
+
+% Edite estes valores uma vez; eles aparecem no título e na identificação.
+\newcommand{\RelatorioAtividade}{[nome da atividade]}
+\newcommand{\RelatorioEmissao}{[data de emissão]}
+
+\IEEECSSetup{
+  document-type={Relatório de atividade},
+  title={\RelatorioAtividade},
+  subtitle={Capítulo Estudantil IEEE Computer Society UFG},
+  running-title={Relatório de atividade},
+  institution={Capítulo Estudantil da IEEE Computer Society na UFG},
+  author={[Nome e função de quem redigiu]},
+  date={\RelatorioEmissao},
+  location={Goiânia},
+  identifier={Minuta para revisão}
+}
+
+\begin{document}
+\maketitle
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.30\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Identificação} & \IEEECSHeaderCell{Registro} \\
+Atividade & \RelatorioAtividade. \\
+Tipo & [Reunião, evento, ação de extensão ou atividade de projeto]. \\
+Data e horário & [Dia, início e término]. \\
+Local ou modalidade & [Unidade, sala ou plataforma]. \\
+Equipe responsável & [Área, coordenação e demais responsáveis]. \\
+Público & [Público pretendido e participantes efetivos]. \\
+Ata relacionada & [Número ou link, quando houver deliberações]. \\
+Situação & [Minuta, aprovado ou arquivado]. \\
+\end{IEEECSBrandedTable}
+
+\section*{Objetivo e preparação}
+
+[Descreva o propósito da atividade, a necessidade atendida e o resultado
+esperado. Informe a divulgação, as inscrições, as autorizações ou os
+materiais preparados que sejam relevantes para avaliar a execução.]
+
+\section*{Execução}
+
+[Registre o que ocorreu, em ordem lógica, com datas e responsáveis quando
+necessário. Diferencie o que estava previsto do que foi realizado. Para
+reuniões, cite a ata que contém as deliberações.]
+
+\section*{Resultados e avaliação}
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.32\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Indicador ou entrega} &
+\IEEECSHeaderCell{Resultado e fonte} \\
+\emph{[Presença ou alcance]} &
+\emph{[Quantidade apurada e fonte da contagem]}. \\
+\emph{[Entrega técnica ou formativa]} &
+\emph{[Resultado verificável e localização]}. \\
+\emph{[Retorno dos participantes]} &
+\emph{[Método de coleta e síntese, se houver]}. \\
+\end{IEEECSBrandedTable}
+
+[Registre o que funcionou, as limitações, os incidentes e as lições
+aprendidas. Evite atribuir resultados que não possam ser verificados.]
+
+\section*{Recursos e evidências}
+
+\textbf{Recursos usados:} [Espaço, equipamentos, materiais e apoio recebido].
+
+\textbf{Despesas e receitas:} [Valores realizados ou ``sem movimentação'';
+indique onde estão os comprovantes e a prestação de contas].
+
+\textbf{Evidências:} [Links ou caminhos de lista de presença, materiais,
+fotografias autorizadas, repositórios, formulários e resultados].
+
+% Guarde dados pessoais e comprovantes em local de acesso apropriado.
+% Descreva aqui a evidência, sem copiar dados sensíveis para o PDF.
+
+\section*{Pendências e encaminhamentos}
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}m{0.24\linewidth}
+  >{\raggedright\arraybackslash}m{0.17\linewidth}
+}
+\IEEECSHeaderCell{Ação} &
+\IEEECSHeaderCell{Responsável} &
+\IEEECSHeaderCell{Prazo} \\
+\emph{[Próxima ação ou ``nenhuma'']} &
+\emph{[Nome ou função]} & \emph{[Data]} \\
+\end{IEEECSBrandedTable}
+
+\section*{Revisão e registros oficiais}
+
+\begin{IEEECSBrandedTable}{
+  >{\raggedright\arraybackslash}m{0.30\linewidth}
+  >{\raggedright\arraybackslash}X
+}
+\IEEECSHeaderCell{Etapa} & \IEEECSHeaderCell{Responsável e registro} \\
+Redação & [Nome, função e data]. \\
+Revisão ou aprovação & [Nome, função, data e decisão]. \\
+IEEE vTools, se aplicável & [Identificador e situação do envio]. \\
+UFG SIGAA, se aplicável & [Identificador e situação do cadastro]. \\
+Arquivo final & [Local da versão aprovada e dos anexos]. \\
+\end{IEEECSBrandedTable}
+
+% Após o preenchimento, retire linhas de sistemas que não se aplicam.
+% Confirme os requisitos atuais nos sistemas oficiais antes do envio.
+
+\end{document}

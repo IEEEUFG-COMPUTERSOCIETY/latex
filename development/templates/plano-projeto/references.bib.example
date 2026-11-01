@@ -1,0 +1,18 @@
+@Comment{
+  COMO USAR ESTE ARQUIVO
+
+  1. Renomeie este arquivo para references.bib.
+  2. Configure biblatex no arquivo principal.
+  3. Cite uma entrada com \cite{exemplo-referencia}.
+  4. Inclua um quadro de referências no fim do plano.
+
+  Remova este arquivo se o projeto não usar referências bibliográficas.
+}
+
+@online{exemplo-referencia,
+  author  = {{Nome da organização}},
+  title   = {Título do material consultado},
+  year    = {2026},
+  url     = {https://example.org},
+  urldate = {2026-11-01}
+}

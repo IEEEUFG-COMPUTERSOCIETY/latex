@@ -4,6 +4,8 @@
 # identificador|nome exibido|descrição
 documento|Documento|Documento institucional para textos em geral.
 atas|Ata de reunião|Registro de presenças, deliberações e encaminhamentos.
+relatorios|Relatório de atividade|Execução, resultados e evidências.
+plano-projeto|Plano de projeto|Apresentação para aprovar a execução.
 plano-trabalho|Plano de trabalho|Plano institucional com objetivos e etapas.
 estatuto|Estatuto|Normas organizadas em capítulos, artigos e incisos.
 slides|Slides|Slides institucionais em formato 16:9.
