@@ -25,6 +25,9 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/templates/plano-trabalho/img/README.md`
 - `development/templates/plano-trabalho/main.tex`
 - `development/templates/plano-trabalho/references.bib.example`
+- `development/templates/estatuto/img/README.md`
+- `development/templates/estatuto/main.tex`
+- `development/templates/estatuto/references.bib.example`
 - `development/templates/slides/img/README.md`
 - `development/templates/slides/main.tex`
 - `development/templates/slides/references.bib.example`
@@ -42,6 +45,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/tests/smoke/document.tex`
 - `development/tests/smoke/slides.tex`
 - `development/tex/latex/ieeeufgcs/ieeeufgcs.cls`
+- `development/tex/latex/ieeeufgcs/ieeeufgcs-estatuto.sty`
 - `development/tex/latex/ieeeufgcs/ieeeufgcs-brand.sty`
 - `development/tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty`
 - `development/tex/latex/ieeeufgcs/assets/README.md`

@@ -1,0 +1,74 @@
+% !TeX program = lualatex
+% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+% Distributed under the LaTeX Project Public License 1.3c or later.
+% See LICENSE and development/MANIFEST.md.
+%
+% MODELO DE ESTATUTO
+% Substitua os textos de orientação por disposições aprovadas pela organização.
+% A numeração de capítulos e artigos é automática e contínua.
+\documentclass[
+  paper-size=a4,
+  font-size=11pt,
+  two-sided=true,
+  title-page=true,
+  inner-margin=22mm,
+  outer-margin=22mm,
+  top-margin=24mm,
+  bottom-margin=28mm,
+  color-model=rgb
+]{ieeeufgcs}
+\usepackage[brazil]{babel}
+\usepackage{ieeeufgcs-estatuto}
+
+\IEEECSSetup{
+  document-type={Estatuto},
+  title={Estatuto do Capítulo Estudantil},
+  running-title={Estatuto},
+  institution={Capítulo Estudantil da IEEE Computer Society na UFG},
+  author={Órgão responsável pelo documento},
+  date={\today},
+  location={Goiânia},
+  identifier={Minuta para revisão}
+}
+
+\begin{document}
+\maketitle
+
+\EstatutoCapitulo{Disposições gerais}
+
+\EstatutoArtigo
+Defina a denominação, a natureza e a finalidade da organização.
+
+\EstatutoArtigo
+Indique as normas e os órgãos aos quais a organização está vinculada.
+
+\EstatutoCapitulo{Membros}
+
+\EstatutoArtigo
+Defina as condições de ingresso e as categorias de membros.
+
+\begin{EstatutoIncisos}
+  \item Descreva a primeira categoria e seus requisitos.
+  \item Descreva a segunda categoria e seus requisitos.
+\end{EstatutoIncisos}
+
+\EstatutoArtigo
+Estabeleça os direitos e os deveres dos membros.
+
+\EstatutoParagrafoUnico
+Acrescente uma regra complementar, se necessária.
+
+\EstatutoCapitulo{Organização e funcionamento}
+
+\EstatutoArtigo
+Descreva os órgãos, os cargos, os mandatos e suas competências.
+
+\EstatutoParagrafo
+Especifique uma condição relativa ao artigo.
+
+\EstatutoCapitulo{Disposições finais}
+
+\EstatutoArtigo
+Indique como o estatuto pode ser alterado e como tratar casos omissos.
+
+\end{document}

@@ -1,0 +1,64 @@
+%% Statute structures for the IEEE UFG Computer Society document class.
+%% Copyright (C) 2026 IEEE UFG Computer Society contributors.
+%% Distributed under the LaTeX Project Public License 1.3c or later.
+%% See LICENSE and development/MANIFEST.md.
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesPackage{ieeeufgcs-estatuto}
+  [2026-11-01 v1.0.0 Statute structures]
+
+\@ifclassloaded{ieeeufgcs}{}{%
+  \PackageError{ieeeufgcs-estatuto}
+    {Use the ieeeufgcs document class}
+    {Load this package only with \string\documentclass{ieeeufgcs}.}%
+}
+
+\newcounter{EstatutoCapitulo}
+\newcounter{EstatutoArtigo}
+\newcounter{EstatutoParagrafo}[EstatutoArtigo]
+
+% Chapters use Roman numerals, while article numbers continue through the
+% entire statute. Each command creates a reference target and a contents entry.
+\NewDocumentCommand{\EstatutoCapitulo}{m}{%
+  \refstepcounter{EstatutoCapitulo}%
+  \section*{Capítulo \Roman{EstatutoCapitulo} --- #1}%
+  \addcontentsline{toc}{section}
+    {Capítulo \Roman{EstatutoCapitulo} --- #1}%
+}
+
+% Brazilian statute typography uses the ordinal sign through article nine,
+% followed by a period from article ten onward.
+\NewDocumentCommand{\EstatutoArtigo}{}{%
+  \par\addvspace{.8\baselineskip}%
+  \noindent\refstepcounter{EstatutoArtigo}%
+  {\bfseries\color{IEEEBlue}Art.~\arabic{EstatutoArtigo}%
+    \ifnum\value{EstatutoArtigo}<10
+      \textordmasculine
+    \else
+      .%
+    \fi}%
+  \enspace\ignorespaces
+}
+
+\NewDocumentCommand{\EstatutoParagrafo}{}{%
+  \par\addvspace{.4\baselineskip}%
+  \noindent\refstepcounter{EstatutoParagrafo}%
+  {\bfseries\color{IEEEBlue}
+    \S~\arabic{EstatutoParagrafo}\textordmasculine}%
+  \enspace\ignorespaces
+}
+
+\NewDocumentCommand{\EstatutoParagrafoUnico}{}{%
+  \par\addvspace{.4\baselineskip}%
+  \noindent{\bfseries\color{IEEEBlue}Parágrafo único.}%
+  \enspace\ignorespaces
+}
+
+\NewDocumentEnvironment{EstatutoIncisos}{}{%
+  \begin{enumerate}
+    \renewcommand{\labelenumi}{\Roman{enumi} --}%
+    \setlength{\itemsep}{.3\baselineskip}%
+}{%
+  \end{enumerate}%
+}
+
+\endinput

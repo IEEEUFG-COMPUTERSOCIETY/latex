@@ -26,6 +26,7 @@ documents/ → development/templates/ → classe ou tema → pacote de marca
 | Caminho | Responsabilidade |
 |---|---|
 | `development/tex/latex/ieeeufgcs/ieeeufgcs.cls` | Documentos institucionais. |
+| `ieeeufgcs-estatuto.sty` | Estrutura de estatutos. |
 | `development/tex/latex/ieeeufgcs/beamerthemeieeeufgcs.sty` | Apresentações. |
 | `development/tex/latex/ieeeufgcs/ieeeufgcs-brand.sty` | Identidade visual. |
 | `development/tex/latex/ieeeufgcs/assets/` | Arte oficial normalizada. |
@@ -105,6 +106,15 @@ Prazo & Dezembro. \\
 `IEEECSBrandedTable` usa a sintaxe de colunas de `tabularx`. As colunas `X`
 são centralizadas verticalmente; use `m{largura}` para obter o mesmo
 alinhamento em colunas de largura fixa.
+
+## Modelo `estatuto`
+
+O modelo `estatuto` usa a classe `ieeeufgcs` e carrega o pacote
+`ieeeufgcs-estatuto`. Use `\EstatutoCapitulo{Título}` e `\EstatutoArtigo`
+para numerar capítulos em algarismos romanos e artigos continuamente.
+O ambiente `EstatutoIncisos` numera itens em algarismos romanos. Para regras
+complementares, use `\EstatutoParagrafo` ou `\EstatutoParagrafoUnico`.
+O conteúdo do modelo é texto de orientação e deve ser substituído.
 
 ## Pacote `ieeeufgcs-brand`
 

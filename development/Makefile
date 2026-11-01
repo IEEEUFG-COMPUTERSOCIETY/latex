@@ -69,6 +69,7 @@ reference:
 templates:
 	mkdir -p $(BUILD_DIR)/templates/documento \
 		$(BUILD_DIR)/templates/plano-trabalho \
+		$(BUILD_DIR)/templates/estatuto \
 		$(BUILD_DIR)/templates/slides \
 		$(BUILD_DIR)/templates/cartao \
 		"$(TEXMFVAR_DIR)"
@@ -78,6 +79,9 @@ templates:
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
 		templates/plano-trabalho/main.tex
+	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
+		-outdir=$(BUILD_DIR)/templates/estatuto \
+		templates/estatuto/main.tex
 	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
 		-outdir=$(BUILD_DIR)/templates/slides \
 		templates/slides/main.tex

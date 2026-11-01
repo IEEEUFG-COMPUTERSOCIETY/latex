@@ -1,0 +1,16 @@
+@Comment{
+  COMO USAR ESTE ARQUIVO
+
+  1. Renomeie este arquivo para references.bib.
+  2. Carregue biblatex e adicione references.bib no início de main.tex.
+  3. Cite uma entrada com \cite{exemplo-livro}.
+  4. Adicione \printbibliography antes de \end{document}.
+}
+
+@book{exemplo-livro,
+  author    = {Sobrenome, Nome},
+  title     = {Título da obra},
+  publisher = {Nome da editora},
+  location  = {Cidade},
+  year      = {2026}
+}
