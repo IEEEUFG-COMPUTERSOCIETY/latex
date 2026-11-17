@@ -5,7 +5,8 @@ Versão 1.0.0.
 
 ## Criar e editar um documento
 
-É necessário ter GNU Make, Bash, LuaLaTeX, `latexmk`, Montserrat e Open Sans.
+É necessário ter LuaLaTeX, `latexmk`, `texlua`, Montserrat e Open Sans.
+GNU Make é opcional para os comandos `make` abaixo.
 Apresentações também exigem Beamer; bibliografias exigem Biber.
 
 ```sh
@@ -30,6 +31,23 @@ make clean documents/meu-doc
 
 Dentro da pasta do documento, `make build` e `make clean` também funcionam.
 `make list` mostra modelos e documentos; `make clean` limpa todas as saídas.
+
+No macOS e no Windows, instale uma distribuição TeX que inclua LuaLaTeX,
+`latexmk` e `texlua`, além das fontes indicadas acima. No Windows, execute os
+comandos abaixo no PowerShell ou no Prompt de Comando, a partir da raiz do
+projeto. Eles também funcionam no macOS e no Linux, sem GNU Make ou Bash:
+
+```text
+texlua development/scripts/project.lua list
+texlua development/scripts/project.lua new slides evento no
+texlua development/scripts/project.lua build-all
+texlua development/scripts/project.lua build-path documents/evento
+texlua development/scripts/project.lua clean-path documents/evento
+texlua development/scripts/project.lua clean
+```
+
+Para usar as verificações de desenvolvimento sem Make, execute
+`texlua development/scripts/project.lua dev-all` na raiz do projeto.
 
 Para criar um documento sem perguntas:
 
@@ -70,4 +88,5 @@ documentos de versões anteriores, consulte o
 
 ## TODO
 
-- [ ] cartão de visita no formato "pitch", com bloquinhos de áreas de interesse, curso, etc.
+- [ ] cartão de visita no formato "pitch", com blocos de áreas de interesse,
+  curso, etc.

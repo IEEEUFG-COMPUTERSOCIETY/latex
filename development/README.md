@@ -38,6 +38,10 @@ documents/ → development/templates/ → classe ou tema → pacote de marca
 Os Makefiles acrescentam `development/tex/latex//` a `TEXINPUTS` e guardam o
 cache do LuaTeX em `development/build/texmf-var`. O PDF final fica junto ao
 arquivo `.tex` do documento. Não é necessária uma instalação global da classe.
+O script `development/scripts/project.lua` executa os mesmos comandos com
+`texlua` em macOS, Windows e Linux, sem depender de Bash ou GNU Make. No
+Windows, use PowerShell ou Prompt de Comando. A separação de caminhos em
+`TEXINPUTS` é ajustada automaticamente para cada sistema.
 
 ## Classe `ieeeufgcs`
 
@@ -266,3 +270,4 @@ LPPL.
 
 Antes de concluir uma mudança, execute `make -C development all`, revise o
 resultado visual e confirme `MANIFEST.md`, compatibilidade e licenciamento.
+Sem GNU Make, execute `texlua development/scripts/project.lua dev-all` na raiz.

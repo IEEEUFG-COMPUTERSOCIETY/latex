@@ -2,10 +2,9 @@
 # Distributed under the LaTeX Project Public License 1.3c or later.
 # See LICENSE and development/MANIFEST.md.
 
-DOCUMENT_DIRS := $(foreach dir,$(wildcard documents/*),\
-  $(if $(wildcard $(dir)/main.tex),$(dir)))
 DOCUMENT_GOALS := $(filter documents/%,$(MAKECMDGOALS))
 COMMAND_GOALS := $(filter build clean,$(MAKECMDGOALS))
+PROJECT_SCRIPT := development/scripts/project.lua
 KNOWN_GOALS := help new build list clean
 UNKNOWN_GOALS := $(filter-out $(KNOWN_GOALS) documents/%,$(MAKECMDGOALS))
 
@@ -37,32 +36,26 @@ help:
 	@echo "Desenvolvimento: make -C development"
 
 new:
-	@bash development/scripts/document.sh new \
-		"$(TEMPLATE)" "$(NAME)" "$(BUILD)"
+	@texlua $(PROJECT_SCRIPT) new "$(TEMPLATE)" "$(NAME)" "$(BUILD)"
 
 ifeq ($(strip $(DOCUMENT_GOALS)),)
-build: $(DOCUMENT_DIRS)
-	@if [ -z "$(strip $(DOCUMENT_DIRS))" ]; then \
-		echo "Nenhum documento criado. Execute 'make new'."; \
-	fi
+build:
+	@texlua $(PROJECT_SCRIPT) build-all
 else
 build:
-	@:
 endif
 
 list:
-	@bash development/scripts/document.sh list
+	@texlua $(PROJECT_SCRIPT) list
 
 ifeq ($(strip $(DOCUMENT_GOALS)),)
 clean:
-	@bash development/scripts/document.sh clean
+	@texlua $(PROJECT_SCRIPT) clean
 else
 clean:
-	@:
 endif
 
 documents/%: FORCE
-	@bash development/scripts/document.sh validate-path "$@"
-	+@$(MAKE) --no-print-directory -C "$@" $(DOCUMENT_ACTION)
+	@texlua $(PROJECT_SCRIPT) $(DOCUMENT_ACTION)-path "$@"
 
 FORCE:

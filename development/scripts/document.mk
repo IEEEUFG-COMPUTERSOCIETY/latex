@@ -2,9 +2,6 @@
 # Distributed under the LaTeX Project Public License 1.3c or later.
 # See project LICENSE and development/MANIFEST.md.
 
-PROJECT_ROOT := $(shell cd ../.. && pwd -P)
-DOCUMENT_DIR := $(shell pwd -P)
-
 .DEFAULT_GOAL := help
 
 .PHONY: help build clean
@@ -17,9 +14,7 @@ help:
 	@echo "  make clean remove os arquivos gerados deste documento"
 
 build:
-	@bash "$(PROJECT_ROOT)/development/scripts/document.sh" \
-		build-path "$(DOCUMENT_DIR)"
+	@texlua ../../development/scripts/project.lua build-path .
 
 clean:
-	@bash "$(PROJECT_ROOT)/development/scripts/document.sh" \
-		clean-path "$(DOCUMENT_DIR)"
+	@texlua ../../development/scripts/project.lua clean-path .

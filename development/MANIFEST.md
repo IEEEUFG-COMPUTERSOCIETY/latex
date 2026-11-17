@@ -18,6 +18,7 @@ The LPPL “Work” consists of the following repository-authored files:
 - `development/scripts/check-line-length.lua`
 - `development/scripts/document.mk`
 - `development/scripts/document.sh`
+- `development/scripts/project.lua`
 - `development/templates/README.md`
 - `development/templates/catalog.tsv`
 - `development/templates/documento/img/README.md`

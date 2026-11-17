@@ -2,19 +2,11 @@
 # Distributed under the LaTeX Project Public License 1.3c or later.
 # See ../LICENSE and MANIFEST.md.
 
-LATEXMK ?= latexmk
-LATEXMK_FLAGS = -lualatex -interaction=nonstopmode -halt-on-error
-BUILD_DIR = build
-TEXMFVAR_DIR ?= $(CURDIR)/$(BUILD_DIR)/texmf-var
-TEX_ENV = TEXINPUTS="$(CURDIR)/tex/latex//:" \
-	TEXMFVAR="$(TEXMFVAR_DIR)"
-
 .DEFAULT_GOAL := help
 .PHONY: help all check-style test reference templates clean
 
 help:
 	@echo "Desenvolvimento IEEE UFG Computer Society LaTeX"
-	@echo
 	@echo "  make all         executa testes, referência e modelos"
 	@echo "  make test        executa os testes de fumaça"
 	@echo "  make reference   compila a referência visual"
@@ -22,84 +14,20 @@ help:
 	@echo "  make check-style verifica o limite de 80 caracteres"
 	@echo "  make clean       limpa as saídas de desenvolvimento"
 
-all: test reference templates
+all:
+	@texlua scripts/project.lua dev-all
 
 check-style:
-	@find .. \
-		-path '../.git' -prune -o \
-		-path '../.agents' -prune -o \
-		-path '../.aws' -prune -o \
-		-path '../.codex' -prune -o \
-		-path '../documents' -prune -o \
-		-path '../development/build' -prune -o \
-		-path '../development/reference-material' -prune -o \
-		-type f \( \
-			-name '*.cls' -o \
-			-name '*.bib' -o \
-			-name '*.bib.example' -o \
-			-name '*.lua' -o \
-			-name '*.md' -o \
-			-name '*.sh' -o \
-			-name '*.sty' -o \
-			-name '*.tsv' -o \
-			-name '*.tex' -o \
-			-name '.gitignore' -o \
-			-name 'Makefile' \
-		\) -exec texlua scripts/check-line-length.lua {} +
+	@texlua scripts/project.lua check-style
 
-test: check-style
-	mkdir -p $(BUILD_DIR)/tests "$(TEXMFVAR_DIR)"
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/tests tests/smoke/brand.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/tests tests/smoke/cmyk.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/tests tests/smoke/document.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/tests tests/smoke/compact.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/tests tests/smoke/slides.tex
+test:
+	@texlua scripts/project.lua dev-test
 
 reference:
-	mkdir -p $(BUILD_DIR)/reference "$(TEXMFVAR_DIR)"
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/reference \
-		tests/reference/brand-reference.tex
+	@texlua scripts/project.lua dev-reference
 
 templates:
-	mkdir -p $(BUILD_DIR)/templates/documento \
-		$(BUILD_DIR)/templates/atas \
-		$(BUILD_DIR)/templates/relatorios \
-		$(BUILD_DIR)/templates/plano-projeto \
-		$(BUILD_DIR)/templates/plano-trabalho \
-		$(BUILD_DIR)/templates/estatuto \
-		$(BUILD_DIR)/templates/slides \
-		$(BUILD_DIR)/templates/cartao \
-		"$(TEXMFVAR_DIR)"
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/documento \
-		templates/documento/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/atas \
-		templates/atas/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/relatorios \
-		templates/relatorios/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/plano-projeto \
-		templates/plano-projeto/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/plano-trabalho \
-		templates/plano-trabalho/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/estatuto \
-		templates/estatuto/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/slides \
-		templates/slides/main.tex
-	$(TEX_ENV) $(LATEXMK) $(LATEXMK_FLAGS) \
-		-outdir=$(BUILD_DIR)/templates/cartao \
-		templates/cartao/main.tex
+	@texlua scripts/project.lua dev-templates
 
 clean:
-	@bash scripts/document.sh clean-development
+	@texlua scripts/project.lua clean-development
