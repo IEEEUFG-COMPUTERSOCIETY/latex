@@ -67,3 +67,7 @@ Consulte [LICENSE](LICENSE).
 A versão 1.0.0 altera o layout. Para migrar
 documentos de versões anteriores, consulte o
 [guia de desenvolvimento](development/README.md).
+
+## TODO
+
+- [ ] cartão de visita no formato "pitch", com bloquinhos de áreas de interesse, curso, etc.
